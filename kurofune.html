@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クロフネ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「砂を制した白い衝撃」ダートの概念を変えた最強の開国者</p>
+        <h2>クロフネ</h2>
+        
+        <div class="horse-visual"><img src="images/kurofune.png" alt="クロフネ"></div>
+
+        <div class="horse-intro">
+            外国産馬として「黒船」の名の通り日本の競馬界に来航。芝のG1・NHKマイルカップを制したのち、天皇賞（秋）への出走が叶わず挑んだダート戦で、世界を震撼させるパフォーマンスを披露しました。武蔵野Sでの「2秒差」、ジャパンCダートでの衝撃的なレコード勝利は、今なお語り草です。種牡馬としても、ソダシをはじめとする数多くの名馬を輩出し、日本の競馬史に深く名を刻みました。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 武豊 / 松永幹夫</li>
+                <li><b>獲得賞金：</b> 3億7023万5000円</li>
+                <li><b>通算成績：</b> 10戦6勝</li>
+                <li><b>脚質：</b>先行</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">フレンチデピュティ</li>
+                        <li class="progeny-item">ブルーアヴェニュー</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 96, "スタミナ": 82, "パワー": 99, "根性": 90, "賢さ": 88}'>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2000</td><td>3歳新馬（芝）</td><td>1着</td><td>レコード</td><td>松永幹夫</td></tr>
+                    <tr class="rank-1"><td>2000</td><td>エリカ賞（芝）</td><td>1着</td><td>1 1/4</td><td>松永幹夫</td></tr>
+                    <tr><td>2000</td><td>ラジオたんぱ杯3歳S</td><td>3着</td><td>0.1</td><td>松永幹夫</td></tr>
+                    <tr class="rank-1"><td>2001</td><td>毎日杯(G3)</td><td>1着</td><td>5馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2001</td><td>NHKマイルC(G1)</td><td>1着</td><td>1 1/2</td><td>武豊</td></tr>
+                    <tr><td>2001</td><td>日本ダービー(G1)</td><td>5着</td><td>0.9</td><td>武豊</td></tr>
+                    <tr><td>2001</td><td>神戸新聞杯(G2)</td><td>3着</td><td>0.1</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2001</td><td>武蔵野S(G3・ダ)</td><td>1着</td><td>2.0s差</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2001</td><td>ジャパンCダート(G1)</td><td>1着</td><td>レコード</td><td>武豊</td></tr>
+                    <p style="font-size: 0.8rem; color: #cc0000; margin-top: 5px;">※屈腱炎のため惜しまれつつ現役引退</p>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒(子供たち)</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">
+                    <a href="sodashi.html" style="text-decoration: none; color: inherit; font-weight: bold;">ソダシ（白毛の女王・G1 3勝）</a>
+                </li>
+                <li class="progeny-item">カレンチャン（スプリント女王・G1 2勝）</li>
+                <li class="progeny-item">ホエールキャプチャ（ヴィクトリアM）</li>
+                <li class="progeny-item">アエロリット（NHKマイルC）</li>
+                <li class="progeny-item">ママコチャ（スプリンターズS）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※クロフネ産駒は芝・ダートを問わず活躍する万能性が特徴</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：ジャパンCダート「世界への宣戦布告」</h3>
+            <p>前走の武蔵野Sでの衝撃がフロックではないことを証明したジャパンカップダート。世界の強豪を相手に、次元の違う手応えで直線抜け出すと、2着に7馬身差をつける圧勝。記録した2分5秒9のタイムは、当時のダート界では考えられない異次元の時計でした。この直後の故障引退がなければ、世界制覇も確実と言われたほどの輝きでした。</p>
+        </div>
+
+        <a href="all-horses.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

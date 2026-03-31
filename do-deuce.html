@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドウデュース - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「逆境を跳ね返す不屈の怪物」第89代日本ダービー馬</p>
+        <h2>ドウデュース</h2>
+        
+        <div class="horse-visual"><img src="images/dodeuce.png" alt="ドウデュース"></div>
+
+        <div class="horse-intro">
+            武豊騎手に前人未到のダービー6勝目をもたらした相棒。2歳王者の称号を手にし、史上最速タイムでのダービー制覇、そして4歳時の有馬記念復活V、5歳秋の天皇賞での衝撃的な末脚と、負けてもなお強さを見せつける姿は、現代の日本競馬において「最強」の呼び声高い存在です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 武豊、戸崎圭太</li>
+                <li><b>獲得賞金：</b> 約23億6258万円</li>
+                <li><b>通算成績：</b> 16戦7勝</li>
+                <li><b>脚質：</b> 差し・追い込み</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">ハーツクライ</li>
+                        <li class="progeny-item">ダストアンドダイヤモンズ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 98, "スタミナ": 92, "パワー": 100, "根性": 97, "賢さ": 95}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2021</td><td>2歳新馬</td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr class="rank-1"><td>2021</td><td>アイビーS</td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2021</td><td><b>朝日杯FS</b></td><td>1着</td><td>1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>2022</td><td>弥生賞</td><td>2着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr><td>2022</td><td>皐月賞</td><td>3着</td><td>0.3秒</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2022</td><td><b>日本ダービー</b></td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr><td>2022</td><td>ニエル賞(仏)</td><td>4着</td><td>0.4秒</td><td>武豊</td></tr>
+                        <tr><td>2022</td><td>凱旋門賞(仏)</td><td>19着</td><td>-</td><td>武豊</td></tr>
+                        <tr class="rank-1"><td>2023</td><td>京都記念</td><td>1着</td><td>3 1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>2023</td><td>天皇賞・秋</td><td>7着</td><td>0.8秒</td><td>戸崎圭太</td></tr>
+                        <tr><td>2023</td><td>ジャパンC</td><td>4着</td><td>1.4秒</td><td>戸崎圭太</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2023</td><td><b>有馬記念</b></td><td>1着</td><td>1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>2024</td><td>ドバイターフ(首)</td><td>5着</td><td>0.3秒</td><td>武豊</td></tr>
+                        <tr><td>2024</td><td>宝塚記念</td><td>6着</td><td>0.6秒</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2024</td><td><b>天皇賞・秋</b></td><td>1着</td><td>1 1/4馬身</td><td>武豊</td></tr>
+                        <tr><td>2024</td><td>ジャパンC</td><td>2着</td><td>0.1秒</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2024</td><td><b>有馬記念</b></td><td>1着</td><td>1 1/2馬身</td><td>武豊</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">現役引退後に期待（2025年より種牡馬入り）</li>
+                <li class="progeny-item">ハーツクライ系正統後継者としての期待</li>
+                <li class="progeny-item">歴史的ピッチ走法の継承</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：空を切り裂く「上がり32.5秒」</h3>
+            <p>2024年天皇賞（秋）。後方2番手から直線へ向くと、異次元のピッチ走法で一気に先行集団を飲み込み、上がり3ハロン32.5秒という驚愕のタイムで突き抜けました。ドバイでの不完全燃焼や宝塚記念の敗戦を嘲笑うかのような「王者の帰還」。武豊騎手が「この馬の足音は他の馬と違う」と語る通り、常識を超えた筋力と闘争心で、記憶と記録を塗り替え続けた最強馬です。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

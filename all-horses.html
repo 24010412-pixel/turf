@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全競走馬一覧 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link active">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="filter-section fade-in">
+            <div class="filter-group">
+                <label>性別</label>
+                <select id="genderFilter">
+                    <option value="all">すべて</option>
+                    <option value="male">牡馬</option>
+                    <option value="female">牝馬</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>毛色</label>
+                <select id="colorFilter">
+                    <option value="all">すべて</option>
+                    <option value="bay">鹿毛・黒鹿毛</option>
+                    <option value="chestnut">栗毛</option>
+                    <option value="gray">芦毛</option>
+                    <option value="white">白毛</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <button type="button" id="resetBtn" class="reset-button">リセット</button>
+            </div>
+            <div id="matchCount">表示中: 35頭</div>
+        </section>
+
+        <section class="horse-section">
+            <div class="horse-grid" id="allHorseGrid">
+
+                <a href="deep.html" class="horse-card fade-in" data-name="ディープインパクト" data-gender="male" data-color="bay">
+                    <img src="images/deep.png" alt="ディープインパクト">
+                    <div class="card-info">
+                        <h4>ディープインパクト</h4>
+                        <p class="origin">由来：深い衝撃</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">英雄・無敗の三冠馬</p>
+                    </div>
+                </a>
+
+                <a href="contrail.html" class="horse-card fade-in" data-name="コントレイル" data-gender="male" data-color="bay">
+                    <img src="images/contrail.png" alt="コントレイル">
+                    <div class="card-info">
+                        <h4>コントレイル</h4>
+                        <p class="origin">由来：飛行機雲</p>
+                        <p class="stats-line">青鹿毛 / 牡馬</p>
+                        <p class="tagline">父子二代・無敗の三冠馬</p>
+                    </div>
+                </a>
+
+                <a href="orphe.html" class="horse-card fade-in" data-name="オルフェーヴル" data-gender="male" data-color="chestnut">
+                    <img src="images/orphe.png" alt="オルフェーヴル">
+                    <div class="card-info">
+                        <h4>オルフェーヴル</h4>
+                        <p class="origin">由来：金細工師（仏語）</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">黄金の暴君</p>
+                    </div>
+                </a>
+
+                <a href="almond.html" class="horse-card fade-in" data-name="アーモンドアイ" data-gender="female" data-color="bay">
+                    <img src="images/almond.png" alt="アーモンドアイ">
+                    <div class="card-info">
+                        <h4>アーモンドアイ</h4>
+                        <p class="origin">由来：美人の目</p>
+                        <p class="stats-line">鹿毛 / 牝馬</p>
+                        <p class="tagline">芝G1 9勝の世界女王</p>
+                    </div>
+                </a>
+
+                <a href="gentil.html" class="horse-card fade-in" data-name="ジェンティルドンナ" data-gender="female" data-color="bay">
+                    <img src="images/gentil.png" alt="ジェンティルドンナ">
+                    <div class="card-info">
+                        <h4>ジェンティルドンナ</h4>
+                        <p class="origin">由来：貴婦人（伊語）</p>
+                        <p class="stats-line">鹿毛 / 牝馬</p>
+                        <p class="tagline">貴婦人・牝馬三冠</p>
+                    </div>
+                </a>
+
+                <a href="sodashi.html" class="horse-card fade-in" data-name="ソダシ" data-gender="female" data-color="white">
+                    <img src="images/sodashi.png" alt="ソダシ">
+                    <div class="card-info">
+                        <h4>ソダシ</h4>
+                        <p class="origin">由来：純粋、輝き（サンスクリット語）</p>
+                        <p class="stats-line">白毛 / 牝馬</p>
+                        <p class="tagline">純白の女王</p>
+                    </div>
+                </a>
+
+                <a href="kitasan.html" class="horse-card fade-in" data-name="キタサンブラック" data-gender="male" data-color="bay">
+                    <img src="images/kitasan.png" alt="キタサンブラック">
+                    <div class="card-info">
+                        <h4>キタサンブラック</h4>
+                        <p class="origin">由来：冠名＋父名の一部</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">王道王者・平成の祭り男</p>
+                    </div>
+                </a>
+
+                <a href="operao.html" class="horse-card fade-in" data-name="テイエムオペラオー" data-gender="male" data-color="chestnut">
+                    <img src="images/operao.png" alt="テイエムオペラオー">
+                    <div class="card-info">
+                        <h4>テイエムオペラオー</h4>
+                        <p class="origin">由来：冠名＋オペラ歌手の王</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">世紀末覇王</p>
+                    </div>
+                </a>
+
+                <a href="oguri.html" class="horse-card fade-in" data-name="オグリキャップ" data-gender="male" data-color="gray">
+                    <img src="images/oguri.png" alt="オグリキャップ">
+                    <div class="card-info">
+                        <h4>オグリキャップ</h4>
+                        <p class="origin">由来：冠名＋父名の一部</p>
+                        <p class="stats-line">芦毛 / 牡馬</p>
+                        <p class="tagline">芦毛の怪物</p>
+                    </div>
+                </a>
+
+                <a href="robroy.html" class="horse-card fade-in" data-name="ゼンノロブロイ" data-gender="male" data-color="bay">
+                    <img src="images/robroy.png" alt="ゼンノロブロイ">
+                    <div class="card-info">
+                        <h4>ゼンノロブロイ</h4>
+                        <p class="origin">由来：冠名＋スコットランドの義賊</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">秋古馬三冠馬</p>
+                    </div>
+                </a>
+
+                <a href="equinox.html" class="horse-card fade-in" data-name="イクイノックス" data-gender="male" data-color="bay">
+                    <img src="images/equinox.png" alt="イクイノックス">
+                    <div class="card-info">
+                        <h4>イクイノックス</h4>
+                        <p class="origin">由来：昼夜平分点（春分・秋分）</p>
+                        <p class="stats-line">青鹿毛 / 牡馬</p>
+                        <p class="tagline">世界1位・天衣無縫</p>
+                    </div>
+                </a>
+
+                <a href="young.html" class="horse-card fade-in" data-name="フォーエバーヤング" data-gender="male" data-color="bay">
+                    <img src="images/young.png" alt="フォーエバーヤング">
+                    <div class="card-info">
+                        <h4>フォーエバーヤング</h4>
+                        <p class="origin">由来：いつまでも若々しく</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">世界を渡る砂の怪物</p>
+                    </div>
+                </a>
+
+                <a href="kurofune.html" class="horse-card fade-in" data-name="クロフネ" data-gender="male" data-color="gray">
+                    <img src="images/kurofune.png" alt="クロフネ">
+                    <div class="card-info">
+                        <h4>クロフネ</h4>
+                        <p class="origin">由来：黒船（江戸末期の来航船）</p>
+                        <p class="stats-line">芦毛 / 牡馬</p>
+                        <p class="tagline">砂を制した白い衝撃</p>
+                    </div>
+                </a>
+
+                <a href="titleholder.html" class="horse-card fade-in" data-name="タイトルホルダー" data-gender="male" data-color="bay">
+                    <img src="images/titleholder.png" alt="タイトルホルダー">
+                    <div class="card-info">
+                        <h4>タイトルホルダー</h4>
+                        <p class="origin">由来：タイトル保持者</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">不屈の逃亡者</p>
+                    </div>
+                </a>
+
+                <a href="symboli-rudolf.html" class="horse-card fade-in" data-name="シンボリルドルフ" data-gender="male" data-color="bay">
+                    <img src="images/rudolf.png" alt="シンボリルドルフ">
+                    <div class="card-info">
+                        <h4>シンボリルドルフ</h4>
+                        <p class="origin">由来：冠名＋ルドルフ1世</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">皇帝</p>
+                    </div>
+                </a>
+
+                <a href="mejiro-ramonu.html" class="horse-card fade-in" data-name="メジロラモーヌ" data-gender="female" data-color="bay">
+                    <img src="images/ramonu.png" alt="メジロラモーヌ">
+                    <div class="card-info">
+                        <h4>メジロラモーヌ</h4>
+                        <p class="origin">由来：冠名＋女性（仏語）</p>
+                        <p class="stats-line">鹿毛 / 牝馬</p>
+                        <p class="tagline">華麗なる三冠牝馬</p>
+                    </div>
+                </a>
+
+                <a href="cesario.html" class="horse-card fade-in" data-name="シーザリオ" data-gender="female" data-color="bay">
+                    <img src="images/cesario.png" alt="シーザリオ">
+                    <div class="card-info">
+                        <h4>シーザリオ</h4>
+                        <p class="origin">由来：シェイクスピアの戯曲</p>
+                        <p class="stats-line">青鹿毛 / 牝馬</p>
+                        <p class="tagline">日米オークス馬</p>
+                    </div>
+                </a>
+
+                <a href="kiseki.html" class="horse-card fade-in" data-name="キセキ" data-gender="male" data-color="bay">
+                    <img src="images/kiseki.png" alt="キセキ">
+                    <div class="card-info">
+                        <h4>キセキ</h4>
+                        <p class="origin">由来：奇跡</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">奇跡の逃亡者</p>
+                    </div>
+                </a>
+
+                <a href="casinodrive.html" class="horse-card fade-in" data-name="カジノドライヴ" data-gender="male" data-color="chestnut">
+                    <img src="images/casinodrive.png" alt="カジノドライヴ">
+                    <div class="card-info">
+                        <h4>カジノドライヴ</h4>
+                        <p class="origin">由来：Casino Royale にちなんだ命名</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">世界を狙った日本ダート馬</p>
+                    </div>
+                </a>
+
+                <a href="kizuna.html" class="horse-card fade-in" data-name="キズナ" data-gender="male" data-color="bay">
+                    <img src="images/kizuna.png" alt="キズナ">
+                    <div class="card-info">
+                        <h4>キズナ</h4>
+                        <p class="origin">由来：絆</p>
+                        <p class="stats-line">青鹿毛 / 牡馬</p>
+                        <p class="tagline">絆のダービー馬</p>
+                    </div>
+                </a>
+
+                <a href="hokko-tarumae.html" class="horse-card fade-in" data-name="ホッコータルマエ" data-gender="male" data-color="bay">
+                    <img src="images/tarumae.png" alt="ホッコータルマエ">
+                    <div class="card-info">
+                        <h4>ホッコータルマエ</h4>
+                        <p class="origin">由来：冠名＋樽前山</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">苫小牧の星</p>
+                    </div>
+                </a>
+
+                <a href="justaway.html" class="horse-card fade-in" data-name="ジャスタウェイ" data-gender="male" data-color="bay">
+                    <img src="images/justaway.png" alt="ジャスタウェイ">
+                    <div class="card-info">
+                        <h4>ジャスタウェイ</h4>
+                        <p class="origin">由来：銀魂</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">遅れてきた覚醒馬</p>
+                    </div>
+                </a>
+
+                <a href="narita-top-road.html" class="horse-card fade-in" data-name="ナリタトップロード" data-gender="male" data-color="chestnut">
+                    <img src="images/toproad.png" alt="ナリタトップロード">
+                    <div class="card-info">
+                        <h4>ナリタトップロード</h4>
+                        <p class="origin">由来：冠名＋Top Road</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">努力の名馬</p>
+                    </div>
+                </a>
+
+                <a href="sirius-symboli.html" class="horse-card fade-in" data-name="シリウスシンボリ" data-gender="male" data-color="bay">
+                    <img src="images/sirius.png" alt="シリウスシンボリ">
+                    <div class="card-info">
+                        <h4>シリウスシンボリ</h4>
+                        <p class="origin">由来：シリウス＋冠名</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">世界に輝く天狼星</p>
+                    </div>
+                </a>
+
+                <a href="cheval-grand.html" class="horse-card fade-in" data-name="シュヴァルグラン" data-gender="male" data-color="chestnut">
+                    <img src="images/cheval.png" alt="シュヴァルグラン">
+                    <div class="card-info">
+                        <h4>シュヴァルグラン</h4>
+                        <p class="origin">由来：偉大な馬（仏語）</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">悲願のジャパンカップ馬</p>
+                    </div>
+                </a>
+
+                <a href="do-deuce.html" class="horse-card fade-in" data-name="ドウデュース" data-gender="male" data-color="bay">
+                    <img src="images/dodeuce.png" alt="ドウデュース">
+                    <div class="card-info">
+                        <h4>ドウデュース</h4>
+                        <p class="origin">由来：Deuce</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">世界を駆ける末脚</p>
+                    </div>
+                </a>
+
+                <a href="stay-gold.html" class="horse-card fade-in" data-name="ステイゴールド" data-gender="male" data-color="bay">
+                    <img src="images/staygold.png" alt="ステイゴールド">
+                    <div class="card-info">
+                        <h4>ステイゴールド</h4>
+                        <p class="origin">由来：輝き続けろ（英語）</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">黄金旅程</p>
+                    </div>
+                </a>
+
+                <a href="special-week.html" class="horse-card fade-in" data-name="スペシャルウィーク" data-gender="male" data-color="bay">
+                    <img src="images/special.png" alt="スペシャルウィーク">
+                    <div class="card-info">
+                        <h4>スペシャルウィーク</h4>
+                        <p class="origin">由来：特別な一週間（英語）</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">日本総大将</p>
+                    </div>
+                </a>
+
+                <a href="daring-tact.html" class="horse-card fade-in" data-name="デアリングタクト" data-gender="female" data-color="bay">
+                    <img src="images/daringtact.png" alt="デアリングタクト">
+                    <div class="card-info">
+                        <h4>デアリングタクト</h4>
+                        <p class="origin">由来：大胆な＋気品（英語）</p>
+                        <p class="stats-line">青鹿毛 / 牝馬</p>
+                        <p class="tagline">無敗の三冠牝馬</p>
+                    </div>
+                </a>
+
+                <a href="nakayama-festa.html" class="horse-card fade-in" data-name="ナカヤマフェスタ" data-gender="male" data-color="bay">
+                    <img src="images/nakayamafesta.png" alt="ナカヤマフェスタ">
+                    <div class="card-info">
+                        <h4>ナカヤマフェスタ</h4>
+                        <p class="origin">由来：冠名＋festa（祭り）</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">世界に最も近づいた日本馬</p>
+                    </div>
+                </a>
+
+                <a href="still-in-love.html" class="horse-card fade-in" data-name="スティルインラブ" data-gender="female" data-color="chestnut">
+                    <img src="images/stillinlove.png" alt="スティルインラブ">
+                    <div class="card-info">
+                        <h4>スティルインラブ</h4>
+                        <p class="origin">由来：まだ恋している（英語）</p>
+                        <p class="stats-line">栗毛 / 牝馬</p>
+                        <p class="tagline">三冠の恋人</p>
+                    </div>
+                </a>
+
+                <a href="durandal.html" class="horse-card fade-in" data-name="デュランダル" data-gender="male" data-color="chestnut">
+                    <img src="images/durandal.png" alt="デュランダル">
+                    <div class="card-info">
+                        <h4>デュランダル</h4>
+                        <p class="origin">由来：伝説の剣の名前</p>
+                        <p class="stats-line">栗毛 / 牡馬</p>
+                        <p class="tagline">伝説の豪脚</p>
+                    </div>
+                </a>
+
+                <a href="epiphaneia.html" class="horse-card fade-in" data-name="エピファネイア" data-gender="male" data-color="bay">
+                    <img src="images/epiphaneia.png" alt="エピファネイア">
+                    <div class="card-info">
+                        <h4>エピファネイア</h4>
+                        <p class="origin">由来：神の顕現（ギリシャ語）</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">規格外の末脚</p>
+                    </div>
+                </a>
+
+                <a href="rulership.html" class="horse-card fade-in" data-name="ルーラーシップ" data-gender="male" data-color="bay">
+                    <img src="images/rulership.png" alt="ルーラーシップ">
+                    <div class="card-info">
+                        <h4>ルーラーシップ</h4>
+                        <p class="origin">由来：支配・統治（英語）</p>
+                        <p class="stats-line">鹿毛 / 牡馬</p>
+                        <p class="tagline">遅れてきた大器</p>
+                    </div>
+                </a>
+
+                <a href="katsuragi-ace.html" class="horse-card fade-in" data-name="カツラギエース" data-gender="male" data-color="bay">
+                    <img src="images/katsuragi.png" alt="カツラギエース">
+                    <div class="card-info">
+                        <h4>カツラギエース</h4>
+                        <p class="origin">由来：冠名＋エース</p>
+                        <p class="stats-line">黒鹿毛 / 牡馬</p>
+                        <p class="tagline">日本馬の誇り</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => { entry.target.classList.add('visible'); }, i * 80);
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+    </script>
+</body>
+</html>

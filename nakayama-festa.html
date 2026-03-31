@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナカヤマフェスタ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を震撼させたステイの魂」凱旋門賞の衝撃</p>
+        <h2>ナカヤマフェスタ</h2>
+        
+        <div class="horse-visual"><img src="images/nakayamafesta.png" alt="ナカヤマフェスタ"></div>
+
+        <div class="horse-intro">
+            2010年の宝塚記念を制し、単身フランスへ。凱旋門賞では名牝ワークフォースと壮絶な叩き合いを演じ、日本調教馬としてエルコンドルパサー以来となる2着に食い込みました。欧州の重い芝を苦にしないパワーと、相手が強ければ強いほど燃える気性の激しさを併せ持った、ステイゴールド一族の「闘争心」の象徴です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 蛯名正義、柴田善臣</li>
+                <li><b>獲得賞金：</b> 約4億1140万円</li>
+                <li><b>通算成績：</b> 15戦5勝</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="stay-gold.html" style="text-decoration: none; color: inherit; font-weight: bold;">ステイゴールド</a></li>
+                        <li class="progeny-item">ディアウィンク</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 92, "スタミナ": 95, "パワー": 98, "根性": 100, "賢さ": 85}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2008</td><td>2歳新馬</td><td>1着</td><td>1 1/2馬身</td><td>柴田善臣</td></tr>
+                        <tr class="rank-1"><td>2008</td><td>東スポ杯2歳S</td><td>1着</td><td>ハナ</td><td>蛯名正義</td></tr>
+                        <tr><td>2009</td><td>京成杯</td><td>2着</td><td>0.1秒</td><td>柴田善臣</td></tr>
+                        <tr><td>2009</td><td>皐月賞</td><td>8着</td><td>0.5秒</td><td>柴田善臣</td></tr>
+                        <tr><td>2009</td><td>日本ダービー</td><td>4着</td><td>0.7秒</td><td>柴田善臣</td></tr>
+                        <tr class="rank-1"><td>2009</td><td>セントライト記念</td><td>1着</td><td>1/2馬身</td><td>蛯名正義</td></tr>
+                        <tr><td>2009</td><td>菊花賞</td><td>12着</td><td>2.0秒</td><td>蛯名正義</td></tr>
+                        <tr><td>2010</td><td>中日新聞杯</td><td>13着</td><td>1.2秒</td><td>柴田善臣</td></tr>
+                        <tr class="rank-1"><td>2010</td><td>メトロポリタンS</td><td>1着</td><td>クビ</td><td>柴田善臣</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2010</td><td><b>宝塚記念</b></td><td>1着</td><td>1/2馬身</td><td>柴田善臣</td></tr>
+                        <tr><td>2010</td><td>フォワ賞(仏)</td><td>2着</td><td>クビ</td><td>蛯名正義</td></tr>
+                        <tr style="background-color: #e3f2fd;"><td>2010</td><td>凱旋門賞(仏)</td><td>2着</td><td>アタマ</td><td>蛯名正義</td></tr>
+                        <tr><td>2010</td><td>ジャパンC</td><td>14着</td><td>1.1秒</td><td>蛯名正義</td></tr>
+                        <tr><td>2011</td><td>フォワ賞(仏)</td><td>4着</td><td>-</td><td>蛯名正義</td></tr>
+                        <tr><td>2011</td><td>凱旋門賞(仏)</td><td>11着</td><td>-</td><td>蛯名正義</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">バビット（セントライト記念・ラジオNIKKEI賞）</li>
+                <li class="progeny-item">ガンコ（日経賞）</li>
+                <li class="progeny-item">ヴォージュ（万葉S）</li>
+                <li class="progeny-item">エポカドーロの母など（母父としての貢献）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：ロンシャンに刻んだ「アタマ差」の夢</h3>
+            <p>2010年10月3日。凱旋門賞の直線、海老名騎手の激に応えて最内から伸びてきたナカヤマフェスタ。最後はワークフォースとの壮絶な叩き合い。一瞬、勝利を確信させたその走りは、世界中の競馬ファンを驚かせました。結果はアタマ差の2着。しかし、日本馬でも凱旋門賞を勝てる、という確かな希望を再び灯したその姿は、ステイゴールド一族が持つ「底知れぬ力」を世界に知らしめた瞬間でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

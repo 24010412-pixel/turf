@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>池添 謙一 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .jockey-detail-hero {
+            background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 60%, #5c2d00 100%);
+            color: white;
+            padding: 60px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .jockey-detail-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.12) 0%, transparent 60%);
+        }
+        .jockey-detail-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            position: relative;
+        }
+        .jockey-detail-img {
+            width: 200px;
+            min-width: 200px;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 16px;
+            border: 3px solid rgba(212,175,55,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+        .jockey-detail-img-placeholder {
+            width: 200px;
+            min-width: 200px;
+            aspect-ratio: 3/4;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            border: 3px solid rgba(212,175,55,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .jockey-detail-info { flex: 1; }
+        .jockey-detail-status {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 4px 14px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
+        .status-active { background: rgba(46,125,50,0.8); color: #a5d6a7; }
+        .status-retired { background: rgba(100,100,100,0.5); color: #ccc; }
+        .jockey-detail-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+        .jockey-detail-name-en {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        .jockey-detail-stats { display: flex; gap: 28px; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-num {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+            line-height: 1;
+        }
+        .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+        .jockey-detail-content { max-width: 900px; margin: 50px auto 80px; padding: 0 20px; }
+        .detail-section { margin-bottom: 48px; }
+        .detail-section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            color: #3d1a00;
+            border-left: 5px solid #d4af37;
+            padding-left: 16px;
+            margin-bottom: 20px;
+        }
+        .detail-section p { font-size: 0.98rem; color: #444; line-height: 1.9; margin-bottom: 14px; }
+        .rep-horse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+        .rep-horse-card {
+            background: white;
+            border: 1px solid #f0e8e0;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .rep-horse-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(139,69,19,0.12); }
+        .rep-horse-name { font-family: 'Noto Serif JP', serif; font-size: 1rem; font-weight: 700; color: #1a0a00; margin-bottom: 4px; }
+        .rep-horse-achievement { font-size: 0.75rem; color: #8b4513; }
+        .career-timeline { position: relative; padding-left: 24px; }
+        .career-timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #d4af37, #e8c99a);
+        }
+        .career-item { position: relative; margin-bottom: 20px; padding-left: 20px; }
+        .career-item::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: #d4af37;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #d4af37;
+        }
+        .career-year { font-size: 0.8rem; color: #8b4513; font-weight: bold; margin-bottom: 4px; }
+        .career-desc { font-size: 0.92rem; color: #444; line-height: 1.7; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #8b4513;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+        .back-link:hover { opacity: 0.7; }
+        @media (max-width: 600px) {
+            .jockey-detail-inner { flex-direction: column; gap: 24px; }
+            .jockey-detail-img, .jockey-detail-img-placeholder { width: 140px; min-width: 140px; }
+            .jockey-detail-name { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link active">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <div class="jockey-detail-hero">
+        <div class="jockey-detail-inner">
+            <img src="images/jockey_ikezoe.png" alt="池添 謙一" class="jockey-detail-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="jockey-detail-img-placeholder" style="display:none">🏇</div>
+            <div class="jockey-detail-info">
+                <span class="jockey-detail-status status-active">現役</span>
+                <div class="jockey-detail-name">池添 謙一</div>
+                <div class="jockey-detail-name-en">IKEZOE Kenichi</div>
+                <div class="jockey-detail-stats">
+                    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">JRA G1勝利</div></div>
+                    <div class="stat-item"><div class="stat-num">1500+</div><div class="stat-label">JRA通算勝利</div></div>
+                    <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">凱旋門賞2着</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jockey-detail-content">
+        <a href="jockey-list.html" class="back-link">← 騎手一覧に戻る</a>
+
+        <div class="detail-section">
+            <div class="detail-section-title">プロフィール・騎乗スタイル</div>
+            <p>1980年2月27日生まれ。2000年にJRAデビュー。デビュー当初から豪快な騎乗スタイルで注目を集め、徐々に主要G1での実績を積み上げていった。</p>
+            <p>キャリアの転換点となったのはオルフェーヴルとのコンビ。2011年に無敗で三冠を達成し、2012年・2013年の凱旋門賞でも2年連続2着という歴史的な成績を収めた。特に2012年の凱旋門賞、残り200mで先頭に立ちながらよれてハナ差で敗れた場面は日本競馬史上最大のドラマとして語り継がれている。</p>
+            <p>気性の難しい馬との相性が良く、「難しい馬を乗りこなす騎手」として高い評価を得ている。現在も現役として活躍中。</p>
+        </div>
+
+        <div class="detail-section">
+            <div class="detail-section-title">主な騎乗馬</div>
+            <div class="rep-horse-grid">
+                <a href="orphe.html" class="rep-horse-card"><div class="rep-horse-name">オルフェーヴル</div><div class="rep-horse-achievement">無敗三冠・凱旋門賞2年連続2着</div></a>
+                <a href="#" class="rep-horse-card"><div class="rep-horse-name">ゴールドシップ</div><div class="rep-horse-achievement">宝塚記念・有馬記念制覇</div></a>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <div class="detail-section-title">経歴</div>
+            <div class="career-timeline">
+                <div class="career-item"><div class="career-year">2000年</div><div class="career-desc">JRAデビュー</div></div>
+                <div class="career-item"><div class="career-year">2011年</div><div class="career-desc">オルフェーヴルで無敗三冠達成</div></div>
+                <div class="career-item"><div class="career-year">2012年</div><div class="career-desc">凱旋門賞でハナ差の惜敗2着</div></div>
+                <div class="career-item"><div class="career-year">2013年</div><div class="career-desc">凱旋門賞2年連続2着</div></div>
+                <div class="career-item"><div class="career-year">現在</div><div class="career-desc">現役として活躍継続中</div></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

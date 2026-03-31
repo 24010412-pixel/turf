@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンボリルドルフ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「競馬に絶対はない。だがルドルフにはある」史上初の七冠馬</p>
+        <h2>シンボリルドルフ</h2>
+        
+        <div class="horse-visual"><img src="images/rudolf.png" alt="シンボリルドルフ"></div>
+
+        <div class="horse-intro">
+            日本競馬史上、初めて無敗でクラシック三冠を制し、最終的に当時前人未到の「七冠」を達成した「皇帝」。岡部幸雄騎手に「ルドルフに競馬を教えてもらった」と言わしめるほどの類まれな知性と、隙のない完璧なレース運びで一時代を築きました。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 岡部幸雄</li>
+                <li><b>獲得賞金：</b> 約6億8000万円（当時の世界最高額）</li>
+                <li><b>通算成績：</b> 16戦13勝（無敗三冠）</li>
+                <li><b>脚質：</b>先行</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">パーソロ</li>
+                        <li class="progeny-item">スイートルナ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 95, "スタミナ": 98, "パワー": 92, "根性": 95, "賢さ": 100}'>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>1983</td><td>3歳新馬</td><td>1着</td><td>5馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>弥生賞</td><td>1着</td><td>1 3/4馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>皐月賞</td><td>1着</td><td>1 1/4馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>日本ダービー</td><td>1着</td><td>1 3/4馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>セントライト記念</td><td>1着</td><td>3馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>菊花賞</td><td>1着</td><td>3/4馬身</td><td>岡部幸雄</td></tr>
+                    <tr><td>1984</td><td>ジャパンC</td><td>3着</td><td>-</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1984</td><td>有馬記念</td><td>1着</td><td>2馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1985</td><td>日経賞</td><td>1着</td><td>4馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1985</td><td>天皇賞・春</td><td>1着</td><td>2 1/2馬身</td><td>岡部幸雄</td></tr>
+                    <tr><td>1985</td><td>宝塚記念</td><td>取消</td><td>-</td><td>岡部幸雄</td></tr>
+                    <tr><td>1985</td><td>天皇賞・秋</td><td>2着</td><td>1/2馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1985</td><td>ジャパンC</td><td>1着</td><td>1 3/4馬身</td><td>岡部幸雄</td></tr>
+                    <tr class="rank-1"><td>1985</td><td>有馬記念</td><td>1着</td><td>4馬身</td><td>岡部幸雄</td></tr>
+                    <tr><td>1986</td><td>サンルイレイH(米)</td><td>6着</td><td>-</td><td>岡部幸雄</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="teio.html" style="text-decoration: none; color: inherit; font-weight: bold;">トウカイテイオー</a>（父子二代無敗三冠の夢・奇跡の復活）</li>
+                <li class="progeny-item">ツルマルツヨシ（京都大賞典）</li>
+                <li class="progeny-item">アイルトンシンボリ（ステイヤーズS）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：一冠目のゴール板</h3>
+            <p>日本ダービーを制した際、岡部幸雄騎手が指を1本立てたパフォーマンスは有名ですが、実はルドルフが自ら「まだあと2つ（菊花賞まで）あるんだろ？」と言わんばかりの余裕を見せていたといいます。馬が自ら勝利を確信し、自制する――その知性が「皇帝」と呼ばれる最大の所以です。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

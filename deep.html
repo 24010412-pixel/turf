@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ディープインパクト - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「日本近代競馬の結晶」無敗の三冠馬</p>
+        <h2>ディープインパクト</h2>
+        
+        <div class="horse-visual"><img src="images/deep.png" alt="ディープインパクト"></div>
+
+        <div class="horse-intro">
+            武豊を背に「飛んでいる」と形容された走りで、史上2頭目の無敗での三冠を達成した日本競馬の至宝。圧倒的な末脚で数々のG1を制し、引退後も種牡馬として日本競馬を支配し続ける、文字通り「衝撃」の名馬です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 武豊</li>
+                <li><b>獲得賞金：</b> 約14億5000万</li>
+                <li><b>通算成績：</b> 14戦12勝（国内無敗）</li>
+                <li><b>脚質：</b> 追い込み</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">サンデーサイレンス</li>
+                        <li class="progeny-item">ウインドインハーヘア</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 100, "スタミナ": 95, "パワー": 90, "根性": 92, "賢さ": 95}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2004</td><td>2歳新馬</td><td>1着</td><td>4馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>若駒S</td><td>1着</td><td>5馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>弥生賞</td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>皐月賞</td><td>1着</td><td>2 1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>日本ダービー</td><td>1着</td><td>5馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>菊花賞</td><td>1着</td><td>2馬身</td><td>武豊</td></tr>
+                    <tr><td>2005</td><td>有馬記念</td><td>2着</td><td>1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2006</td><td>阪神大賞典</td><td>1着</td><td>3 1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2006</td><td>天皇賞・春</td><td>1着</td><td>3 1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2006</td><td>宝塚記念</td><td>1着</td><td>4馬身</td><td>武豊</td></tr>
+                    <tr><td>2006</td><td>凱旋門賞</td><td>失格</td><td>-</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2006</td><td>ジャパンC</td><td>1着</td><td>2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2006</td><td>有馬記念</td><td>1着</td><td>3馬身</td><td>武豊</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（代表的な三冠馬・名馬）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="gentil.html" style="text-decoration: none; color: inherit; font-weight: bold;">ジェンティルドンナ</a>（牝馬三冠）</li>
+                <li class="progeny-item"><a href="contrail.html" style="text-decoration: none; color: inherit; font-weight: bold;">コントレイル</a>（無敗の三冠）</li>
+                <li class="progeny-item">オーギュストロダン（英・愛ダービー）</li>
+                <li class="progeny-item">シャフリヤール（日本ダービー）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：空を飛ぶ走り</h3>
+            <p>2005年菊花賞。「世界のホースマンよ見てくれ、これが日本近代競馬の結晶だ！」という実況と共に、史上2頭目の無敗の三冠馬となった瞬間。武豊騎手に「走っているのではなく、飛んでいる」と言わしめたその脚は、今も伝説として語り継がれています。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナリタトップロード - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世紀を越えた不屈の主役」誰もが愛した菊花賞馬</p>
+        <h2>ナリタトップロード</h2>
+        
+        <div class="horse-visual"><img src="images/toproad.png" alt="ナリタトップロード"></div>
+
+        <div class="horse-intro">
+            1999年のクラシック戦線で、アドマイヤベガ、テイエムオペラオーと共に「三強」を形成。日本ダービーでのハナ差2着という悔しさを経て、菊花賞で悲願の頂点へ。その後も「世紀末覇王」オペラオーに挑み続け、G1の舞台で常に善戦。その誠実な走りと渡辺薫彦騎手との絆は、今もなお多くのファンの語り草となっています。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 渡辺薫彦</li>
+                <li><b>獲得賞金：</b> 約9億9011万円</li>
+                <li><b>通算成績：</b> 30戦8勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">サッカーボーイ</li>
+                        <li class="progeny-item">フローラルマジック</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 93, "スタミナ": 98, "パワー": 92, "根性": 96, "賢さ": 94}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>1998</td><td>3歳新馬</td><td>1着</td><td>2 1/2馬身</td><td>渡辺薫彦</td></tr>
+                        <tr><td>1998</td><td>寒椿賞</td><td>2着</td><td>0.1秒</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>1999</td><td>きさらぎ賞</td><td>1着</td><td>2馬身</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>1999</td><td>弥生賞</td><td>1着</td><td>クビ</td><td>渡辺薫彦</td></tr>
+                        <tr><td>1999</td><td>皐月賞</td><td>3着</td><td>0.1秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>1999</td><td>日本ダービー</td><td>2着</td><td>ハナ</td><td>渡辺薫彦</td></tr>
+                        <tr><td>1999</td><td>京都新聞杯</td><td>2着</td><td>0.1秒</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1999</td><td><b>菊花賞</b></td><td>1着</td><td>クビ</td><td>渡辺薫彦</td></tr>
+                        <tr><td>1999</td><td>有馬記念</td><td>7着</td><td>0.5秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2000</td><td>京都記念</td><td>2着</td><td>0.0秒</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>2000</td><td>阪神大賞典</td><td>1着</td><td>1/2馬身</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2000</td><td>天皇賞・春</td><td>3着</td><td>0.2秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2000</td><td>宝塚記念</td><td>4着</td><td>0.6秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2000</td><td>天皇賞・秋</td><td>5着</td><td>0.2秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2000</td><td>ジャパンC</td><td>13着</td><td>1.4秒</td><td>的場均</td></tr>
+                        <tr><td>2000</td><td>有馬記念</td><td>9着</td><td>0.8秒</td><td>的場均</td></tr>
+                        <tr><td>2001</td><td>京都記念</td><td>3着</td><td>0.1秒</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>2001</td><td>阪神大賞典</td><td>1着</td><td>ハナ</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2001</td><td>天皇賞・春</td><td>3着</td><td>0.1秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2001</td><td>天皇賞・秋</td><td>落馬</td><td>-</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2001</td><td>有馬記念</td><td>10着</td><td>0.6秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2002</td><td>京都記念</td><td>1着</td><td>1 1/4馬身</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>2002</td><td>阪神大賞典</td><td>1着</td><td>1 3/4馬身</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2002</td><td>天皇賞・春</td><td>3着</td><td>0.3秒</td><td>渡辺薫彦</td></tr>
+                        <tr><td>2002</td><td>宝塚記念</td><td>5着</td><td>0.3秒</td><td>渡辺薫彦</td></tr>
+                        <tr class="rank-1"><td>2002</td><td>京都大賞典</td><td>1着</td><td>2 1/2馬身</td><td>四位洋文</td></tr>
+                        <tr><td>2002</td><td>天皇賞・秋</td><td>2着</td><td>ハナ</td><td>四位洋文</td></tr>
+                        <tr><td>2002</td><td>ジャパンC</td><td>10着</td><td>1.5秒</td><td>四位洋文</td></tr>
+                        <tr><td>2002</td><td>有馬記念</td><td>4着</td><td>0.2秒</td><td>渡辺薫彦</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">ベッラレイア（フローラS・オークス2着）</li>
+                <li class="progeny-item">マイネルアワグラス（シリウスS）</li>
+                <li class="progeny-item">ナリタシルクロード（オープン馬）</li>
+                <li class="progeny-item">トップオブピーコ（地方重賞勝ち）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：沸き上がった「トプロ」コール</h3>
+            <p>1999年菊花賞。ダービーの悔し涙から数ヶ月、渡辺薫彦騎手を背に外から力強く突き抜けた瞬間、京都競馬場は熱狂の渦に包まれました。強すぎるライバルたちの影に隠れそうになりながらも、決して腐らず走り続けたその姿。ラストランの有馬記念で見せた執念の4着と、引き揚げてくる彼を待っていた温かな拍手こそ、この馬が誰よりも愛された証でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

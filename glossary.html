@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>競馬用語事典 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================================
+           glossary専用スタイル
+        ============================================================ */
+        .glossary-wrapper {
+            max-width: 1100px;
+            margin: 40px auto 80px;
+            padding: 0 30px;
+        }
+
+        /* 検索・フィルターバー */
+        .glossary-filter {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .glossary-search-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .glossary-search-wrap input {
+            width: 100%;
+            padding: 10px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .glossary-search-wrap input:focus {
+            border-color: #004d40;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cat-btn:hover {
+            border-color: #004d40;
+            color: #004d40;
+        }
+
+        .cat-btn.active {
+            background: #004d40;
+            border-color: #004d40;
+            color: white;
+        }
+
+        .cat-btn[data-cat="脚質"] { border-color: #1976d2; color: #1976d2; }
+        .cat-btn[data-cat="脚質"].active { background: #1976d2; color: white; }
+        .cat-btn[data-cat="称号・実績"] { border-color: #b8860b; color: #b8860b; }
+        .cat-btn[data-cat="称号・実績"].active { background: #b8860b; color: white; }
+        .cat-btn[data-cat="血統"] { border-color: #c2185b; color: #c2185b; }
+        .cat-btn[data-cat="血統"].active { background: #c2185b; color: white; }
+        .cat-btn[data-cat="レース"] { border-color: #2e7d32; color: #2e7d32; }
+        .cat-btn[data-cat="レース"].active { background: #2e7d32; color: white; }
+        .cat-btn[data-cat="馬体・能力"] { border-color: #6a1b9a; color: #6a1b9a; }
+        .cat-btn[data-cat="馬体・能力"].active { background: #6a1b9a; color: white; }
+
+        /* 用語カード */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .glossary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .glossary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .glossary-card-header {
+            padding: 18px 22px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .glossary-term {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .glossary-yomi {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .cat-badge {
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .cat-badge.脚質 { background: #e3f2fd; color: #1976d2; }
+        .cat-badge.称号・実績 { background: #fff8e1; color: #b8860b; }
+        .cat-badge.血統 { background: #fce4ec; color: #c2185b; }
+        .cat-badge.レース { background: #e8f5e9; color: #2e7d32; }
+        .cat-badge.馬体・能力 { background: #f3e5f5; color: #6a1b9a; }
+
+        .glossary-card-body {
+            padding: 16px 22px 20px;
+        }
+
+        .glossary-short {
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .glossary-detail {
+            display: none;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+            border-top: 1px dashed #ddd;
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        .glossary-card.open .glossary-detail {
+            display: block;
+        }
+
+        .glossary-example {
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: #f9fbf9;
+            border-left: 3px solid #004d40;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .glossary-example strong {
+            color: #004d40;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #004d40;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-btn::after {
+            content: " ▼";
+        }
+
+        .glossary-card.open .toggle-btn::after {
+            content: " ▲";
+        }
+
+        .no-results {
+            text-align: center;
+            color: #999;
+            font-size: 1.1rem;
+            padding: 60px 0;
+            display: none;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glossary-count {
+            font-size: 0.95rem;
+            color: #2e7d32;
+            font-weight: bold;
+            background: #e8f5e9;
+            padding: 6px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <div class="glossary-wrapper">
+        <div class="glossary-filter fade-in">
+            <div class="glossary-search-wrap">
+                <input type="text" id="glossarySearch" placeholder="用語を検索...">
+            </div>
+            <div class="category-tabs">
+                <button class="cat-btn active" data-cat="all">すべて</button>
+                <button class="cat-btn" data-cat="脚質">脚質</button>
+                <button class="cat-btn" data-cat="称号・実績">称号・実績</button>
+                <button class="cat-btn" data-cat="血統">血統</button>
+                <button class="cat-btn" data-cat="レース">レース</button>
+                <button class="cat-btn" data-cat="馬体・能力">馬体・能力</button>
+            </div>
+            <div class="glossary-count" id="glossaryCount">全 40 語</div>
+        </div>
+
+        <div class="glossary-grid" id="glossaryGrid"></div>
+        <div class="no-results" id="noResults">該当する用語が見つかりませんでした。</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    const glossaryData = [
+        // 脚質
+        {
+            term: "末脚",
+            yomi: "すえあし",
+            cat: "脚質",
+            short: "レース終盤に発揮する爆発的な加速力・スピード。",
+            detail: "直線やゴール前で一気に加速する能力のこと。末脚が強い馬は追い込み・差し脚質であることが多く、後方から一気に先頭に立つ豪快なレースが見せ場になる。",
+            example: "ディープインパクト・アーモンドアイは歴代最強クラスの末脚を誇る。"
+        },
+        {
+            term: "逃げ",
+            yomi: "にげ",
+            cat: "脚質",
+            short: "スタート直後から先頭に立ち、そのまま粘り切る戦法。",
+            detail: "ハナ（先頭）を奪いペースをコントロールすることで、後続馬に脚を使わせる。スタミナと精神力が重要で、マークされやすいためペース配分が難しい。",
+            example: "キタサンブラック・タイトルホルダーが代表的な逃げ馬。"
+        },
+        {
+            term: "先行",
+            yomi: "せんこう",
+            cat: "脚質",
+            short: "先頭集団の直後につけ、直線で先頭を狙う脚質。",
+            detail: "逃げほど前には出ないが、常に好位置を確保して直線勝負に持ち込む。バランスが良くリスクが少ないとされる脚質。",
+            example: "テイエムオペラオーは先行から安定した強さを見せた。"
+        },
+        {
+            term: "差し",
+            yomi: "さし",
+            cat: "脚質",
+            short: "中団から直線で一気に前を交わす脚質。",
+            detail: "先行馬の後ろに位置し、直線に入ってから脚を伸ばして前を差し切る。末脚が問われるが、位置取りが難しく展開に左右されることも多い。",
+            example: "ゼンノロブロイ・ジェンティルドンナが典型的な差し馬。"
+        },
+        {
+            term: "追い込み",
+            yomi: "おいこみ",
+            cat: "脚質",
+            short: "後方待機から直線で猛然と追い込む脚質。",
+            detail: "最後方近くから末脚一本で勝負する。爆発的なスピードが必要で、ペースが流れて前が止まる展開が理想。一方、展開次第では届かないリスクもある。",
+            example: "ディープインパクトは典型的な追い込み馬として名を馳せた。"
+        },
+        {
+            term: "スタミナ",
+            yomi: "すたみな",
+            cat: "脚質",
+            short: "長距離・消耗戦を走り切る持久力。",
+            detail: "特に2000m以上のレースで重要な要素。心肺機能と筋持久力が影響し、長距離適性のある馬は「ステイヤー」と呼ばれる。",
+            example: "菊花賞（3000m）はスタミナの真価が問われる。"
+        },
+        // 称号・実績
+        {
+            term: "三冠馬",
+            yomi: "さんかんば",
+            cat: "称号・実績",
+            short: "皐月賞・日本ダービー・菊花賞の3つのクラシックレースを制した馬。",
+            detail: "日本競馬最高の称号の一つ。3歳牡馬限定の三大クラシックを全制覇した馬のみに与えられる。牝馬版は桜花賞・オークス・秋華賞。無敗での達成はさらに希少。",
+            example: "ディープインパクト・コントレイル・シンボリルドルフが無敗の三冠馬。"
+        },
+        {
+            term: "顕彰馬",
+            yomi: "けんしょうば",
+            cat: "称号・実績",
+            short: "日本中央競馬会（JRA）が競馬の発展に貢献した名馬を顕彰する制度。",
+            detail: "競走成績・種牡馬・繁殖牝馬としての実績などが評価され、選考委員会によって選出される。競馬殿堂入りとも言われる最高の名誉。",
+            example: "シンボリルドルフ・オグリキャップ・ディープインパクトが顕彰馬。"
+        },
+        {
+            term: "古馬三冠",
+            yomi: "こばさんかん",
+            cat: "称号・実績",
+            short: "宝塚記念・天皇賞（秋）・ジャパンカップ（または有馬記念）を制すること。",
+            detail: "明確な定義はないが、秋古馬三冠は天皇賞(秋)・ジャパンカップ・有馬記念を指すことが多い。4歳以上の古馬が争うトップレベルのタイトル。",
+            example: "テイエムオペラオーが2000年に秋古馬三冠を達成。"
+        },
+        {
+            term: "G1",
+            yomi: "じーわん",
+            cat: "称号・実績",
+            short: "競馬のグレード制における最高位のレース。",
+            detail: "グレードはG1・G2・G3に分かれ、G1が最高格付け。日本では25のG1が設定されており、ダービー・有馬記念・天皇賞などが該当する。",
+            example: "アーモンドアイは芝G1を9勝という前人未到の記録を樹立。"
+        },
+        {
+            term: "無敗",
+            yomi: "むはい",
+            cat: "称号・実績",
+            short: "競走生活において一度も敗れることなく勝ち続けること。",
+            detail: "特に三冠馬の無敗達成は極めて希少。プレッシャーの中で完璧なレースを続ける精神力と能力が求められる。",
+            example: "ディープインパクト・コントレイルが無敗の三冠を達成。"
+        },
+        {
+            term: "世界レーティング",
+            yomi: "せかいれーてぃんぐ",
+            cat: "称号・実績",
+            short: "国際競馬統括機関連盟(IFHA)が発表する世界の競走馬の能力評価。",
+            detail: "レースの結果や着差などを元に数値化した世界共通の馬の強さの指標。世界1位は競馬界最高の栄誉とされる。",
+            example: "イクイノックスが2023年に世界ランキング1位を獲得。"
+        },
+        // 血統
+        {
+            term: "サンデーサイレンス系",
+            yomi: "さんでーさいれんすけい",
+            cat: "血統",
+            short: "アメリカの名馬サンデーサイレンスを祖とする血統系統。",
+            detail: "日本競馬に最も大きな影響を与えた血統。ディープインパクトをはじめ多くの名馬を輩出し、現在の日本競馬の主流血統となっている。",
+            example: "ディープインパクト・ステイゴールドがサンデーサイレンス産駒。"
+        },
+        {
+            term: "種牡馬",
+            yomi: "しゅぼば",
+            cat: "血統",
+            short: "繁殖に使用される牡馬。優秀な産駒を多く輩出した名馬がなる。",
+            detail: "競走馬として活躍後、種牡馬として次世代の名馬を生み出す役割を担う。リーディングサイアー（年間最多勝利産駒を出した種牡馬）は名誉ある称号。",
+            example: "ディープインパクトは種牡馬としても歴代最高クラスの実績を残した。"
+        },
+        {
+            term: "繁殖牝馬",
+            yomi: "はんしょくひんば",
+            cat: "血統",
+            short: "繁殖に使用される牝馬。優秀な産駒を生む名牝が重宝される。",
+            detail: "牝馬は引退後に繁殖牝馬となり、種牡馬との配合で産駒を生む。名牝の血は何世代にも渡って受け継がれることがある。",
+            example: "シーザリオ・エアグルーヴが名繁殖牝馬として知られる。"
+        },
+        {
+            term: "配合",
+            yomi: "はいごう",
+            cat: "血統",
+            short: "種牡馬と繁殖牝馬を組み合わせて産駒を生産すること。",
+            detail: "血統の相性・インブリード・ニックスなど様々な理論を元に最良の組み合わせを考える。名配合からは世代を超えた名馬が生まれる。",
+            example: "ディープインパクト×ストームキャット系は成功配合として有名。"
+        },
+        {
+            term: "インブリード",
+            yomi: "いんぶりーど",
+            cat: "血統",
+            short: "近親交配。父方・母方に同じ祖先が現れる血統構成。",
+            detail: "特定の優秀な血を濃くするために行われるが、やりすぎると虚弱体質になるリスクもある。バランスが重要。",
+            example: "ノーザンダンサーの4×4インブリードを持つ馬は多い。"
+        },
+        // レース
+        {
+            term: "クラシック",
+            yomi: "くらしっく",
+            cat: "レース",
+            short: "3歳馬限定の伝統的な重賞レース群の総称。",
+            detail: "日本では牡馬三冠（皐月賞・日本ダービー・菊花賞）と牝馬三冠（桜花賞・オークス・秋華賞）が該当。一生に一度しか出走できない特別なレース。",
+            example: "ダービーはクラシックの中でも特に権威あるレースとされる。"
+        },
+        {
+            term: "ダービー",
+            yomi: "だーびー",
+            cat: "レース",
+            short: "日本ダービー（東京優駿）。3歳牡馬の最高峰レース。",
+            detail: "東京競馬場・芝2400mで行われる3歳クラシック第2戦。「最も強い3歳馬を決める一戦」として競馬界最高の祭典と称される。",
+            example: "ダービー馬になることは全ホースマンの夢とされる。"
+        },
+        {
+            term: "有馬記念",
+            yomi: "ありまきねん",
+            cat: "レース",
+            short: "年末に中山競馬場で行われる競馬の祭典。ファン投票で出走馬が決まる。",
+            detail: "中山競馬場・芝2500mで12月に開催。ファン投票によって出走馬が選ばれる唯一のグランプリレース。その年の最強馬決定戦として注目度が非常に高い。",
+            example: "オグリキャップの引退レースとなった1990年有馬記念は伝説として語り継がれる。"
+        },
+        {
+            term: "凱旋門賞",
+            yomi: "がいせんもんしょう",
+            cat: "レース",
+            short: "フランス・パリロンシャン競馬場で行われる世界最高峰のレース。",
+            detail: "芝2400mで10月に開催される世界レーティング最高位のレース。日本馬は長年挑戦しているが未勝利。ディープインパクトは失格となり、オルフェーヴルは2年連続2着という惜敗を喫した。",
+            example: "日本馬の悲願・凱旋門賞制覇はいまだ達成されていない。"
+        },
+        {
+            term: "ジャパンカップ",
+            yomi: "じゃぱんかっぷ",
+            cat: "レース",
+            short: "東京競馬場で行われる国際G1。世界の強豪が集う。",
+            detail: "東京競馬場・芝2400mで11月に開催。1981年創設の国際招待競走で、長年世界トップクラスの外国馬が来日して争われてきた。",
+            example: "アーモンドアイが2018年に世界レコードでジャパンカップを制した。"
+        },
+        {
+            term: "皐月賞",
+            yomi: "さつきしょう",
+            cat: "レース",
+            short: "3歳牡馬クラシック第1戦。中山競馬場・芝2000m。",
+            detail: "「最も速い馬が勝つ」と言われるスピードが問われるレース。三冠の最初の関門で、ここを制した馬がダービーの主役となることが多い。",
+            example: "皐月賞馬はダービーの最有力候補として注目される。"
+        },
+        {
+            term: "菊花賞",
+            yomi: "きっかしょう",
+            cat: "レース",
+            short: "3歳牡馬クラシック第3戦。京都競馬場・芝3000m。",
+            detail: "「最も強い馬が勝つ」と言われるスタミナが問われる長距離戦。三冠の最後の関門で、ここを制して初めて三冠馬となれる。",
+            example: "菊花賞は長距離適性がなければ勝てない「ステイヤーの頂点」。"
+        },
+        // 馬体・能力
+        {
+            term: "ステイヤー",
+            yomi: "すてぃやー",
+            cat: "馬体・能力",
+            short: "長距離レースを得意とする馬。スタミナ型。",
+            detail: "2400m以上の長距離を得意とする馬のこと。心肺機能が高くスタミナに優れる。菊花賞・天皇賞(春)などが主戦場。",
+            example: "ディープインパクト・オルフェーヴルは三冠を制したステイヤー。"
+        },
+        {
+            term: "スプリンター",
+            yomi: "すぷりんたー",
+            cat: "馬体・能力",
+            short: "短距離レース（1200m以下）を得意とする瞬発力型の馬。",
+            detail: "瞬発的なスピードに優れ、短い距離で爆発的な力を発揮する。スプリンターズステークス（1200m）が最高峰のレース。",
+            example: "デュランダルはマイル・スプリント路線で無類の強さを誇った。"
+        },
+        {
+            term: "芦毛",
+            yomi: "あしげ",
+            cat: "馬体・能力",
+            short: "灰色～白色の体毛を持つ馬の毛色。加齢とともに白くなる。",
+            detail: "生まれた時は黒や鹿毛でも、年齢とともに白くなっていく特徴がある。「芦毛の怪物」と呼ばれたオグリキャップが有名。",
+            example: "オグリキャップ・クロフネが芦毛の名馬として知られる。"
+        },
+        {
+            term: "鹿毛",
+            yomi: "かげ",
+            cat: "馬体・能力",
+            short: "茶褐色の体毛を持つ最もポピュラーな毛色。",
+            detail: "日本競馬で最も多い毛色。明るい茶色から黒に近い黒鹿毛まで幅があり、多くの名馬がこの毛色を持つ。",
+            example: "ディープインパクト・キタサンブラックが鹿毛。"
+        },
+        {
+            term: "白毛",
+            yomi: "しろげ",
+            cat: "馬体・能力",
+            short: "生まれた時から白い体毛を持つ極めて希少な毛色。",
+            detail: "芦毛と異なり生まれた時から白く、遺伝的に非常に珍しい。日本では白毛馬の競走実績はほとんどなかったが、ソダシが白毛馬初のG1制覇を達成した。",
+            example: "ソダシが白毛馬として史上初の桜花賞制覇を達成。"
+        },
+        {
+            term: "栗毛",
+            yomi: "くりげ",
+            cat: "馬体・能力",
+            short: "赤みがかった茶色の体毛を持つ毛色。",
+            detail: "鮮やかな赤褐色が特徴的な毛色。テイエムオペラオー・オルフェーヴルなど多くの名馬が栗毛。",
+            example: "オルフェーヴル・テイエムオペラオーが栗毛の名馬。"
+        },
+        {
+            term: "牡馬",
+            yomi: "おすうま",
+            cat: "馬体・能力",
+            short: "オスの競走馬。牝馬より体格が大きく力強い傾向。",
+            detail: "一般的に牡馬は牝馬より体が大きく筋力があるとされる。クラシックでは牡馬と牝馬が別々のレースで争うことが多いが、宝塚記念・有馬記念などでは混合戦も多い。",
+            example: "ディープインパクト・キタサンブラックが牡馬の代表格。"
+        },
+        {
+            term: "牝馬",
+            yomi: "めすうま",
+            cat: "馬体・能力",
+            short: "メスの競走馬。牡馬と比較して体が小さいが、近年は牡馬に匹敵する実績を持つ名牝も多い。",
+            detail: "かつては牝馬限定戦が主戦場だったが、近年はアーモンドアイ・ジェンティルドンナのように牡馬混合のG1でも互角以上に渡り合う牝馬が増えている。",
+            example: "アーモンドアイ・ジェンティルドンナが牝馬最強クラスの実績。"
+        },
+        {
+            term: "騸馬",
+            yomi: "せんば",
+            cat: "馬体・能力",
+            short: "去勢された牡馬。気性が落ち着き、競走能力が安定することが多い。",
+            detail: "気性の荒い牡馬を去勢することで、レースに集中しやすくなる。ただし日本では騸馬は種牡馬になれないため、繁殖価値はない。",
+            example: "ゴールドシップは騸馬として活躍した名馬の一頭。"
+        },
+        {
+            term: "気性",
+            yomi: "きしょう",
+            cat: "馬体・能力",
+            short: "馬の性格・気質のこと。レース中の集中力や折り合いに影響する。",
+            detail: "気性が激しい馬はスタートや道中でエネルギーを無駄遣いしてしまうことがある。逆に気性が穏やかな馬は安定したレースをしやすい。",
+            example: "オルフェーヴルは圧倒的な能力を持ちながら激しい気性でも有名だった。"
+        },
+        {
+            term: "折り合い",
+            yomi: "おりあい",
+            cat: "馬体・能力",
+            short: "レース中に騎手が馬をコントロールできている状態のこと。",
+            detail: "折り合いが付かない馬は道中で引っかかって力を使いすぎ、直線で失速することが多い。折り合い力は長距離レースで特に重要。",
+            example: "折り合いを欠いた馬は終盤に失速するリスクが高い。"
+        },
+        {
+            term: "ハナ",
+            yomi: "はな",
+            cat: "脚質",
+            short: "レースの先頭のこと。「ハナを奪う」は先頭に立つことを意味する。",
+            detail: "逃げ馬にとってハナを奪うことは非常に重要で、ペースを自分でコントロールできる最大のメリットがある。",
+            example: "タイトルホルダーはハナを奪い自分のペースで押し切る逃げが得意。"
+        },
+        {
+            term: "直線",
+            yomi: "ちょくせん",
+            cat: "レース",
+            short: "競馬場のゴール前の真っ直ぐな区間。勝負どころ。",
+            detail: "最後の直線の長さはコースによって異なり、東京は525mと日本最長。直線が長いほど差し・追い込み馬に有利とされる。",
+            example: "東京競馬場の長い直線はディープインパクトの末脚を活かした。"
+        },
+        {
+            term: "展開",
+            yomi: "てんかい",
+            cat: "レース",
+            short: "レースのペースや位置取りなど、レースの流れ全体のこと。",
+            detail: "スローペース（ゆっくり）とハイペース（速い）では有利な脚質が変わる。スローなら先行馬、ハイペースなら差し・追い込みが有利になりやすい。",
+            example: "展開次第で強い馬でも負けることがあるのが競馬の醍醐味。"
+        },
+        {
+            term: "馬体重",
+            yomi: "ばたいじゅう",
+            cat: "馬体・能力",
+            short: "競走馬の体重。レース当日に発表され、前走比での増減も注目される。",
+            detail: "馬体重の増減はコンディションの目安となる。極端な増加・減少は体調不良のサインとして注意が必要。理想的な馬体重は馬によって異なる。",
+            example: "馬体重プラス20kgなど大幅増は仕上がりへの影響が懸念される。"
+        },
+    ];
+
+    // 描画
+    const grid = document.getElementById('glossaryGrid');
+    const noResults = document.getElementById('noResults');
+    const countEl = document.getElementById('glossaryCount');
+    const searchEl = document.getElementById('glossarySearch');
+    let currentCat = 'all';
+    let currentSearch = '';
+
+    function renderCards() {
+        const filtered = glossaryData.filter(d => {
+            const catMatch = currentCat === 'all' || d.cat === currentCat;
+            const searchMatch = currentSearch === '' ||
+                d.term.includes(currentSearch) ||
+                d.yomi.includes(currentSearch) ||
+                d.short.includes(currentSearch) ||
+                d.detail.includes(currentSearch);
+            return catMatch && searchMatch;
+        });
+
+        grid.innerHTML = '';
+        if (filtered.length === 0) {
+            noResults.style.display = 'block';
+            countEl.textContent = '0 語';
+            return;
+        }
+        noResults.style.display = 'none';
+        countEl.textContent = `${filtered.length} 語`;
+
+        filtered.forEach(d => {
+            const card = document.createElement('div');
+            card.className = 'glossary-card fade-in';
+            card.innerHTML = `
+                <div class="glossary-card-header">
+                    <div>
+                        <div class="glossary-term">${d.term}</div>
+                        <div class="glossary-yomi">（${d.yomi}）</div>
+                    </div>
+                    <span class="cat-badge ${d.cat}">${d.cat}</span>
+                </div>
+                <div class="glossary-card-body">
+                    <p class="glossary-short">${d.short}</p>
+                    <span class="toggle-btn">詳しく見る</span>
+                    <div class="glossary-detail">
+                        ${d.detail}
+                        <div class="glossary-example"><strong>例：</strong>${d.example}</div>
+                    </div>
+                </div>
+            `;
+            card.querySelector('.toggle-btn').addEventListener('click', () => {
+                card.classList.toggle('open');
+                card.querySelector('.toggle-btn').textContent = card.classList.contains('open') ? '閉じる' : '詳しく見る';
+            });
+            grid.appendChild(card);
+        });
+
+        // フェードイン適用
+        document.querySelectorAll('.glossary-card.fade-in').forEach((el, i) => {
+            setTimeout(() => {
+                const obs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.08 });
+                obs.observe(el);
+            }, i * 50);
+        });
+    }
+
+    // カテゴリタブ
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCat = btn.dataset.cat;
+            renderCards();
+        });
+    });
+
+    // 検索
+    searchEl.addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        renderCards();
+    });
+
+    renderCards();
+    </script>
+</body>
+</html>

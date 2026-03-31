@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォーエバーヤング - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を震撼させた砂の超新星」日本ダート馬の歴史を変えた開拓者</p>
+        <h2>フォーエバーヤング</h2>
+        
+        <div class="horse-visual"><img src="images/young.png" alt="フォーエバーヤング"></div>
+
+        <div class="horse-intro">
+            フォーエバーヤングは日本のダート界を代表する競走馬で、父リアルスティールから譲り受けた高い身体能力を持ち国内外で活躍する世界的ダートホースです。先行して長く脚を使う力強い走りが特徴で、海外の強豪とも互角以上に戦える実力を持っています。アメリカのダート最高峰レースであるブリーダーズカップ・クラシックを制覇し、日本馬として歴史的な勝利を挙げました。さらに世界最高賞金レースのサウジカップも連覇し、世界トップクラスのダート王者として高く評価されています。
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 94, "スタミナ": 98, "パワー": 100, "根性": 99, "賢さ": 92}'>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 坂井瑠星</li>
+                <li><b>獲得賞金：</b> 約45億6083万円（2026年サウジカップ連覇後）</li>
+                <li><b>通算成績：</b> 14戦11勝（2026年上半期時点）</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">リアルスティール</li>
+                        <li class="progeny-item">フォエヴァーダーリン</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>場所/着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2023</td><td>2歳新馬</td><td>1着</td><td>4馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2023</td><td>JBC2歳優駿</td><td>1着</td><td>1 1/2馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2023</td><td>全日本2歳優駿</td><td>1着</td><td>7馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2024</td><td>サウジダービー</td><td>1着</td><td>アタマ</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2024</td><td>UAEダービー</td><td>1着</td><td>2馬身</td><td>坂井瑠星</td></tr>
+                    <tr><td>2024</td><td>ケンタッキーダービー</td><td>3着</td><td>ハナ+ハナ</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2024</td><td>ジャパンダートクラシック</td><td>1着</td><td>1 1/4馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2024</td><td>東京大賞典</td><td>1着</td><td>1 1/2馬身</td><td>坂井瑠星</td></tr>
+                    <tr><td>2024</td><td>ブリーダーズカップ・クラシック</td><td>3着</td><td>1馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2025</td><td>サウジカップ</td><td>1着</td><td>クビ差</td><td>坂井瑠星</td></tr>
+                    <tr><td>2025</td><td>ドバイワールドカップ</td><td>3着</td><td>2 1/2馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2025</td><td>日本テレビ盃</td><td>1着</td><td>2 1/2馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2025</td><td>ブリーダーズカップ・クラシック</td><td>1着</td><td>1馬身</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2026</td><td>サウジカップ</td><td>1着</td><td>1馬身</td><td>坂井瑠星</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：ケンタッキーダービー「124年目の衝撃」</h3>
+            <p>
+                アメリカ競馬の聖地チャーチルダウンズ。外から猛追するフォーエバーヤング、内の2頭との壮絶な叩き合い。写真判定の結果、わずか数センチ差の3着。しかし、その走りは「日本馬がダートの本場で勝てる」ことを世界に証明し、現地ファンからもスタンディングオベーションが送られました。
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>今後の展望</h3>
+            <p>現在は現役最強のダート馬として、BCクラシック制覇や国内ダート路線の統一が期待されています。引退後は父リアルスティールの後継として、日本のダート血統を世界レベルへ押し上げる存在になることは間違いありません。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

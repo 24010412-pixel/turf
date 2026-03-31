@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キズナ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「日本中を繋いだ奇跡の末脚」親子二代ダービー馬</p>
+        <h2>キズナ</h2>
+        
+        <div class="horse-visual"><img src="images/kizuna.png" alt="キズナ"></div>
+
+        <div class="horse-intro">
+            父ディープインパクトにそっくりの爆発的な末脚を武器に、第80回日本ダービーを制覇。主戦の武豊騎手に「僕は帰ってきました」という名言を言わしめ、低迷期にあった名手と日本競馬界を再び熱狂の渦に巻き込みました。フランス・ニエル賞制覇など、世界にもその名を轟かせた「絆」の結晶です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 武豊、佐藤哲三</li>
+                <li><b>獲得賞金：</b> 約5億8000万円</li>
+                <li><b>通算成績：</b> 14戦7勝</li>
+                <li><b>脚質：</b> 差し・追い込み</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="deep.html" style="text-decoration: none; color: inherit; font-weight: bold;">ディープインパクト</a></li>
+                        <li class="progeny-item">キャットクイル</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 95, "スタミナ": 90, "パワー": 94, "根性": 93, "賢さ": 92}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2012</td><td>2歳新馬</td><td>1着</td><td>1 1/2馬身</td><td>佐藤哲三</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>黄菊賞</td><td>1着</td><td>1 1/4馬身</td><td>武豊</td></tr>
+                    <tr><td>2012</td><td>ラジオNIKKEI杯2歳S</td><td>3着</td><td>0.1秒</td><td>武豊</td></tr>
+                    <tr><td>2013</td><td>若駒S</td><td>1着</td><td>2馬身</td><td>武豊</td></tr>
+                    <tr><td>2013</td><td>弥生賞</td><td>5着</td><td>0.1秒</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2013</td><td>毎日杯</td><td>1着</td><td>3馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2013</td><td>京都新聞杯</td><td>1着</td><td>1 1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1" style="background-color: #fff9c4;"><td>2013</td><td>日本ダービー</td><td>1着</td><td>1/2馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1" style="background-color: #e3f2fd;"><td>2013</td><td>ニエル賞(仏G2)</td><td>1着</td><td>短頭</td><td>武豊</td></tr>
+                    <tr><td>2013</td><td>凱旋門賞(仏G1)</td><td>4着</td><td>5馬身</td><td>武豊</td></tr>
+                    <tr class="rank-1"><td>2014</td><td>産経大阪杯</td><td>1着</td><td>キレ</td><td>武豊</td></tr>
+                    <tr><td>2014</td><td>天皇賞・春</td><td>4着</td><td>0.1秒</td><td>武豊</td></tr>
+                    <tr><td>2015</td><td>京都記念</td><td>3着</td><td>0.1秒</td><td>武豊</td></tr>
+                    <tr><td>2015</td><td>大阪杯</td><td>2着</td><td>2馬身</td><td>武豊</td></tr>
+                    <tr><td>2015</td><td>天皇賞・春</td><td>7着</td><td>0.6秒</td><td>武豊</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="just-in-cafe.html" style="text-decoration: none; color: inherit; font-weight: bold;">ジャスティンミラノ</a>（皐月賞）</li>
+                <li class="progeny-item"><a href="songline.html" style="text-decoration: none; color: inherit; font-weight: bold;">ソングライン</a>（安田記念2連覇・ヴィクトリアM）</li>
+                <li class="progeny-item">アカイイト（エリザベス女王杯）</li>
+                <li class="progeny-item">ディープボンド（阪神大賞典3連覇）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：武豊の帰還</h3>
+            <p>2013年、日本ダービー。キズナがゴール板を駆け抜けた瞬間、東京競馬場は割れんばかりの「ユタカ」コールに包まれました。長く苦しい時期を過ごした武豊騎手が、この馬と共に最高の栄冠を手にした姿は、多くのファンの涙を誘いました。ニエル賞では世界王者の英ダービー馬を撃破。まさに「キズナ」の名の通り、人と馬、そしてファンを強く結びつけた一頭でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* ============================================================
+   style.css (デザイン維持・色分け復活・隙間調整版 + ×ボタン対応)
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; 
+    background-color: #f4f7f4;
+    background-image: linear-gradient(90deg, rgba(0, 77, 64, 0.03) 1px, transparent 1px);
+    background-size: 50px 100%;
+    color: #333; 
+    overflow-x: hidden; 
+}
+
+/* --- サイドの装飾テキスト --- */
+body::before, body::after {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(0, 77, 64, 0.05); 
+    white-space: nowrap;
+    z-index: -1;
+    pointer-events: none;
+    letter-spacing: 0.5rem;
+}
+body::before { content: "RACING ARCHIVE"; left: -1rem; transform: translateY(-50%) rotate(-90deg); }
+body::after { content: "LEGEND HORSES"; right: -1rem; transform: translateY(-50%) rotate(90deg); }
+
+/* --- ヘッダー --- */
+header { 
+    background: #004d40; 
+    color: white; 
+    padding: 110px 20px 40px; 
+    text-align: center; 
+    position: relative; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.header-container { 
+    max-width: 100%; 
+    margin: 0 auto; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    position: absolute; 
+    top: 20px; left: 0; right: 0; 
+    padding: 0 60px; 
+}
+
+.header-logo img { height: 85px !important; width: auto; transition: transform 0.3s ease; }
+.header-logo:hover img { transform: scale(1.05); }
+.header-right { display: flex; gap: 25px; align-items: center; }
+.header-nav { display: flex; align-items: center; gap: 20px; }
+
+.list-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+.list-link:hover, .list-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+}
+
+/* ★検索ボックス */
+.search-box { 
+    background: white; 
+    border-radius: 35px; 
+    padding: 10px 25px; 
+    display: flex; 
+    align-items: center; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box input { 
+    border: none; 
+    outline: none; 
+    width: 220px; 
+    font-size: 1.1rem; 
+    color: #333; 
+    padding-right: 30px; 
+}
+
+#clearBtn {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    display: none;
+    color: #999;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
+}
+#clearBtn:hover { color: #333; }
+
+.search-box button { background: #2e7d32; color: white; border: none; padding: 8px 22px; border-radius: 25px; cursor: pointer; font-weight: bold; }
+
+/* --- スライダー --- */
+/* ✅ 修正: overflow:hidden を外枠 .main-visual-slider に置く（変更なし） */
+.main-visual-slider { 
+    width: 100%; 
+    height: 500px; 
+    overflow: hidden; 
+    position: relative; 
+    background: #000; 
+    margin-bottom: 20px;
+}
+
+/* ✅ 修正: width を fit-content → 100% に変更（これが動かなかった原因） */
+.slider-container { 
+    display: flex !important; 
+    height: 100%; 
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+}
+
+/* ✅ 修正: min-width を 100vw → 100% に変更（スクロールバーのズレを防止） */
+.slide { 
+    min-width: 100% !important; 
+    height: 100%; 
+    flex-shrink: 0 !important; 
+}
+
+.slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: brightness(0.6); }
+.slider-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; width: 100%; text-align: center; }
+.slider-overlay p { font-family: 'Noto Serif JP', serif; font-size: 2.5rem; color: white; border-top: 2px solid white; border-bottom: 2px solid white; display: inline-block; padding: 10px 40px; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 20px; cursor: pointer; z-index: 15; }
+.prev { left: 0; } .next { right: 0; }
+
+/* --- 絞り込みフィルターセクション --- */
+.filter-section {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 15px;
+    margin: 40px auto 30px; 
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    width: fit-content;
+    min-width: 60%;
+    max-width: 1720px; 
+    border: 1px solid #e0e0e0;
+}
+
+.filter-group { display: flex; align-items: center; gap: 12px; }
+.filter-group label { font-weight: bold; color: #004d40; font-size: 1rem; }
+.filter-group select {
+    padding: 10px 15px;
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    background-color: #fafafa;
+    color: #333;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.reset-button {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #666;
+    padding: 8px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+#matchCount {
+    margin-left: 30px;
+    font-weight: bold;
+    color: #2e7d32;
+    background: #e8f5e9;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+/* --- メインコンテンツ --- */
+.content-wrapper { 
+    width: 100%;
+    margin: 0 auto 60px;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.horse-section {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 100px;
+    max-width: 1720px; 
+}
+
+.category-header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 60px; 
+}
+
+.category-header { 
+    background: #004d40; 
+    color: white; 
+    padding: 15px 45px; 
+    border-radius: 0 40px 40px 0; 
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.1);
+}
+
+.category-header.blue { background: #1976d2 !important; }
+.category-header.pink { background: #c2185b !important; }
+.category-header.dark-green { background: #1b5e20 !important; }
+.category-header.hall-of-fame { background: #b8860b !important; }
+
+.horse-grid { 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: flex-start; 
+}
+
+.horse-card { 
+    width: 320px;
+    background: white; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    text-decoration: none; 
+    color: #333; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.horse-card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+.horse-card img { width: 100%; aspect-ratio: 3/2; object-fit: cover; }
+
+.card-info { padding: 25px; text-align: left; }
+.card-info h4 { font-size: 1.4rem; color: #1a1a1a; margin-bottom: 8px; font-family: 'Noto Serif JP', serif; }
+
+.origin { font-size: 0.9rem; color: #666; margin-bottom: 12px; line-height: 1.5; display: block; height: 3em; overflow: hidden; }
+
+.stats-line {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #2e7d32; 
+    background-color: #e8f5e9;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.tagline {
+    font-size: 1rem;
+    color: #333;
+    border-top: 1px dashed #ccc;
+    padding-top: 12px;
+    margin-top: 5px;
+}
+
+footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; border-top: 1px solid #eee; background: #fff; width: 100%; }
+
+@media (max-width: 700px) {
+    .filter-section { flex-direction: column; align-items: stretch; width: 90%; }
+    #matchCount { margin-left: 0; text-align: center; margin-top: 10px; }
+    .horse-grid { justify-content: center; }
+    .horse-card { width: 100%; max-width: 380px; }
+}

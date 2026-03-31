@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イクイノックス - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界一の天才」ロンジンワールドベストレースホース</p>
+        <h2>イクイノックス</h2>
+        
+        <div class="horse-visual"><img src="images/equinox.png" alt="イクイノックス"></div>
+
+        <div class="horse-intro">
+            キタサンブラックの初年度産駒として登場し、3歳秋の天皇賞で衝撃の末脚を披露。そこから引退まで破竹のG1・6連勝を飾り、2023年には世界最高峰の評価「ワールドベストレースホース」の座に輝きました。どんな距離・展開でも他を圧倒する「天衣無縫」の強さは、現代競馬の到達点とも言われます。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> C.ルメール</li>
+                <li><b>獲得賞金：</b> 22億1544万6100円（日本歴代1位）</li>
+                <li><b>通算成績：</b> 10戦8勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">
+                            <a href="kitasan.html" style="text-decoration: none; color: inherit; font-weight: bold;">キタサンブラック</a>
+                        </li>
+                        <li class="progeny-item">シャトーブランシュ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 100, "スタミナ": 90, "パワー": 95, "根性": 88, "賢さ": 98}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+        <div class="data-box">
+    <h3>全戦績</h3>
+    <table class="career-table">
+        <thead>
+            <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+        </thead>
+        <tbody>
+            <tr class="rank-1"><td>2021</td><td>2歳新馬</td><td>1着</td><td>6馬身</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2021</td><td>東スポ杯2歳S(G2)</td><td>1着</td><td>2 1/2</td><td>C.ルメール</td></tr>
+            <tr><td>2022</td><td>皐月賞(G1)</td><td>2着</td><td>1馬身</td><td>C.ルメール</td></tr>
+            <tr><td>2022</td><td>日本ダービー(G1)</td><td>2着</td><td>クビ</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2022</td><td>天皇賞・秋(G1)</td><td>1着</td><td>1馬身</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2022</td><td>有馬記念(G1)</td><td>1着</td><td>2 1/2</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2023</td><td>ドバイシーマC(G1)</td><td>1着</td><td>3 1/2</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2023</td><td>宝塚記念(G1)</td><td>1着</td><td>クビ</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2023</td><td>天皇賞・秋(G1)</td><td>1着</td><td>2 1/2</td><td>C.ルメール</td></tr>
+            <tr class="rank-1"><td>2023</td><td>ジャパンC(G1)</td><td>1着</td><td>4馬身</td><td>C.ルメール</td></tr>
+        </tbody>
+    </table>
+</div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">2025年誕生予定（初年度産駒）</li>
+                <li class="progeny-item">期待の血統がここから始まります</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：2023年ジャパンカップ「最強の証明」</h3>
+            <p>現役最強牝馬リバティアイランドを4馬身突き放した圧巻のラストラン。ムチを一度も使うことなく、悠々とゴール板を駆け抜けたその姿は、まさに「無敵」の一言。世界ランク1位のままターフを去る、究極の引き際でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スティルインラブ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「17年ぶりの奇跡」愛を貫いた史上2頭目の牝馬三冠馬</p>
+        <h2>スティルインラブ</h2>
+        
+        <div class="horse-visual"><img src="images/stillinlove.png" alt="スティルインラブ"></div>
+
+        <div class="horse-intro">
+            2003年、幸英明騎手とのコンビで史上2頭目となる牝馬三冠を達成。宿命のライバル、アドマイヤグルーヴと何度も叩き合いを演じ、そのすべてで先着して栄光を掴み取りました。非常に繊細で気性が激しい面もありましたが、レースでは一切妥協しない勝負根性を発揮。「スティルインラブ（今でも愛している）」の名にふさわしく、多くのファンを虜にした名牝です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 幸英明</li>
+                <li><b>獲得賞金：</b> 約4億3528万円</li>
+                <li><b>通算成績：</b> 16戦5勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">サンデーサイレンス</li>
+                        <li class="progeny-item">ブラダマンテ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 94, "スタミナ": 92, "パワー": 90, "根性": 100, "賢さ": 85}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2002</td><td>2歳新馬</td><td>1着</td><td>1 1/2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2003</td><td>紅梅S</td><td>1着</td><td>1 1/4馬身</td><td>幸英明</td></tr>
+                        <tr><td>2003</td><td>チューリップ賞</td><td>2着</td><td>0.2秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2003</td><td><b>桜花賞</b></td><td>1着</td><td>1 1/2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2003</td><td><b>オークス</b></td><td>1着</td><td>1 1/4馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2003</td><td><b>秋華賞</b></td><td>1着</td><td>0.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2003</td><td>エリザベス女王杯</td><td>2着</td><td>ハナ</td><td>幸英明</td></tr>
+                        <tr><td>2004</td><td>金鯱賞</td><td>8着</td><td>1.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2004</td><td>宝塚記念</td><td>8着</td><td>1.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2004</td><td>北九州記念</td><td>12着</td><td>1.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2004</td><td>府中牝馬S</td><td>3着</td><td>0.2秒</td><td>幸英明</td></tr>
+                        <tr><td>2004</td><td>エリザベス女王杯</td><td>9着</td><td>0.5秒</td><td>幸英明</td></tr>
+                        <tr><td>2005</td><td>サンケイスポーツ杯阪神牝馬S</td><td>4着</td><td>0.4秒</td><td>幸英明</td></tr>
+                        <tr><td>2005</td><td>ヴィクトリアマイル(参考：都大路S)</td><td>17着</td><td>3.6秒</td><td>幸英明</td></tr>
+                        <tr><td>2005</td><td>府中牝馬S</td><td>15着</td><td>2.0秒</td><td>幸英明</td></tr>
+                        <tr><td>2005</td><td>エリザベス女王杯</td><td>11着</td><td>0.9秒</td><td>幸英明</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">ジューダ（北九州短距離S勝ち）</li>
+                <li class="progeny-item">唯一の産駒</li>
+                <li class="progeny-item">スティルインラブの遺志を継ぐ血統</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：京都に咲いた三つ目の冠</h3>
+            <p>2003年10月19日。秋華賞のゴール前。外から迫るアドマイヤグルーヴの追撃を、内側で必死に耐え凌いだスティルインラブ。ハナ差の勝利が確定した瞬間、17年ぶり、史上2頭目の牝馬三冠が達成されました。勝利を分かち合った幸英明騎手にとっても、これが初のG1タイトル。デビューから引退まで、一度も手綱を譲ることなく駆け抜けた二人の絆は、日本競馬史に刻まれる純愛の物語でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

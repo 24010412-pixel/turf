@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コントレイル - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「空の軌跡」父ディープインパクトに並ぶ無敗の三冠馬</p>
+        <h2>コントレイル</h2>
+        
+        <div class="horse-visual"><img src="images/contrail.png" alt="コントレイル"></div>
+
+        <div class="horse-intro">
+            父ディープインパクトを彷彿とさせる軽やかな走りと、勝負どころでの爆発的な加速を武器に、2020年に史上3頭目となる無敗のクラシック三冠を達成。父子二代での無敗三冠達成という世界的な快挙を成し遂げました。コロナ禍の日本競馬界に希望を与え、引退レースのジャパンカップで有終の美を飾ったその姿は、多くのファンの記憶に刻まれています。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 福永祐一</li>
+                <li><b>獲得賞金：</b> 11億9529万4000円</li>
+                <li><b>通算成績：</b> 11戦8勝</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="deep.html" style="text-decoration: none; color: inherit; font-weight: bold;">ディープインパクト</a></li>
+                        <li class="progeny-item">ロードクロサイト</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 98, "スタミナ": 92, "パワー": 90, "根性": 94, "賢さ": 96}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+    <h3>全戦績</h3>
+    <table class="career-table">
+        <thead>
+            <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+        </thead>
+        <tbody>
+            <tr class="rank-1"><td>2019</td><td>2歳新馬</td><td>1着</td><td>2 1/2</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2019</td><td>東スポ杯2歳S(G3)</td><td>1着</td><td>5馬身</td><td>R.ムーア</td></tr>
+            <tr class="rank-1"><td>2019</td><td>ホープフルS(G1)</td><td>1着</td><td>1 1/2</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2020</td><td>皐月賞(G1)</td><td>1着</td><td>1/2</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2020</td><td>日本ダービー(G1)</td><td>1着</td><td>3馬身</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2020</td><td>神戸新聞杯(G2)</td><td>1着</td><td>2馬身</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2020</td><td>菊花賞(G1)</td><td>1着</td><td>クビ</td><td>福永祐一</td></tr>
+            <tr><td>2020</td><td>ジャパンC(G1)</td><td>2着</td><td>1 1/4</td><td>福永祐一</td></tr>
+            <tr><td>2021</td><td>大阪杯(G1)</td><td>3着</td><td>0.9</td><td>福永祐一</td></tr>
+            <tr><td>2021</td><td>天皇賞・秋(G1)</td><td>2着</td><td>1馬身</td><td>福永祐一</td></tr>
+            <tr class="rank-1"><td>2021</td><td>ジャパンC(G1)</td><td>1着</td><td>2馬身</td><td>福永祐一</td></tr>
+        </tbody>
+    </table>
+</div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">2024年誕生予定（初年度産駒）</li>
+                <li class="progeny-item">空を翔ける血統の継承が期待されます</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：2021年ジャパンカップ「涙の有終の美」</h3>
+            <p>三冠達成以降、勝利から遠ざかっていた中で迎えた引退レース。福永祐一騎手を背に、直線で力強く抜け出し後続を完封。ゴール後、パートナーを労う福永騎手の涙と、ファンへ向けた最後のお辞儀は、日本競馬史に残る感動的なフィナーレとなりました。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホッコータルマエ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「ダートの金字塔」G1級10勝の鉄人</p>
+        <h2>ホッコータルマエ</h2>
+        
+        <div class="horse-visual"><img src="images/tarumae.png" alt="ホッコータルマエ"></div>
+
+        <div class="horse-intro">
+            地方・中央を問わずダート戦線で圧倒的な安定感を誇り、日本競馬史上初となるG1（Jpn1）10勝を達成した砂の王者。どんな展開でも崩れない無類の勝負根性と、3年連続でドバイワールドカップに挑戦したタフネスぶりは、まさに「ダート界の横綱」と呼ぶにふさわしいものでした。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 幸英明</li>
+                <li><b>獲得賞金：</b> 約10億7870万円</li>
+                <li><b>通算成績：</b> 39戦10勝</li>
+                <li><b>脚質：</b> 先行</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">キングカメハメハ</li>
+                        <li class="progeny-item">マダムチェロキー</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 88, "スタミナ": 98, "パワー": 100, "根性": 98, "賢さ": 92}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2012</td><td>3歳新馬</td><td>11着</td><td>2.9秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>3歳未勝利</td><td>1着</td><td>1 1/4馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>3歳500万下</td><td>1着</td><td>3 1/2馬身</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>端午S</td><td>3着</td><td>0.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>兵庫CS</td><td>2着</td><td>0.4秒</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>鳳雛S</td><td>3着</td><td>0.7秒</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>ジャパンダートダービー</td><td>5着</td><td>0.8秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>レパードS</td><td>1着</td><td>良</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>みやこS</td><td>3着</td><td>0.3秒</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>ジャパンCダート</td><td>3着</td><td>0.0秒</td><td>幸英明</td></tr>
+                        <tr><td>2012</td><td>東京大賞典</td><td>3着</td><td>0.3秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>東海S</td><td>1着</td><td>2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>佐賀記念</td><td>1着</td><td>4馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>名古屋大賞典</td><td>1着</td><td>1 1/2馬身</td><td>幸英明</td></tr>
+                        <tr><td>2013</td><td>アンタレスS</td><td>1着</td><td>1/2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>かしわ記念</td><td>1着</td><td>1 1/2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>帝王賞</td><td>1着</td><td>1馬身</td><td>幸英明</td></tr>
+                        <tr><td>2013</td><td>南部杯</td><td>2着</td><td>0.2秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>JBCクラシック</td><td>1着</td><td>2馬身</td><td>幸英明</td></tr>
+                        <tr><td>2013</td><td>ジャパンCダート</td><td>3着</td><td>0.1秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>東京大賞典</td><td>1着</td><td>1 1/2馬身</td><td>幸英明</td></tr>
+                        <tr><td>2014</td><td>フェブラリーS</td><td>2着</td><td>1/2馬身</td><td>幸英明</td></tr>
+                        <tr><td>2014</td><td>ドバイワールドC</td><td>16着</td><td>-</td><td>幸英明</td></tr>
+                        <tr><td>2014</td><td>JBCクラシック</td><td>4着</td><td>0.6秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2014</td><td>チャンピオンズC</td><td>1着</td><td>1/2馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2014</td><td>東京大賞典</td><td>1着</td><td>4馬身</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2015</td><td>川崎記念</td><td>1着</td><td>しぶとい</td><td>幸英明</td></tr>
+                        <tr><td>2015</td><td>フェブラリーS</td><td>9着</td><td>0.6秒</td><td>幸英明</td></tr>
+                        <tr><td>2015</td><td>ドバイワールドC</td><td>5着</td><td>-</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2015</td><td>帝王賞</td><td>1着</td><td>3/4馬身</td><td>幸英明</td></tr>
+                        <tr><td>2015</td><td>JBCクラシック</td><td>3着</td><td>0.1秒</td><td>幸英明</td></tr>
+                        <tr><td>2015</td><td>チャンピオンズC</td><td>5着</td><td>0.4秒</td><td>幸英明</td></tr>
+                        <tr><td>2015</td><td>東京大賞典</td><td>2着</td><td>0.3秒</td><td>幸英明</td></tr>
+                        <tr class="rank-1"><td>2016</td><td>川崎記念</td><td>1着</td><td>首</td><td>幸英明</td></tr>
+                        <tr><td>2016</td><td>フェブラリーS</td><td>14着</td><td>1.3秒</td><td>幸英明</td></tr>
+                        <tr><td>2016</td><td>ドバイワールドC</td><td>9着</td><td>-</td><td>幸英明</td></tr>
+                        <tr><td>2016</td><td>帝王賞</td><td>3着</td><td>0.8秒</td><td>幸英明</td></tr>
+                        <tr><td>2016</td><td>南部杯</td><td>3着</td><td>0.3秒</td><td>幸英明</td></tr>
+                        <tr><td>2016</td><td>JBCクラシック</td><td>2着</td><td>0.1秒</td><td>幸英明</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">メイショウフンジン（仁川S）</li>
+                <li class="progeny-item">ブリッツファング（兵庫CS）</li>
+                <li class="progeny-item">ゴライコウ（JBC2歳優駿）</li>
+                <li class="progeny-item">テリオスベル（ブリーダーズGC）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：前人未到の「10冠」へ</h3>
+            <p>2016年、川崎記念。幸英明騎手を背に、JRA・地方交流含めG1級レース10勝目という大記録を打ち立てました。デビュー戦で11着に敗れた馬が、地道に、しかし確実に階段を登り詰め、砂の絶対王者となったその歩みは、努力とタフネスの象徴です。地元・苫小牧の星として、引退後も多くのファンに愛され続けています。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

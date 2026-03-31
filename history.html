@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>競馬の歴史 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .history-hero {
+            background: linear-gradient(135deg, #002d26 0%, #004d40 50%, #00695c 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px 50px;
+        }
+        .history-hero h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .history-hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .timeline-wrapper {
+            max-width: 1000px;
+            margin: 60px auto 80px;
+            padding: 0 30px;
+            position: relative;
+        }
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #004d40, #d4af37, #004d40);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 40px);
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .timeline-item.right {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 40px);
+            transform: translateX(40px);
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            background: #004d40;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 34px;
+            width: 16px;
+            height: 16px;
+            background: #d4af37;
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .timeline-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.09);
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid #eee;
+            transition: box-shadow 0.3s ease;
+        }
+        .timeline-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
+        .timeline-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            object-position: center 25%;
+            filter: brightness(0.85);
+        }
+        .timeline-card-body { padding: 22px 24px 24px; }
+        .timeline-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .tag-triple  { background: #fff8e1; color: #b8860b; }
+        .tag-record  { background: #e3f2fd; color: #1565c0; }
+        .tag-drama   { background: #fce4ec; color: #c2185b; }
+        .tag-world   { background: #e8f5e9; color: #2e7d32; }
+        .tag-legend  { background: #f3e5f5; color: #6a1b9a; }
+        .timeline-card-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .timeline-card-sub { font-size: 0.85rem; color: #888; margin-bottom: 12px; font-weight: bold; }
+        .timeline-card-text { font-size: 0.95rem; color: #444; line-height: 1.8; }
+
+        /* 詳細展開エリア */
+        .timeline-detail {
+            display: none;
+            margin-top: 16px;
+            border-top: 1px dashed #ccc;
+            padding-top: 16px;
+        }
+        .timeline-card.open .timeline-detail { display: block; }
+        .timeline-detail p {
+            font-size: 0.92rem;
+            color: #444;
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+        .detail-quote {
+            border-left: 4px solid #d4af37;
+            padding: 10px 16px;
+            background: #fffdf0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+            margin: 14px 0;
+        }
+        .detail-result {
+            background: #f0f9f0;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.88rem;
+            color: #2e7d32;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+        .toggle-detail-btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 20px;
+            background: #004d40;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .toggle-detail-btn:hover { background: #00695c; }
+        .timeline-card.open .toggle-detail-btn { background: #999; }
+
+        .era-divider {
+            text-align: center;
+            margin: 70px 0 50px;
+            position: relative;
+            z-index: 1;
+        }
+        .era-divider span {
+            background: #f4f7f4;
+            padding: 0 24px;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
+            color: #004d40;
+            font-weight: bold;
+            position: relative;
+        }
+        .era-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ccc;
+        }
+        @media (max-width: 700px) {
+            .timeline-wrapper::before { left: 20px; }
+            .timeline-item, .timeline-item.right {
+                padding-left: 55px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+            .timeline-year { left: 20px; top: 0; font-size: 0.75rem; }
+            .timeline-dot { left: 20px; top: 4px; }
+            .timeline-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link active">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <div class="history-hero">
+        <h2>競馬の歴史</h2>
+        <p>伝説は、いつも時代を超えて語り継がれる。<br>日本競馬を震わせた名馬たちの軌跡を、年代順に辿る。</p>
+    </div>
+
+    <div class="timeline-wrapper">
+
+        <div class="era-divider"><span>昭和の伝説</span></div>
+
+        <!-- 1984 カツラギエース -->
+        <div class="timeline-item">
+            <div class="timeline-year">1984年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/katsuragi.png" alt="カツラギエース">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-world">世界への挑戦</span>
+                    <div class="timeline-card-title">カツラギエース、日本馬初のジャパンカップ制覇</div>
+                    <div class="timeline-card-sub">1984年 ジャパンカップ</div>
+                    <p class="timeline-card-text">外国馬が圧倒的優位とされた第4回ジャパンカップで、カツラギエースが逃げ切り勝ち。日本競馬の底力を世界に示した歴史的勝利。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>1981年に創設されたジャパンカップは、世界の強豪馬を日本に招いて覇を競う国際招待競走だった。しかし創設から3年間、日本馬は一度も外国馬に勝てず、「日本馬では歯が立たない」という空気が漂っていた。</p>
+                        <p>1984年、その流れを断ち切ったのが西浦勝一騎手とカツラギエースだった。逃げの手に打って出たカツラギエースは、世界の強豪がひしめく中、ハナを奪ってそのままゴールまで駆け抜けた。</p>
+                        <div class="detail-quote">「日本の馬もついに世界に通じる日が来た」——当時の競馬関係者の証言</div>
+                        <p>この勝利は単なるレース結果にとどまらず、日本競馬が世界と互角に戦えるという証明となり、その後の日本競馬の国際化を加速させる大きな転換点となった。</p>
+                        <div class="detail-result">📋 1984年 ジャパンカップ 1着 / 鞍上：西浦勝一</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1984 シンボリルドルフ -->
+        <div class="timeline-item right">
+            <div class="timeline-year">1984年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/rudolf.png" alt="シンボリルドルフ">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-triple">無敗の三冠</span>
+                    <div class="timeline-card-title">皇帝シンボリルドルフ、史上初の無敗三冠達成</div>
+                    <div class="timeline-card-sub">1984年 皐月賞・日本ダービー・菊花賞</div>
+                    <p class="timeline-card-text">「皇帝」の異名を持つシンボリルドルフが史上初の無敗三冠を達成。圧倒的な強さで日本競馬史に君臨し続けた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>シンボリルドルフが史上初の無敗での三冠を達成したのは1984年。鞍上の岡部幸雄騎手とのコンビで皐月賞・日本ダービー・菊花賞を完全制覇した。その走りは常に冷静で、まるでレースを計算し尽くしているかのように見えたという。</p>
+                        <p>三冠達成後も衰えを見せず、翌年以降もジャパンカップ・有馬記念など主要G1を次々と制覇。通算成績は16戦13勝。引退後は種牡馬としてトウカイテイオーなど多くの名馬を輩出した。</p>
+                        <div class="detail-quote">「あの馬には知性があった。レースを理解して走っていた」——岡部幸雄騎手</div>
+                        <p>日本競馬において「皇帝」と呼ばれる馬はシンボリルドルフただ一頭。その称号は今も色褪せることなく、日本競馬史最高の名馬の一頭として語り継がれている。</p>
+                        <div class="detail-result">📋 1984年 三冠達成 / 通算16戦13勝 / 鞍上：岡部幸雄</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1990 オグリキャップ -->
+        <div class="timeline-item">
+            <div class="timeline-year">1990年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/oguri.png" alt="オグリキャップ">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-drama">奇跡の復活</span>
+                    <div class="timeline-card-title">オグリキャップ、引退レースで奇跡の復活優勝</div>
+                    <div class="timeline-card-sub">1990年 有馬記念</div>
+                    <p class="timeline-card-text">不振が続き引退を発表した後の有馬記念。「もう終わった」と誰もが思った芦毛の怪物が、武豊を背に奇跡の復活優勝。17万人超の大歓声は今も伝説として語り継がれる。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>1990年の有馬記念。オグリキャップはその年春から不振が続き、秋のジャパンカップでも11着と大敗していた。「もう終わった馬」「引退レースを飾れればいい」と誰もが思っていた。競馬を知らない人たちにまで名を知られた国民的アイドルホースが、ひっそりと幕を閉じようとしていた。</p>
+                        <p>しかしレースが始まると、オグリキャップは別の馬のように生き生きと走り始めた。武豊騎手が手綱を緩めると、かつての輝きが蘇ったかのような末脚が炸裂。先頭に立ったオグリキャップに、中山競馬場は割れんばかりの歓声に包まれた。</p>
+                        <div class="detail-quote">「オグリ！オグリ！オグリ！」——1990年有馬記念、中山競馬場を包んだ歓声</div>
+                        <p>この日の観客数は17万人超。第二次競馬ブームの象徴であったオグリキャップが、引退の舞台で魅せた奇跡のラストランは、日本競馬史上最も感動的な瞬間の一つとして今も語り継がれている。</p>
+                        <div class="detail-result">📋 1990年 有馬記念 1着 / 鞍上：武豊 / 観客数17万人超</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1991 ダイユウサク -->
+        <div class="timeline-item right">
+            <div class="timeline-year">1991年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/daiyuusaku.png" alt="ダイユウサク">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-drama">大番狂わせ</span>
+                    <div class="timeline-card-title">ダイユウサク、13番人気で有馬記念を大金星</div>
+                    <div class="timeline-card-sub">1991年 有馬記念</div>
+                    <p class="timeline-card-text">圧倒的1番人気のメジロマックイーンが揃った有馬記念で、13番人気のダイユウサクが大逃げを打って大金星。「競馬に絶対はない」を体現した歴史的番狂わせ。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>1991年の有馬記念は、天皇賞春秋連覇の絶対王者・メジロマックイーンが圧倒的1番人気に推され、誰もがメジロマックイーンの勝利を疑わなかった。対してダイユウサクは重賞未勝利の13番人気。単勝オッズは100倍を超えていた。</p>
+                        <p>しかしスタートが切られると、ダイユウサクは熊沢重文騎手の手綱のもと一気にハナを奪い、そのまま他馬を引き離す大逃げを打った。直線でも脚色が衰えず、最後まで粘り切って1着でゴール。メジロマックイーンは3着に終わった。</p>
+                        <div class="detail-quote">「信じられない。競馬とはこういうものだ」——当時の実況より</div>
+                        <p>この結果は大波乱として競馬史に刻まれており、「競馬に絶対はない」を体現した一戦として今も語り草となっている。展開が嵌まれば格下の馬でも最強馬を打ち倒せる——それが競馬の最大の魅力であることを証明した伝説のレースだ。</p>
+                        <div class="detail-result">📋 1991年 有馬記念 1着（13番人気） / 鞍上：熊沢重文</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1999 ブロードアピール -->
+        <div class="timeline-item">
+            <div class="timeline-year">1999年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/bload.png" alt="ブロードアピール">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-record">空前絶後の末脚</span>
+                    <div class="timeline-card-title">ブロードアピール、根岸Sで歴史に残る大外一気</div>
+                    <div class="timeline-card-sub">1999年 根岸ステークス</div>
+                    <p class="timeline-card-text">根岸ステークスで見せた後方最後方からの信じられない末脚での差し切り勝ち。そのインパクトは今も「競馬史上最高の末脚の一つ」として語り継がれる。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>1999年の根岸ステークス。ブロードアピールはスタートから最後方に近い位置取りで、先頭との差は絶望的なほど離れていた。短距離ダートレースでこれほど後ろからでは、通常どれだけ末脚があっても物理的に届かない。</p>
+                        <p>しかし直線に入ると、ブロードアピールは文字通り「別次元」の加速を見せた。外から一頭ずつ、まるで止まっているかのように前の馬を抜き去り、最後は圧倒的な着差をつけてゴール。その末脚はまるで「後ろから飛んでくる砲弾」と形容された。</p>
+                        <div class="detail-quote">「あんな競馬は見たことがない。あれは末脚ではなく、もはや別の何かだ」——当時の競馬評論家</div>
+                        <p>ブロードアピールはその後も短距離ダート路線でトップを走り続け、牝馬ながらダート最強クラスの実力を誇示した。根岸ステークスでのあの一瞬は、今も「競馬史上最高の末脚映像」として語り継がれている。</p>
+                        <div class="detail-result">📋 1999年 根岸ステークス 1着 / 鞍上：福永祐一</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2000 テイエムオペラオー -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2000年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/operao.png" alt="テイエムオペラオー">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-legend">世紀末覇王</span>
+                    <div class="timeline-card-title">テイエムオペラオー、古馬G1を完全制覇し年間無敗</div>
+                    <div class="timeline-card-sub">2000年 古馬G1完全制覇</div>
+                    <p class="timeline-card-text">2000年、古馬の主要G1を全て制覇し年間無敗を達成した「世紀末覇王」。前人未到の古馬G1完全制覇は永遠に語り継がれる。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2000年のテイエムオペラオーの活躍は、競馬史でも類を見ない圧倒的なものだった。古馬になった2000年、春の天皇賞から始まり宝塚記念・天皇賞（秋）・ジャパンカップ・有馬記念と、古馬G1を連続して全て制覇。その年の古馬G1全勝という空前絶後の記録を打ち立てた。</p>
+                        <p>和田竜二騎手との「人馬一体」のレースぶりも評価が高く、常に先行から粘り強く勝ち切るスタイルで、どんなペースになっても崩れることがなかった。当時の賞金獲得額も歴代1位を記録した。</p>
+                        <div class="detail-quote">「2000年の競馬はオペラオーのためにあった」——和田竜二騎手</div>
+                        <p>引退後はその実績に比して種牡馬として産駒成績は期待を下回ったが、競走馬としての2000年の無双ぶりは日本競馬史に永遠に刻まれている。「世紀末覇王」の称号は最強の古馬として今も語り継がれる。</p>
+                        <div class="detail-result">📋 2000年 古馬G1全勝（5戦5勝） / 年間獲得賞金歴代1位 / 鞍上：和田竜二</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-divider"><span>平成の黄金時代</span></div>
+
+        <!-- 2005 ディープインパクト -->
+        <div class="timeline-item">
+            <div class="timeline-year">2005年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/deep.png" alt="ディープインパクト">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-triple">無敗の三冠</span>
+                    <div class="timeline-card-title">ディープインパクト、無敗の三冠達成</div>
+                    <div class="timeline-card-sub">2005年 皐月賞・日本ダービー・菊花賞</div>
+                    <p class="timeline-card-text">「日本近代競馬の結晶」と称された名馬が、武豊を背に飛ぶような走りで史上2頭目の無敗三冠を達成した。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2005年の菊花賞。実況アナウンサーが叫んだ「世界のホースマンよ見てくれ、これが日本近代競馬の結晶だ！」という言葉は、そのままディープインパクトという馬を表す永遠の名言となった。</p>
+                        <p>ディープインパクトの走りは他の馬と明らかに違った。後方から一気に加速する際、まるで地面を蹴るのではなく浮き上がるように見えたことから「飛んでいる」と形容された。武豊騎手も「あんな馬には二度と乗れない」と語っている。</p>
+                        <div class="detail-quote">「走っているというより、飛んでいる感覚だった」——武豊騎手</div>
+                        <p>無敗の三冠達成後も天皇賞・春、宝塚記念、ジャパンカップ、有馬記念と主要G1を制覇。引退後は種牡馬として日本競馬を支配し、コントレイル・ジェンティルドンナなど無数の名馬を送り出した。競走馬・種牡馬両方でここまでの実績を残した馬は史上類を見ない。</p>
+                        <div class="detail-result">📋 2005年 無敗三冠達成 / 通算14戦12勝 / 鞍上：武豊</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2012-2013 オルフェーヴル -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2012・2013年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/orphe.png" alt="オルフェーヴル">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-world">世界最高峰</span>
+                    <div class="timeline-card-title">オルフェーヴル、凱旋門賞2年連続2着。悲願あと一歩</div>
+                    <div class="timeline-card-sub">2012年・2013年 凱旋門賞</div>
+                    <p class="timeline-card-text">日本馬の悲願・凱旋門賞制覇に最も近づいた一頭。2012年は残り200mで先頭に立ちながら差し返されてハナ差2着。翌年も2着と、日本競馬を世界最高峰へと近づけた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2012年の凱旋門賞。残り200mでオルフェーヴルは先頭に立った。日本中が固唾を飲んで見守る中、「ついに日本馬が凱旋門賞を制する」という瞬間が訪れるかに思われた。しかしそこから、オルフェーヴルらしい「らしくない」ドラマが待っていた。</p>
+                        <p>先頭に立った直後、オルフェーヴルは内側によれ始め、その隙をソレミアに差し返されてハナ差2着。あと100mがあれば——と誰もが思った悔恨の2着だった。翌2013年も2着と、2年連続で日本馬の凱旋門賞制覇の夢を惜しいところで逃した。</p>
+                        <div class="detail-quote">「あの200mのことは、一生忘れられない」——池添謙一騎手</div>
+                        <p>しかしこの2年間のオルフェーヴルの走りは、日本馬が世界最高峰のレースで互角以上に戦えることを証明した。「黄金の暴君」の凱旋門賞挑戦は、日本競馬史上最高のドラマの一つとして永遠に語り継がれるだろう。</p>
+                        <div class="detail-result">📋 2012年・2013年 凱旋門賞 ともに2着 / 鞍上：池添謙一</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2013 キズナ -->
+        <div class="timeline-item">
+            <div class="timeline-year">2013年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/kizuna.png" alt="キズナ">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-legend">父子の絆</span>
+                    <div class="timeline-card-title">キズナ、ダービー制覇。父ディープと親子ダービー馬に</div>
+                    <div class="timeline-card-sub">2013年 日本ダービー</div>
+                    <p class="timeline-card-text">父ディープインパクトに続き日本ダービーを制したキズナ。「日本を繋ぐ」という名の通り、父子二代でのダービー制覇という感動的なドラマを届けた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>「キズナ」という名前は東日本大震災からの復興を祈って名付けられた。「日本を繋ぐ絆」という願いが込められたその名前の通り、キズナは日本中の競馬ファンの心を一つにする活躍を見せた。</p>
+                        <p>2013年の日本ダービー。父ディープインパクトもかつて同じ舞台を制した東京競馬場の直線で、キズナは武豊騎手の手綱のもと末脚を爆発させた。父と同じ騎手、同じ舞台でのダービー制覇は、単なるレース結果を超えた感動的なドラマだった。</p>
+                        <div class="detail-quote">「ディープの仔でダービーを勝てた。あの馬への恩返しができた気がした」——武豊騎手</div>
+                        <p>父ディープインパクトが2005年に制したダービー、その産駒キズナが2013年に制したダービー。親子二代での制覇は、ディープインパクトという偉大な種牡馬の証明でもあり、日本競馬の血の継承を象徴する出来事だった。</p>
+                        <div class="detail-result">📋 2013年 日本ダービー 1着 / 鞍上：武豊 / 父ディープとの親子ダービー制覇</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2017 シュヴァルグラン -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2017年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/cheval.png" alt="シュヴァルグラン">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-drama">悲願の戴冠</span>
+                    <div class="timeline-card-title">シュヴァルグラン、悲願のジャパンカップ制覇</div>
+                    <div class="timeline-card-sub">2017年 ジャパンカップ</div>
+                    <p class="timeline-card-text">幾度もビッグレースで惜敗を繰り返してきたシュヴァルグランがついにジャパンカップを制覇。遅咲きの大器が掴んだ悲願の頂点。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>シュヴァルグランはハーツクライ産駒らしく、本格化が遅かった。2016年のジャパンカップでも2着と惜敗し、「あと一歩届かない馬」というイメージがつきまとっていた。</p>
+                        <p>2017年のジャパンカップ。鞍上はH・ボウマン騎手。キタサンブラックをはじめ強豪が揃った中、シュヴァルグランは直線で馬群を割って先頭に立ち、粘るキタサンブラックをクビ差抑えてゴールした。悲願の国際G1制覇の瞬間だった。</p>
+                        <div class="detail-quote">「あの馬は本当に力があった。ただ、それが出るまで時間がかかっただけ」——陣営コメント</div>
+                        <p>遅咲きながらも頂点に立ったシュヴァルグラン。ジャパンカップの激戦を制した「偉大な馬（仏語）」の名に恥じない名勝負だった。</p>
+                        <div class="detail-result">📋 2017年 ジャパンカップ 1着 / 鞍上：H・ボウマン</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2018 アーモンドアイ＋キセキ -->
+        <div class="timeline-item">
+            <div class="timeline-year">2018年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/almond.png" alt="アーモンドアイ">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-record">世界レコード</span>
+                    <div class="timeline-card-title">アーモンドアイ世界レコード。そしてキセキの大逃げ</div>
+                    <div class="timeline-card-sub">2018年 ジャパンカップ</div>
+                    <p class="timeline-card-text">3歳牝馬ながら2分20秒6の世界レコードで圧勝。そのレースでキセキが見せた世界的な大逃げもまた伝説——あの日は二つの伝説が生まれた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2018年のジャパンカップは、二つの意味で歴史に残るレースだった。一つはアーモンドアイの世界レコード。2分20秒6というタイムは当時の芝2400m世界最高記録で、3歳牝馬がこれほどのタイムを叩き出したことは世界の競馬関係者を震撼させた。</p>
+                        <p>もう一つはキセキの大逃げだ。キセキは前半から飛ばしに飛ばし、1000m通過が57秒台という世界レベルのハイペースを刻んだ。通常このペースで逃げれば後半は失速するはずが、キセキは最後まで粘り込んで3着に残った。アーモンドアイの驚異的なタイムの背景には、このキセキの世界的なハイペースがあったことを忘れてはならない。</p>
+                        <div class="detail-quote">「キセキのペースがあったから世界レコードが生まれた。あの日は二頭が伝説を作った」——競馬評論家</div>
+                        <p>アーモンドアイはその後も勝ち続け、最終的に芝G1・9勝という日本記録を打ち立てて引退。そしてキセキの「隠れた世界的パフォーマンス」も、競馬を深く知る人々の間で語り継がれている。</p>
+                        <div class="detail-result">📋 2018年 ジャパンカップ / アーモンドアイ1着・世界レコード2分20秒6 / キセキ3着・世界的ハイペースで奮闘</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="era-divider"><span>令和の新時代</span></div>
+
+        <!-- 2020 コントレイル＋デアリングタクト -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2020年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/contrail.png" alt="コントレイル">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-triple">史上初・同年無敗三冠</span>
+                    <div class="timeline-card-title">コントレイル×デアリングタクト、史上初の同年無敗三冠同時誕生</div>
+                    <div class="timeline-card-sub">2020年 菊花賞・秋華賞</div>
+                    <p class="timeline-card-text">父ディープの血を継いだコントレイルが無敗三冠達成。同年デアリングタクトも無敗の牝馬三冠を達成し、史上初の「同年無敗三冠同時誕生」という奇跡が起きた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2020年の競馬界は、まさに「奇跡の年」だった。父ディープインパクトの産駒コントレイルが皐月賞・ダービー・菊花賞を無敗で制覇し、父と同じ無敗三冠を達成。父子二代での無敗三冠という日本競馬史上初の記録が生まれた。</p>
+                        <p>さらに同じ年、牝馬戦線ではデアリングタクトが桜花賞・オークス・秋華賞を無敗で制覇。牝馬の無敗三冠は史上3頭目だったが、牡牝同年での無敗三冠同時誕生は競馬史上初の快挙だった。</p>
+                        <div class="detail-quote">「コロナ禍の2020年に、競馬がこんな夢のような記録を届けてくれるとは」——当時の競馬ファンの声</div>
+                        <p>新型コロナウイルスで世界が混乱した2020年。無観客のレースが続く中でも、コントレイルとデアリングタクトは走り続け、歴史的な記録を残した。その偉業は苦しい時代の人々にとって大きな希望の光となった。</p>
+                        <div class="detail-result">📋 コントレイル：2020年 牡馬三冠（無敗） / デアリングタクト：2020年 牝馬三冠（無敗） / 同年同時達成は史上初</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2020 アーモンドアイ9冠 -->
+        <div class="timeline-item">
+            <div class="timeline-year">2020年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/almond.png" alt="アーモンドアイ">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-record">芝G1・9勝</span>
+                    <div class="timeline-card-title">アーモンドアイ、芝G1・9勝の日本記録を樹立して引退</div>
+                    <div class="timeline-card-sub">2020年 天皇賞（秋）・有馬記念</div>
+                    <p class="timeline-card-text">天皇賞（秋）でG1最多勝記録を更新し、最終的に芝G1・9勝という空前絶後の記録を打ち立てて引退。「史上最強牝馬」の称号は永遠に輝き続ける。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>アーモンドアイは2018年の桜花賞からG1を勝ち続け、2020年の天皇賞（秋）でシンボリルドルフ・テイエムオペラオーらが持つG1・7勝の最多記録を更新した。そして同年のジャパンカップでも勝利し、最終的にG1・9勝という前人未到の記録に到達した。</p>
+                        <p>特に印象的だったのは、世代交代の激しい競馬界で5年近くにわたってトップを走り続けたこと。3歳から6歳まで、牝馬・牡馬を問わず最強クラスの相手と戦い続け、常に最高峰のパフォーマンスを見せ続けた。</p>
+                        <div class="detail-quote">「この馬に出会えた競馬人生は幸せだった」——ルメール騎手</div>
+                        <p>引退レースとなった2020年有馬記念こそクロノジェネシスの3着に敗れたが、それはアーモンドアイの偉大さを何ら損なうものではない。芝G1・9勝という記録は今も破られておらず、「史上最強牝馬」の称号は揺るがない。</p>
+                        <div class="detail-result">📋 通算芝G1・9勝（日本記録） / 鞍上：ルメール（主戦） / 2020年引退</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2022 ドウデュース -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2022年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/dodeuce.png" alt="ドウデュース">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-record">最速ダービー馬</span>
+                    <div class="timeline-card-title">ドウデュース、最速タイのレコードでダービー制覇</div>
+                    <div class="timeline-card-sub">2022年 日本ダービー</div>
+                    <p class="timeline-card-text">武豊騎手とのコンビで最速タイのレコードタイムでダービーを制覇。「世界を駆ける末脚」でその後も国内外を問わず頂点を目指し続けた。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>2022年の日本ダービー。ドウデュースは後方待機から直線で驚異的な末脚を炸裂させ、最速タイのレコードタイムでゴールした。鞍上は武豊騎手——日本ダービー6勝目という偉業も同時に達成された。</p>
+                        <p>父ハーツクライもかつて有馬記念を制した名馬。その息子が武豊騎手とともにダービーを制するドラマは、世代を超えた競馬の物語として多くのファンの胸を打った。</p>
+                        <div class="detail-quote">「この馬の末脚は本物だ。東京の長い直線が一番合っている」——武豊騎手</div>
+                        <p>ダービー後も有馬記念・ドバイ遠征など国内外で活躍を続け、その末脚は世界のトップホースとも互角に渡り合えることを証明し続けた。世界を舞台に駆け続けたドウデュースの走りは、令和競馬の象徴の一つだ。</p>
+                        <div class="detail-result">📋 2022年 日本ダービー 1着・レコードタイム / 鞍上：武豊（ダービー6勝目）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2023 イクイノックス -->
+        <div class="timeline-item">
+            <div class="timeline-year">2023年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/equinox.png" alt="イクイノックス">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-world">世界ランキング1位</span>
+                    <div class="timeline-card-title">イクイノックス、世界ランキング1位に輝く</div>
+                    <div class="timeline-card-sub">2023年 ジャパンカップ・世界1位認定</div>
+                    <p class="timeline-card-text">ジャパンカップを圧勝し、国際競馬統括機関連盟が発表する世界ランキングで日本馬として初の1位を獲得。「天衣無縫」の走りで世界の頂点に立った。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>イクイノックスは2022年の有馬記念で古馬を相手に勝利したあたりから「この馬は別格だ」という空気が漂い始めた。2023年になると、その強さはさらに次元が上がった。</p>
+                        <p>ドバイシーマクラシック、天皇賞（秋）、ジャパンカップと国内外のG1を次々と制覇。特にジャパンカップでは外国馬を寄せ付けない圧勝で、国際競馬統括機関連盟（IFHA）が発表する世界ランキングで日本馬として史上初の1位を獲得した。</p>
+                        <div class="detail-quote">「あの馬は今の競馬界で最も強い。それは世界共通の認識だ」——海外競馬メディア</div>
+                        <p>2023年末に有馬記念を制して引退。通算12戦10勝という成績と、世界1位という称号を引っ提げて種牡馬入りしたイクイノックス。その産駒が活躍する日が、すでに楽しみにされている。</p>
+                        <div class="detail-result">📋 2023年 世界ランキング1位（日本馬初） / 通算12戦10勝 / 鞍上：ルメール</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2024 フォーエバーヤング -->
+        <div class="timeline-item right">
+            <div class="timeline-year">2024・2025年</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <img src="images/young.png" alt="フォーエバーヤング">
+                <div class="timeline-card-body">
+                    <span class="timeline-tag tag-world">世界制覇</span>
+                    <div class="timeline-card-title">フォーエバーヤング、BCクラシック制覇＆サウジカップ連覇</div>
+                    <div class="timeline-card-sub">2024年 BCクラシック / 2025年 サウジカップ連覇</div>
+                    <p class="timeline-card-text">日本のダート路線から世界へ飛び出し、BCクラシックを制覇。サウジカップを連覇するという偉業も達成。日本ダート馬が世界最高峰の舞台で頂点に立った。</p>
+                    <button class="toggle-detail-btn">詳しく読む ▼</button>
+                    <div class="timeline-detail">
+                        <p>フォーエバーヤングが登場するまで、日本のダート馬が世界のトップと互角に戦えるとは思われていなかった。芝路線では世界トップレベルに到達していた日本競馬だが、ダートでは長らく世界との差があった。</p>
+                        <p>しかしフォーエバーヤングはその常識を覆した。BCクラシック（ダート2000m・米国最高峰レース）での勝利は日本ダート馬として歴史的快挙。さらにサウジカップ連覇でその実力が本物であることを証明した。</p>
+                        <div class="detail-quote">「日本のダート馬が世界を制する日が来るとは。競馬の歴史が変わった」——米国競馬メディア</div>
+                        <p>芝での世界制覇（イクイノックス）に続き、ダートでも世界の頂点に立ったフォーエバーヤング。この馬の登場により、日本競馬は芝・ダート両路線で世界トップレベルの競馬大国であることが証明された。</p>
+                        <div class="detail-result">📋 2024年 BCクラシック 1着 / サウジカップ連覇 / 日本ダート馬として世界制覇</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const items = document.querySelectorAll('.timeline-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+        items.forEach(item => observer.observe(item));
+
+        document.querySelectorAll('.toggle-detail-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const card = btn.closest('.timeline-card');
+                card.classList.toggle('open');
+                btn.textContent = card.classList.contains('open') ? '閉じる ▲' : '詳しく読む ▼';
+            });
+        });
+    </script>
+</body>
+</html>

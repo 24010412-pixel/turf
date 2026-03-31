@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シーザリオ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「日米オークス制覇」世界を震撼させた衝撃の才女</p>
+        <h2>シーザリオ</h2>
+        
+        <div class="horse-visual"><img src="images/cesario.png" alt="シーザリオ"></div>
+
+        <div class="horse-intro">
+            2005年、日本オークスを制したわずか1ヶ月後、アメリカのアメリカンオークスに挑戦。4馬身差の圧勝劇を見せつけ、日本調教馬として初めてアメリカのG1を制するという歴史的快挙を成し遂げました。その類まれなるスピードとスタミナは、産駒たちにも色濃く受け継がれています。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 福永祐一</li>
+                <li><b>獲得賞金：</b> 約2億2700万円</li>
+                <li><b>通算成績：</b> 6戦5勝</li>
+                <li><b>脚質：</b>差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="special-week.html" style="text-decoration: none; color: inherit; font-weight: bold;">スペシャルウィーク</a></li>
+                        <li class="progeny-item">キロフプリミエール</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 94, "スタミナ": 92, "パワー": 93, "根性": 90, "賢さ": 95}'>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2004</td><td>2歳新馬</td><td>1着</td><td>ハナ</td><td>福永祐一</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>寒竹賞</td><td>1着</td><td>1 1/2馬身</td><td>福永祐一</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>フラワーC</td><td>1着</td><td>2 1/2馬身</td><td>福永祐一</td></tr>
+                    <tr><td>2005</td><td>桜花賞</td><td>2着</td><td>アタマ</td><td>福永祐一</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>日本オークス</td><td>1着</td><td>クビ</td><td>福永祐一</td></tr>
+                    <tr class="rank-1"><td>2005</td><td>アメリカンオークス(米)</td><td>1着</td><td>4馬身</td><td>福永祐一</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="epiphaneia.html" style="text-decoration: none; color: inherit; font-weight: bold;">エピファネイア</a>（ジャパンC・菊花賞）</li>
+                <li class="progeny-item">リオンディーズ（朝日杯FS）</li>
+                <li class="progeny-item">サートゥルナーリア（皐月賞・ホープフルS）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：ジャパニーズ・スーパースター</h3>
+            <p>アメリカンオークスのゴール前、実況のトレヴァー・デンマンが叫んだ「The Japanese superstar is coming to America!」という言葉は、日本の競馬ファンを狂喜させました。故障によりわずか6戦で引退しましたが、その圧倒的なポテンシャルは、産駒たちの活躍によって「日本最強の血」の一つとして証明され続けています。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

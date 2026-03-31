@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジェンティルドンナ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「比類なき強さを誇る貴婦人」史上4頭目の牝馬三冠馬</p>
+        <h2>ジェンティルドンナ</h2>
+        
+        <div class="horse-visual"><img src="images/gentil.png" alt="ジェンティルドンナ"></div>
+
+        <div class="horse-intro">
+            父ディープインパクト譲りの瞬発力に加え、牡馬をねじ伏せる強靭な勝負根性を併せ持った最強牝馬。史上初となるジャパンカップ連覇や、ドバイでの海外G1制覇など、国内外でG1計7勝を挙げた、日本競馬史に残る「貴婦人」です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 岩田康誠 / 戸崎圭太 / R.ムーア</li>
+                <li><b>獲得賞金：</b> 17億2603万400円</li>
+                <li><b>通算成績：</b> 19戦10勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="deep.html">ディープインパクト</a></li>
+                        <li class="progeny-item">ドナブリーニ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 95, "スタミナ": 90, "パワー": 100, "根性": 100, "賢さ": 92}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2011</td><td>2歳新馬</td><td>2着</td><td>クビ</td><td>安藤勝己</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>2歳未勝利</td><td>1着</td><td>3 1/2馬身</td><td>安藤勝己</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>シンザン記念</td><td>1着</td><td>1 1/4馬身</td><td>幸英明</td></tr>
+                    <tr><td>2012</td><td>チューリップ賞</td><td>4着</td><td>1 3/4馬身</td><td>岩田康誠</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>桜花賞</td><td>1着</td><td>1/2馬身</td><td>岩田康誠</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>優駿牝馬</td><td>1着</td><td>5馬身</td><td>川田将雅</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>秋華賞</td><td>1着</td><td>ハナ</td><td>岩田康誠</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>ジャパンC</td><td>1着</td><td>ハナ</td><td>岩田康誠</td></tr>
+                    <tr><td>2013</td><td>ドバイシーマC</td><td>2着</td><td>2 1/4馬身</td><td>岩田康誠</td></tr>
+                    <tr><td>2013</td><td>宝塚記念</td><td>3着</td><td>3 1/2馬身</td><td>岩田康誠</td></tr>
+                    <tr><td>2013</td><td>天皇賞・秋</td><td>2着</td><td>4馬身</td><td>福永祐一</td></tr>
+                    <tr class="rank-1"><td>2013</td><td>ジャパンC</td><td>1着</td><td>ハナ</td><td>R.ムーア</td></tr>
+                    <tr><td>2013</td><td>有馬記念</td><td>6着</td><td>9馬身</td><td>戸崎圭太</td></tr>
+                    <tr class="rank-1"><td>2014</td><td>ドバイシーマC</td><td>1着</td><td>1 1/2馬身</td><td>R.ムーア</td></tr>
+                    <tr><td>2014</td><td>宝塚記念</td><td>9着</td><td>6馬身</td><td>川田将雅</td></tr>
+                    <tr><td>2014</td><td>天皇賞・秋</td><td>2着</td><td>3/4馬身</td><td>戸崎圭太</td></tr>
+                    <tr><td>2014</td><td>ジャパンC</td><td>4着</td><td>4馬身</td><td>R.ムーア</td></tr>
+                    <tr class="rank-1"><td>2014</td><td>有馬記念</td><td>1着</td><td>3/4馬身</td><td>戸崎圭太</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="geraldina.html">ジェラルディーナ</a>（エリザベス女王杯）</li>
+                <li class="progeny-item">ロジャーバローズ（日本ダービー ※叔父にあたる血統）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：三冠馬同士の世紀の叩き合い</h3>
+            <p>2012年のジャパンカップ。前年の三冠馬オルフェーヴルと直線で激突。激しいタックルをものともせず、ハナ差で競り勝った姿は、彼女が単なる「お嬢様」ではないことを世界に証明しました。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルーラーシップ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「王者の血が目覚めた香港の夜」出遅れをも凌駕する身体能力</p>
+        <h2>ルーラーシップ</h2>
+        
+        <div class="horse-visual"><img src="images/rulership.png" alt="ルーラーシップ"></div>
+
+        <div class="horse-intro">
+            日本競馬の至宝エアグルーヴの仔として生まれ、その名の通り「支配権（Rulership）」を握るような圧倒的な走りが期待されました。ゲート難という最大の弱点を抱えながらも、2012年のクイーンエリザベス2世カップ（香港）では強豪を相手に3馬身差の圧勝。引退までの全戦で掲示板（5着以内）を外したのはわずか2回という、驚異的な安定感と底力を見せつけた名馬です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 福永祐一、I.メンディザバル、U.リスポリ</li>
+                <li><b>獲得賞金：</b> 約6億3735万円</li>
+                <li><b>通算成績：</b> 20戦8勝</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">キングカメハメハ</li>
+                        <li class="progeny-item">エアグルーヴ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 96, "スタミナ": 94, "パワー": 98, "根性": 92, "賢さ": 70}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2009</td><td>2歳新馬</td><td>1着</td><td>0.1秒</td><td>岩田康誠</td></tr>
+                        <tr><td>2010</td><td>若駒S</td><td>2着</td><td>0.1秒</td><td>四位洋文</td></tr>
+                        <tr class="rank-1"><td>2010</td><td>若葉S</td><td>1着</td><td>1 1/2馬身</td><td>四位洋文</td></tr>
+                        <tr><td>2010</td><td>皐月賞</td><td>4着</td><td>0.4秒</td><td>四位洋文</td></tr>
+                        <tr class="rank-1"><td>2010</td><td>プリンシパルS</td><td>1着</td><td>1 1/2馬身</td><td>横山典弘</td></tr>
+                        <tr><td>2010</td><td>日本ダービー</td><td>5着</td><td>0.5秒</td><td>横山典弘</td></tr>
+                        <tr class="rank-1"><td>2010</td><td>鳴尾記念</td><td>1着</td><td>1 1/4馬身</td><td>M.デムーロ</td></tr>
+                        <tr><td>2010</td><td>有馬記念</td><td>6着</td><td>0.6秒</td><td>M.デムーロ</td></tr>
+                        <tr class="rank-1"><td>2011</td><td>日経新春杯</td><td>1着</td><td>1/2馬身</td><td>I.メンディザバル</td></tr>
+                        <tr><td>2011</td><td>日経賞</td><td>3着</td><td>0.1秒</td><td>U.リスポリ</td></tr>
+                        <tr class="rank-1"><td>2011</td><td>金鯱賞</td><td>1着</td><td>ハナ</td><td>福永祐一</td></tr>
+                        <tr><td>2011</td><td>宝塚記念</td><td>5着</td><td>0.3秒</td><td>福永祐一</td></tr>
+                        <tr><td>2011</td><td>天皇賞・秋</td><td>11着</td><td>1.1秒</td><td>四位洋文</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>AJCC</td><td>1着</td><td>3馬身</td><td>福永祐一</td></tr>
+                        <tr><td>2012</td><td>日経賞</td><td>3着</td><td>0.4秒</td><td>福永祐一</td></tr>
+                        <tr class="rank-1" style="background-color: #e3f2fd;"><td>2012</td><td><b>QE2世C(香G1)</b></td><td>1着</td><td>3 3/4馬身</td><td>U.リスポリ</td></tr>
+                        <tr><td>2012</td><td>宝塚記念</td><td>2着</td><td>0.3秒</td><td>C.ウィリアムズ</td></tr>
+                        <tr><td>2012</td><td>天皇賞・秋</td><td>3着</td><td>0.2秒</td><td>I.メンディザバル</td></tr>
+                        <tr><td>2012</td><td>ジャパンC</td><td>3着</td><td>0.4秒</td><td>C.ウィリアムズ</td></tr>
+                        <tr><td>2012</td><td>有馬記念</td><td>3着</td><td>0.3秒</td><td>C.ウィリアムズ</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="kiseki.html" style="text-decoration: none; color: inherit; font-weight: bold;">キセキ</a>（菊花賞）</li>
+                <li class="progeny-item">メールドグラース（コーフィールドC）</li>
+                <li class="progeny-item">ダンビュライト（AJCC・京都記念）</li>
+                <li class="progeny-item">サンリヴァル（皐月賞2着）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：度肝を抜いた「世紀の出遅れ」と「世界の咆哮」</h3>
+            <p>2012年、香港シャティン。クイーンエリザベス2世カップで見せた3馬身以上の完勝劇は、まさに世界の王者の走りでした。しかし、日本のファンの記憶に最も深く刻まれているのは、同年の天皇賞・秋。ゲート内で立ち上がり、絶望的な出遅れを喫しながら、最後は3着まで追い込んできた異次元の脚です。もし普通にスタートしていれば……。その「もしかして」を抱かせる規格外の身体能力こそが、ルーラーシップの最大の魅力でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

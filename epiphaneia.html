@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エピファネイア - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を跪かせた漆黒の衝動」驚愕の4馬身差ジャパンC</p>
+        <h2>エピファネイア</h2>
+        
+        <div class="horse-visual"><img src="images/epiphaneia.png" alt="エピファネイア"></div>
+
+        <div class="horse-intro">
+            日米オークス馬シーザリオの最高傑作。3歳時には菊花賞を5馬身差で圧勝し、4歳時のジャパンカップでは、世界の名手クリストフ・スミヨンを背に、当時の世界最強馬ジャスタウェイやジェンティルドンナを子供扱いする歴史的圧勝を披露しました。その気性の激しさは諸刃の剣でしたが、ハマった時の爆発力は「歴代最強」の議論に必ず名が挙がるほどです。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 福永祐一、C.スミヨン</li>
+                <li><b>獲得賞金：</b> 約7億39万円</li>
+                <li><b>通算成績：</b> 14戦6勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">シンボリクリスエス</li>
+                        <li class="progeny-item"><a href="cesario.html" style="text-decoration: none; color: inherit; font-weight: bold;">シーザリオ</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 98, "スタミナ": 95, "パワー": 100, "根性": 94, "賢さ": 75}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2012</td><td>2歳新馬</td><td>1着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>京都2歳S</td><td>1着</td><td>1/2馬身</td><td>福永祐一</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>ラジオNIKKEI杯2歳S</td><td>1着</td><td>1/2馬身</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>弥生賞</td><td>4着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>皐月賞</td><td>2着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>日本ダービー</td><td>2着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr class="rank-1"><td>2013</td><td>神戸新聞杯</td><td>1着</td><td>2 1/2馬身</td><td>福永祐一</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2013</td><td><b>菊花賞</b></td><td>1着</td><td>5馬身</td><td>福永祐一</td></tr>
+                        <tr><td>2014</td><td>産経大阪杯</td><td>3着</td><td>0.2秒</td><td>福永祐一</td></tr>
+                        <tr><td>2014</td><td>クイーンエリザベス2世C(香)</td><td>4着</td><td>-</td><td>福永祐一</td></tr>
+                        <tr><td>2014</td><td>天皇賞・秋</td><td>6着</td><td>0.4秒</td><td>福永祐一</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2014</td><td><b>ジャパンC</b></td><td>1着</td><td>4馬身</td><td>C.スミヨン</td></tr>
+                        <tr><td>2014</td><td>有馬記念</td><td>5着</td><td>0.3秒</td><td>川田将雅</td></tr>
+                        <tr><td>2015</td><td>ドバイワールドC(首)</td><td>last</td><td>-</td><td>C.スミヨン</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（代表的な三冠馬・名馬）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="daring-tact.html" style="text-decoration: none; color: inherit; font-weight: bold;">デアリングタクト</a>（無敗牝馬三冠）</li>
+                <li class="progeny-item">エフフォーリア（皐月賞・天皇賞秋・有馬記念）</li>
+                <li class="progeny-item">サークルオブライフ（阪神JF）</li>
+                <li class="progeny-item">ステレンボッシュ（桜花賞）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：絶頂の「スミヨン・マジック」</h3>
+            <p>2014年ジャパンカップ。世界各国のG1馬が集結した豪華な一戦で、エピファネイアは異次元の強さを見せました。暴走寸前の手応えをスミヨン騎手がなだめ、直線で解き放つと、後続を突き放す一方の独走劇。2着ジャスタウェイに4馬身差、タイム差0.7秒という記録的な大差に、府中のスタンドは静まり返ったあとに大歓声に包まれました。これこそが、世界に「EPIPHANEIA」の名を刻みつけた瞬間でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

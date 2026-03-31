@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジャスタウェイ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を震撼させた衝撃の加速」2014年世界ランク1位</p>
+        <h2>ジャスタウェイ</h2>
+        
+        <div class="horse-visual"><img src="images/justaway.png" alt="ジャスタウェイ"></div>
+
+        <div class="horse-intro">
+            2013年の天皇賞・秋で絶対王者ジェンティルドンナを圧倒的な末脚で破ると、翌年のドバイ免税店ターフでは2着に6馬身以上の差をつけるレコード勝ち。日本馬として史上初めて国際競馬統括機関連盟（IFHA）によるワールド・ベスト・レースホース・ランキングで単独1位にランクされた、文字通り「世界最強」の称号を手にした名馬です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 福永祐一</li>
+                <li><b>獲得賞金：</b> 約5億9540万円</li>
+                <li><b>通算成績：</b> 22戦6勝</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">ハーツクライ</li>
+                        <li class="progeny-item">シビル</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 100, "スタミナ": 90, "パワー": 92, "根性": 94, "賢さ": 95}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>2011</td><td>2歳新馬</td><td>1着</td><td>5馬身</td><td>福永祐一</td></tr>
+                        <tr><td>2011</td><td>新潟2歳S</td><td>2着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr><td>2011</td><td>東スポ杯2歳S</td><td>4着</td><td>0.4秒</td><td>後藤浩輝</td></tr>
+                        <tr class="rank-1"><td>2012</td><td>アーリントンC</td><td>1着</td><td>1/2馬身</td><td>秋山真一郎</td></tr>
+                        <tr><td>2012</td><td>ニュージーランドT</td><td>16着</td><td>1.3秒</td><td>内田博幸</td></tr>
+                        <tr><td>2012</td><td>NHKマイルC</td><td>6着</td><td>0.6秒</td><td>秋山真一郎</td></tr>
+                        <tr><td>2012</td><td>日本ダービー</td><td>11着</td><td>1.0秒</td><td>秋山真一郎</td></tr>
+                        <tr><td>2012</td><td>毎日王冠</td><td>2着</td><td>0.0秒</td><td>武豊</td></tr>
+                        <tr><td>2012</td><td>天皇賞・秋</td><td>6着</td><td>0.4秒</td><td>内田博幸</td></tr>
+                        <tr><td>2013</td><td>中山記念</td><td>8着</td><td>0.3秒</td><td>内田博幸</td></tr>
+                        <tr><td>2013</td><td>中日新聞杯</td><td>3着</td><td>0.0秒</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>エプソムC</td><td>2着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>関屋記念</td><td>2着</td><td>0.2秒</td><td>福永祐一</td></tr>
+                        <tr><td>2013</td><td>毎日王冠</td><td>2着</td><td>0.1秒</td><td>柴田善臣</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2013</td><td><b>天皇賞・秋</b></td><td>1着</td><td>4馬身</td><td>福永祐一</td></tr>
+                        <tr class="rank-1"><td>2014</td><td>中山記念</td><td>1着</td><td>3 1/2馬身</td><td>横山典弘</td></tr>
+                        <tr class="rank-1" style="background-color: #e3f2fd;"><td>2014</td><td><b>ドバイ免税店T(首G1)</b></td><td>1着</td><td>6 1/4馬身</td><td>福永祐一</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>2014</td><td><b>安田記念</b></td><td>1着</td><td>ハナ</td><td>柴田善臣</td></tr>
+                        <tr><td>2014</td><td>凱旋門賞(仏G1)</td><td>8着</td><td>-</td><td>福永祐一</td></tr>
+                        <tr><td>2014</td><td>ジャパンC</td><td>2着</td><td>4馬身</td><td>福永祐一</td></tr>
+                        <tr><td>2014</td><td>有馬記念</td><td>4着</td><td>0.1秒</td><td>福永祐一</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="danon-the-kid.html" style="text-decoration: none; color: inherit; font-weight: bold;">ダノンザキッド</a>（ホープフルS）</li>
+                <li class="progeny-item">テオレーマ（JBCレディスクラシック）</li>
+                <li class="progeny-item">ヴェロックス（若駒S）</li>
+                <li class="progeny-item">ルッキングフォー（産経杯）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：世界一へ突き抜けた「覚醒」</h3>
+            <p>覚醒の瞬間は2013年の天皇賞・秋。それまで善戦マンだった彼が、次元の違う末脚で最強牝馬ジェンティルドンナを置き去りにしたシーンは、ファンの度肝を抜きました。その勢いのまま翌年にはドバイで異次元の走りを披露し、日本馬初の「世界ランク1位」という歴史を創出。名前の由来となった「銀魂」のアイテムのように、まさに日本競馬の爆弾として世界を揺るがしました。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

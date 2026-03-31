@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スペシャルウィーク - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「日本総大将」武豊に捧げた初めてのダービー</p>
+        <h2>スペシャルウィーク</h2>
+        
+        <div class="horse-visual"><img src="images/special.png" alt="スペシャルウィーク"></div>
+
+        <div class="horse-intro">
+            1998年の日本ダービーを5馬身差で圧勝し、天才・武豊騎手に初のダービー制覇をもたらしました。翌年には春秋天皇賞連覇を成し遂げ、ジャパンカップでは世界各国の強豪を退けて「日本総大将」の愛称を不動のものに。美しき馬体と誠実な走りで、1990年代後半の競馬ブームを牽引した象徴的な存在です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 武豊</li>
+                <li><b>獲得賞金：</b> 約10億9262万円</li>
+                <li><b>通算成績：</b> 17戦10勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">サンデーサイレンス</li>
+                        <li class="progeny-item">キャンペンガール</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 96, "スタミナ": 95, "パワー": 94, "根性": 98, "賢さ": 95}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>1997</td><td>3歳新馬</td><td>1着</td><td>2馬身</td><td>武豊</td></tr>
+                        <tr><td>1998</td><td>白梅賞</td><td>2着</td><td>0.1秒</td><td>武豊</td></tr>
+                        <tr class="rank-1"><td>1998</td><td>きさらぎ賞</td><td>1着</td><td>3 1/2馬身</td><td>武豊</td></tr>
+                        <tr class="rank-1"><td>1998</td><td>弥生賞</td><td>1着</td><td>1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>1998</td><td>皐月賞</td><td>3着</td><td>0.4秒</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1998</td><td><b>日本ダービー</b></td><td>1着</td><td>5馬身</td><td>武豊</td></tr>
+                        <tr><td>1998</td><td>京都新聞杯</td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr><td>1998</td><td>菊花賞</td><td>2着</td><td>0.1秒</td><td>武豊</td></tr>
+                        <tr><td>1998</td><td>ジャパンC</td><td>3着</td><td>0.5秒</td><td>岡部幸雄</td></tr>
+                        <tr class="rank-1"><td>1999</td><td>AJCC</td><td>1着</td><td>3馬身</td><td>武豊</td></tr>
+                        <tr class="rank-1"><td>1999</td><td>阪神大賞典</td><td>1着</td><td>3/4馬身</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1999</td><td><b>天皇賞・春</b></td><td>1着</td><td>1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>1999</td><td>宝塚記念</td><td>2着</td><td>0.5秒</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1999</td><td><b>天皇賞・秋</b></td><td>1着</td><td>クビ</td><td>武豊</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1999</td><td><b>ジャパンC</b></td><td>1着</td><td>1 1/2馬身</td><td>武豊</td></tr>
+                        <tr><td>1999</td><td>有馬記念</td><td>2着</td><td>0.0秒</td><td>武豊</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item"><a href="buena-vista.html" style="text-decoration: none; color: inherit; font-weight: bold;">ブエナビスタ</a>（G1・6勝）</li>
+                <li class="progeny-item"><a href="cesario.html" style="text-decoration: none; color: inherit; font-weight: bold;">シーザリオ</a>（日米オークス制覇）</li>
+                <li class="progeny-item">リーチザクラウン（マイラーズC）</li>
+                <li class="progeny-item">トーホウジャッカル（菊花賞）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：1998年、府中の空に舞ったムチ</h3>
+            <p>1998年5月31日。日本ダービー。直線で独走態勢に入ったスペシャルウィークと武豊騎手。後続を5馬身突き放す圧勝劇に、場内からは地鳴りのような歓声が上がりました。ゴール後、嬉しさのあまりムチを落とした武豊騎手のエピソードは、彼がいかにこの勝利を待ちわびていたかを物語っています。引退レースの有馬記念ではグラスワンダーとハナ差の激闘。最後まで「主人公」であり続けた名馬でした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

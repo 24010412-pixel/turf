@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <div class="main-visual-slider" id="mainSlider">
+        <div class="slider-container">
+            <div class="slide"><img src="images/kizuna_slide.png" alt="キズナ"></div>
+            <div class="slide"><img src="images/oguri_slide.png" alt="オグリキャップ"></div>
+            <div class="slide"><img src="images/kitasan_slide.png" alt="キタサンブラック"></div>
+            <div class="slide"><img src="images/grass_slide.png" alt="グラスワンダー"></div>
+            <div class="slide"><img src="images/orphe_slide.png" alt="オルフェーヴル"></div>
+            <div class="slide"><img src="images/duramente_slide.png" alt="ドゥラメンテ"></div>
+        </div>
+        <button class="slider-btn prev" id="prevBtn">&#10094;</button>
+        <button class="slider-btn next" id="nextBtn">&#10095;</button>
+        <div class="slider-overlay">
+            <p>伝説の競走馬、ここに集結。</p>
+        </div>
+    </div>
+
+    <main class="content-wrapper">
+        <section class="horse-section" id="searchResultsSection" style="display: none; border: 2px solid #d4af37; padding: 20px; border-radius: 10px; background-color: rgba(212, 175, 55, 0.05);">
+            <h3 class="category-header" style="background: #d4af37;">検索結果で見つかったアーカイブ</h3>
+            <div class="horse-grid" id="searchResultGrid"></div>
+        </section>
+
+        <section class="horse-section fade-in">
+            <h3 class="category-header blue">三冠馬</h3>
+            <div class="horse-grid">
+                <a href="deep.html" class="horse-card" data-name="ディープインパクト">
+                    <img src="images/deep.png" alt="ディープインパクト">
+                    <div class="card-info">
+                        <h4>ディープインパクト</h4>
+                        <p class="origin">由来：深い衝撃</p>
+                        <p class="tagline">英雄・無敗の三冠馬</p>
+                    </div>
+                </a>
+                <a href="orphe.html" class="horse-card" data-name="オルフェーヴル">
+                    <img src="images/orphe.png" alt="オルフェーヴル">
+                    <div class="card-info">
+                        <h4>オルフェーヴル</h4>
+                        <p class="origin">由来：金細工師（仏）</p>
+                        <p class="tagline">黄金の暴君・2011年三冠</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="horse-section fade-in">
+            <h3 class="category-header pink">三冠牝馬</h3>
+            <div class="horse-grid">
+                <a href="gentil.html" class="horse-card" data-name="ジェンティルドンナ">
+                    <img src="images/gentil.png" alt="ジェンティルドンナ">
+                    <div class="card-info">
+                        <h4>ジェンティルドンナ</h4>
+                        <p class="origin">由来：貴婦人（伊）</p>
+                        <p class="tagline">2012年 史上4頭目の牝馬三冠</p>
+                    </div>
+                </a>
+                <a href="almond.html" class="horse-card" data-name="アーモンドアイ">
+                    <img src="images/almond.png" alt="アーモンドアイ">
+                    <div class="card-info">
+                        <h4>アーモンドアイ</h4>
+                        <p class="origin">由来：美人の目</p>
+                        <p class="tagline">芝G1 9勝・史上最強牝馬</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="horse-section fade-in">
+            <h3 class="category-header blue">古馬三冠</h3>
+            <div class="horse-grid">
+                <a href="operao.html" class="horse-card" data-name="テイエムオペラオー">
+                    <img src="images/operao.png" alt="テイエムオペラオー">
+                    <div class="card-info">
+                        <h4>テイエムオペラオー</h4>
+                        <p class="origin">由来：冠名＋オペラ歌手</p>
+                        <p class="tagline">世紀末覇王・2000年秋古馬三冠</p>
+                    </div>
+                </a>
+                <a href="robroy.html" class="horse-card" data-name="ゼンノロブロイ">
+                    <img src="images/robroy.png" alt="ゼンノロブロイ">
+                    <div class="card-info">
+                        <h4>ゼンノロブロイ</h4>
+                        <p class="origin">由来：冠名＋スコットランドの義賊</p>
+                        <p class="tagline">2004年 秋古馬三冠達成</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="horse-section fade-in">
+            <h3 class="category-header hall-of-fame">顕彰馬</h3>
+            <div class="horse-grid">
+                <a href="kitasan.html" class="horse-card" data-name="キタサンブラック">
+                    <img src="images/kitasan.png" alt="キタサンブラック">
+                    <div class="card-info">
+                        <h4>キタサンブラック</h4>
+                        <p class="origin">由来：北島三郎氏＋父名</p>
+                        <p class="tagline">王道王者・平成の祭り男</p>
+                    </div>
+                </a>
+                <a href="oguri.html" class="horse-card" data-name="オグリキャップ">
+                    <img src="images/oguri.png" alt="オグリキャップ">
+                    <div class="card-info">
+                        <h4>オグリキャップ</h4>
+                        <p class="origin">由来：冠名＋父名の一部</p>
+                        <p class="tagline">芦毛の怪物・第二次競馬ブームの主役</p>
+                    </div>
+                </a>
+            </div>
+
+            <div id="hiddenHorseData" style="display: none;">
+                <a href="equinox.html" class="horse-card" data-name="イクイノックス"><img src="images/equinox.png" alt="イクイノックス"><div class="card-info"><h4>イクイノックス</h4><p class="origin">由来：昼夜平分点</p><p class="tagline">世界1位・天衣無縫の天才</p></div></a>
+                <a href="contrail.html" class="horse-card" data-name="コントレイル"><img src="images/contrail.png" alt="コントレイル"><div class="card-info"><h4>コントレイル</h4><p class="origin">由来：飛行機雲</p><p class="tagline">父子二代・無敗の三冠馬</p></div></a>
+                <a href="young.html" class="horse-card" data-name="フォーエバーヤング"><img src="images/young.png" alt="フォーエバーヤング"><div class="card-info"><h4>フォーエバーヤング</h4><p class="origin">由来：曲名</p><p class="tagline">世界を渡る砂の怪物</p></div></a>
+                <a href="sodashi.html" class="horse-card" data-name="ソダシ"><img src="images/sodashi.png" alt="ソダシ"><div class="card-info"><h4>ソダシ</h4><p class="origin">由来：サンスクリット語で「輝き」</p><p class="tagline">白毛の女王</p></div></a>
+                <a href="kurofune.html" class="horse-card" data-name="クロフネ"><img src="images/kurofune.png" alt="クロフネ"><div class="card-info"><h4>クロフネ</h4><p class="origin">由来：黒船</p><p class="tagline">ダートの開国者</p></div></a>
+                <a href="titleholder.html" class="horse-card" data-name="タイトルホルダー"><img src="images/titleholder.png" alt="タイトルホルダー"><div class="card-info"><h4>タイトルホルダー</h4><p class="origin">由来：タイトル保持者</p><p class="tagline">令和のツインターボ</p></div></a>
+                <a href="symboli-rudolf.html" class="horse-card" data-name="シンボリルドルフ"><img src="images/rudolf.png" alt="シンボリルドルフ"><div class="card-info"><h4>シンボリルドルフ</h4><p class="origin">由来：冠名＋ルドルフ1世</p><p class="tagline">皇帝</p></div></a>
+                <a href="mejiro-ramonu.html" class="horse-card" data-name="メジロラモーヌ"><img src="images/ramonu.png" alt="メジロラモーヌ"><div class="card-info"><h4>メジロラモーヌ</h4><p class="origin">由来：冠名＋女性（仏語）</p><p class="tagline">華麗なる三冠牝馬</p></div></a>
+                <a href="cesario.html" class="horse-card" data-name="シーザリオ"><img src="images/cesario.png" alt="シーザリオ"><div class="card-info"><h4>シーザリオ</h4><p class="origin">由来：シェイクスピアの戯曲</p><p class="tagline">日米オークス馬</p></div></a>
+                <a href="kiseki.html" class="horse-card" data-name="キセキ"><img src="images/kiseki.png" alt="キセキ"><div class="card-info"><h4>キセキ</h4><p class="origin">由来：奇跡</p><p class="tagline">奇跡の逃亡者</p></div></a>
+                <a href="hokko-tarumae.html" class="horse-card" data-name="ホッコータルマエ"><img src="images/tarumae.png" alt="ホッコータルマエ"><div class="card-info"><h4>ホッコータルマエ</h4><p class="origin">由来：冠名＋樽前山</p><p class="tagline">苫小牧の星</p></div></a>
+                <a href="justaway.html" class="horse-card" data-name="ジャスタウェイ"><img src="images/justaway.png" alt="ジャスタウェイ"><div class="card-info"><h4>ジャスタウェイ</h4><p class="origin">由来：銀魂</p><p class="tagline">遅れてきた覚醒馬</p></div></a>
+                <a href="narita-top-road.html" class="horse-card" data-name="ナリタトップロード"><img src="images/toproad.png" alt="ナリタトップロード"><div class="card-info"><h4>ナリタトップロード</h4><p class="origin">由来：冠名＋Top Road</p><p class="tagline">努力の名馬</p></div></a>
+                <a href="sirius-symboli.html" class="horse-card" data-name="シリウスシンボリ"><img src="images/sirius.png" alt="シリウスシンボリ"><div class="card-info"><h4>シリウスシンボリ</h4><p class="origin">由来：シリウス＋冠名</p><p class="tagline">世界に輝く天狼星</p></div></a>
+                <a href="cheval-grand.html" class="horse-card" data-name="シュヴァルグラン"><img src="images/cheval.png" alt="シュヴァルグラン"><div class="card-info"><h4>シュヴァルグラン</h4><p class="origin">由来：偉大な馬（仏語）</p><p class="tagline">悲願のジャパンカップ馬</p></div></a>
+                <a href="do-deuce.html" class="horse-card" data-name="ドウデュース"><img src="images/dodeuce.png" alt="ドウデュース"><div class="card-info"><h4>ドウデュース</h4><p class="origin">由来：Deuce</p><p class="tagline">世界を駆ける末脚</p></div></a>
+                <a href="stay-gold.html" class="horse-card" data-name="ステイゴールド"><img src="images/staygold.png" alt="ステイゴールド"><div class="card-info"><h4>ステイゴールド</h4><p class="origin">由来：輝き続けろ（英語）</p><p class="tagline">黄金旅程</p></div></a>
+                <a href="special-week.html" class="horse-card" data-name="スペシャルウィーク"><img src="images/special.png" alt="スペシャルウィーク"><div class="card-info"><h4>スペシャルウィーク</h4><p class="origin">由来：特別な一週間（英語）</p><p class="tagline">日本総大将</p></div></a>
+                <a href="daring-tact.html" class="horse-card" data-name="デアリングタクト"><img src="images/daringtact.png" alt="デアリングタクト"><div class="card-info"><h4>デアリングタクト</h4><p class="origin">由来：大胆な＋気品（英語）</p><p class="tagline">無敗の三冠牝馬</p></div></a>
+                <a href="nakayama-festa.html" class="horse-card" data-name="ナカヤマフェスタ"><img src="images/nakayamafesta.png" alt="ナカヤマフェスタ"><div class="card-info"><h4>ナカヤマフェスタ</h4><p class="origin">由来：冠名＋festa（祭り）</p><p class="tagline">世界に最も近づいた日本馬</p></div></a>
+                <a href="still-in-love.html" class="horse-card" data-name="スティルインラブ"><img src="images/stillinlove.png" alt="スティルインラブ"><div class="card-info"><h4>スティルインラブ</h4><p class="origin">由来：まだ恋している（英語）</p><p class="tagline">三冠の恋人</p></div></a>
+                <a href="durandal.html" class="horse-card" data-name="デュランダル"><img src="images/durandal.png" alt="デュランダル"><div class="card-info"><h4>デュランダル</h4><p class="origin">由来：伝説の剣の名前</p><p class="tagline">伝説の豪脚</p></div></a>
+                <a href="epiphaneia.html" class="horse-card" data-name="エピファネイア"><img src="images/epiphaneia.png" alt="エピファネイア"><div class="card-info"><h4>エピファネイア</h4><p class="origin">由来：神の顕現（ギリシャ語）</p><p class="tagline">規格外の末脚</p></div></a>
+                <a href="rulership.html" class="horse-card" data-name="ルーラーシップ"><img src="images/rulership.png" alt="ルーラーシップ"><div class="card-info"><h4>ルーラーシップ</h4><p class="origin">由来：支配・統治（英語）</p><p class="tagline">遅れてきた大器</p></div></a>
+                <a href="katsuragi-ace.html" class="horse-card" data-name="カツラギエース"><img src="images/katsuragi.png" alt="カツラギエース"><div class="card-info"><h4>カツラギエース</h4><p class="origin">由来：冠名＋エース</p><p class="tagline">日本馬の誇り</p></div></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 100);
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+    </script>
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => { entry.target.classList.add('visible'); }, i * 80);
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+    </script>
+</body>
+</html>

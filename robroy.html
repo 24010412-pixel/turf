@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゼンノロブロイ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css"> <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「王道完全制覇」2004年 秋古馬三冠馬</p>
+        <h2>ゼンノロブロイ</h2>
+        
+        <div class="horse-visual"><img src="images/robroy.png" alt="ゼンノロブロイ"></div>
+
+        <div class="horse-intro">
+            父サンデーサイレンス、母ローミンレイチェルという世界的良血。デビュー当初は善戦マンのイメージが強かったが、2004年秋に覚醒。天皇賞（秋）、ジャパンカップ、有馬記念を3連勝し、テイエムオペラオー以来となる史上2頭目の「秋古馬三冠」を達成した、安定感と勝負強さを兼ね備えた名馬です。
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 95, "スタミナ": 94, "パワー": 96, "根性": 98, "賢さ": 98}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 横山典弘 / O.ペリエ / 武豊</li>
+                <li><b>獲得賞金：</b> 11億1560万8000円</li>
+                <li><b>通算成績：</b> 20戦7勝</li>
+                <li><b>脚質：</b> 先行・差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">サンデーサイレンス</li>
+                        <li class="progeny-item">ローミンレイチェル</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+    <tr class="rank-1"><td>2003</td><td>3歳新馬</td><td>1着</td><td>3 1/2馬身</td><td>横山典弘</td></tr>
+    <tr class="rank-1"><td>2003</td><td>3歳500万下</td><td>1着</td><td>2 1/2馬身</td><td>横山典弘</td></tr>
+    <tr class="rank-1"><td>2003</td><td>青葉賞(G2)</td><td>1着</td><td>1 1/2馬身</td><td>横山典弘</td></tr>
+    <tr><td>2003</td><td>日本ダービー(G1)</td><td>2着</td><td>0.1s</td><td>横山典弘</td></tr>
+    <tr class="rank-1"><td>2003</td><td>神戸新聞杯(G2)</td><td>1着</td><td>2 1/2馬身</td><td>横山典弘</td></tr> <tr><td>2003</td><td>菊花賞(G1)</td><td>4着</td><td>0.4s</td><td>横山典弘</td></tr>
+    <tr><td>2003</td><td>有馬記念(G1)</td><td>3着</td><td>1.2s</td><td>O.ペリエ</td></tr>
+
+    <tr><td>2004</td><td>日経賞(G2)</td><td>2着</td><td>0.3s</td><td>横山典弘</td></tr>
+    <tr><td>2004</td><td>天皇賞・春(G1)</td><td>2着</td><td>0.1s</td><td>横山典弘</td></tr>
+    <tr><td>2004</td><td>宝塚記念(G1)</td><td>4着</td><td>0.3s</td><td>横山典弘</td></tr>
+    <tr><td>2004</td><td>京都大賞典(G2)</td><td>2着</td><td>0.1s</td><td>横山典弘</td></tr>
+    <tr class="rank-1"><td>2004</td><td>天皇賞・秋(G1)</td><td>1着</td><td>1 1/4馬身</td><td>武豊</td></tr>
+    <tr class="rank-1"><td>2004</td><td>ジャパンC(G1)</td><td>1着</td><td>3馬身</td><td>O.ペリエ</td></tr>
+    <tr class="rank-1"><td>2004</td><td>有馬記念(G1)</td><td>1着</td><td>1/2馬身</td><td>O.ペリエ</td></tr>
+
+    <tr><td>2005</td><td>宝塚記念(G1)</td><td>3着</td><td>0.2s</td><td>武豊</td></tr>
+    <tr><td>2005</td><td>インターナショナルS(G1)</td><td>2着</td><td>1 1/4馬身</td><td>武豊</td></tr>
+    <tr><td>2005</td><td>天皇賞・秋(G1)</td><td>2着</td><td>ハナ</td><td>横山典弘</td></tr>
+    <tr><td>2005</td><td>ジャパンC(G1)</td><td>3着</td><td>0.2s</td><td>横山典弘</td></tr>
+    <tr><td>2005</td><td>有馬記念(G1)</td><td>8着</td><td>0.7s</td><td>横山典弘</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+    <h3>主な産駒（子供たち）</h3>
+    <ul class="progeny-list">
+        <li class="progeny-item"><b>サンテミリオン：</b> (オークス)</li>
+        <li class="progeny-item"><b>マグニフィカ：</b> (ジャパンダートダービー)</li>
+        <li class="progeny-item"><b>ペルーサ：</b> (青葉賞)</li>
+    </ul>
+    <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+</div>
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script> 
+</body>
+</html>

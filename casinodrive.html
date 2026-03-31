@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カジノドライヴ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を震撼させた驚愕の2戦目」砂の超特急</p>
+        <h2>カジノドライヴ</h2>
+        
+        <div class="horse-visual"><img src="images/casinodrive.png" alt="カジノドライヴ"></div>
+
+        <div class="horse-intro">
+            米G1馬2頭を兄姉に持つ超良血馬。日本での新馬戦を歴史的大差で圧勝すると、続く2戦目で海を渡り、米G2ピーターパンSを圧勝。ベルモントS直前の無念の出走断念など、波乱に満ちた現役生活でしたが、そのポテンシャルは間違いなく「世界基準」であったダート界の超新星です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 藤岡佑介、E.プラード、V.エスピノーザ</li>
+                <li><b>獲得賞金：</b>約1億8000万円</li>
+                <li><b>通算成績：</b> 11戦4勝</li>
+                <li><b>脚質：</b> 先行</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">Mineshaft</li>
+                        <li class="progeny-item">Better Than Honour</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 96, "スタミナ": 88, "パワー": 100, "根性": 85, "賢さ": 90}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2008</td><td>3歳新馬</td><td>1着</td><td>11馬身(2.2秒)</td><td>藤岡佑介</td></tr>
+                    <tr class="rank-1" style="background-color: #e3f2fd;"><td>2008</td><td>ピーターパンS(米G2)</td><td>1着</td><td>5 3/4馬身</td><td>E.プラード</td></tr>
+                    <tr><td>2008</td><td>BCクラシック(米G1)</td><td>12着</td><td>3.6秒</td><td>V.エスピノーザ</td></tr>
+                    <tr class="rank-1"><td>2009</td><td>アレキサンドライトS</td><td>1着</td><td>1/2馬身</td><td>安藤勝己</td></tr>
+                    <tr><td>2009</td><td>フェブラリーS</td><td>2着</td><td>クビ</td><td>ビュイック</td></tr>
+                    <tr><td>2009</td><td>ドバイワールドC(首)</td><td>8着</td><td>1.9秒</td><td>安藤勝己</td></tr>
+                    <tr><td>2010</td><td>マイルCS南部杯</td><td>11着</td><td>3.3秒</td><td>三浦皇成</td></tr>
+                    <tr><td>2010</td><td>武蔵野S</td><td>12着</td><td>1.6秒</td><td>後藤浩輝</td></tr>
+                    <tr><td>2011</td><td>マイルCS南部杯</td><td>14着</td><td>2.0秒</td><td>福永祐一</td></tr>
+                    <tr><td>2011</td><td>アルデバランS</td><td>3着</td><td>0.1秒</td><td>内田博幸</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>JBCクラシック</td><td>取消</td><td>-</td><td>岩田康誠</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">ヴェンジェンス</li>
+                <li class="progeny-item">コウエイタケル</li>
+                <li class="progeny-item">メイショウカズサ</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※産駒にも自身のスピードとパワーを色濃く伝えています</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：幻のベルモントステークス</h3>
+            <p>ピーターパンSでの歴史的圧勝を受け、米国三冠最終戦ベルモントSでは単勝1番人気（前売り）に支持されたカジノドライヴ。しかし、当日の朝に挫跖（ざせき）を発症し、無念の出走取消。もし走っていたら、日本調教馬による米クラシック制覇という歴史が変わっていたかもしれない――今も語り継がれる「競馬史に残るIF」の一つです。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

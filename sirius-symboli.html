@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シリウスシンボリ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界を夢見た開拓者」欧州に消えたダービー馬</p>
+        <h2>シリウスシンボリ</h2>
+        
+        <div class="horse-visual"><img src="images/sirius.png" alt="シリウスシンボリ"></div>
+
+        <div class="horse-intro">
+            1985年の日本ダービーを、のちに伝説となる加藤和宏騎手を背に完勝。その後、国内の三冠路線を歩まずに単身ヨーロッパへ。キングジョージ、凱旋門賞といった世界の最高峰へ挑み続けたその2年余りの歳月は、結果以上に日本競馬の「世界への扉」をこじ開けた功績として語り継がれています。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 加藤和宏、岡部幸雄</li>
+                <li><b>獲得賞金：</b> 約2億4386万円</li>
+                <li><b>通算成績：</b> 26戦4勝</li>
+                <li><b>脚質：</b> 差し</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">モガミ</li>
+                        <li class="progeny-item">スイートベルン</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 92, "スタミナ": 95, "パワー": 94, "根性": 96, "賢さ": 88}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <div class="table-wrapper" style="overflow-x: auto;">
+                <table class="career-table">
+                    <thead>
+                        <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1"><td>1984</td><td>3歳新馬</td><td>1着</td><td>2 1/2馬身</td><td>加藤和宏</td></tr>
+                        <tr><td>1984</td><td>府中3歳S</td><td>2着</td><td>0.1秒</td><td>加藤和宏</td></tr>
+                        <tr class="rank-1"><td>1985</td><td>若竹賞</td><td>1着</td><td>3馬身</td><td>加藤和宏</td></tr>
+                        <tr><td>1985</td><td>弥生賞</td><td>失格</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr class="rank-1"><td>1985</td><td>若葉賞</td><td>1着</td><td>3 1/2馬身</td><td>加藤和宏</td></tr>
+                        <tr class="rank-1" style="background-color: #fff9c4;"><td>1985</td><td><b>日本ダービー</b></td><td>1着</td><td>3馬身</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>グロシェ賞(仏G3)</td><td>3着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>エヴリ大賞(仏G2)</td><td>4着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>サンクルー大賞(仏G1)</td><td>11着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>キングジョージ(英G1)</td><td>8着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>ゴントービロン賞(仏G3)</td><td>2着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>フォワ賞(仏G3)</td><td>3着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1986</td><td>凱旋門賞(仏G1)</td><td>14着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>エドモンブラン賞(仏G3)</td><td>6着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>アルクール賞(仏G2)</td><td>10着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>ボイヤール賞(仏G3)</td><td>3着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>ガネー賞(仏G1)</td><td>8着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>エヴリ大賞(仏G2)</td><td>6着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1987</td><td>サンクルー大賞(仏G1)</td><td>8着</td><td>-</td><td>加藤和宏</td></tr>
+                        <tr><td>1988</td><td>天皇賞・春</td><td>8着</td><td>1.9秒</td><td>加藤和宏</td></tr>
+                        <tr><td>1988</td><td>宝塚記念</td><td>4着</td><td>0.4秒</td><td>加藤和宏</td></tr>
+                        <tr><td>1988</td><td>毎日王冠</td><td>2着</td><td>0.1秒</td><td>岡部幸雄</td></tr>
+                        <tr><td>1988</td><td>天皇賞・秋</td><td>7着</td><td>0.8秒</td><td>岡部幸雄</td></tr>
+                        <tr><td>1988</td><td>有馬記念</td><td>12着</td><td>1.0秒</td><td>岡部幸雄</td></tr>
+                        <tr><td>1989</td><td>マイルCS</td><td>8着</td><td>1.0秒</td><td>岡部幸雄</td></tr>
+                        <tr><td>1989</td><td>有馬記念</td><td>12着</td><td>1.3秒</td><td>柴田政人</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">モガミシンボリ（中山大障害3着）</li>
+                <li class="progeny-item">グロリアスシンボリ（オープン馬）</li>
+                <li class="progeny-item">シンボリブレス（地方重賞勝ち）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※名前をクリックすると詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：泥にまみれた栄光の孤独</h3>
+            <p>1985年、雨の日本ダービー。「不良馬場の申し子」とも言われた血筋を証明するように、外から次元の違う脚で突き抜けた姿は圧巻でした。しかし、その直後の海外遠征は、今のような「チーム・ジャパン」による万全の体制ではなく、現地の厳しい環境に揉まれる過酷なものでした。通算成績には現れない、欧州のトップホースたちと対等に渡り合った「挑戦の誇り」こそが、この馬の真価です。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

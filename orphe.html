@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オルフェーヴル - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link active">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「黄金の暴君」2011年 史上7頭目の三冠馬</p>
+        <h2>オルフェーヴル</h2>
+        
+        <div class="horse-visual"><img src="images/orphe.png" alt="オルフェーヴル"></div>
+
+        <div class="horse-intro">
+            父ステイゴールド譲りの激しい気性と、異次元の末脚を武器に三冠を制覇。阪神大賞典での逸走や、凱旋門賞での2年連続2着など、強さと脆さが同居するドラマチックな走りで多くのファンを魅了した唯一無二の三冠馬です。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 池添謙一 / C.スミヨン</li>
+                <li><b>獲得賞金：</b> 15億7621万3000円</li>
+                <li><b>通算成績：</b> 21戦12勝</li>
+                <li><b>脚質：</b> 差し・追い込み</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item"><a href="stay-gold.html" style="text-decoration: none; color: inherit; font-weight: bold;">ステイゴールド</a></li>
+                        <li class="progeny-item">オリエンタルアート</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container" 
+                 data-stats='{"スピード": 98, "スタミナ": 95, "パワー": 100, "根性": 100, "賢さ": 70}'>
+                </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-1"><td>2010</td><td>2歳新馬</td><td>1着</td><td>1 1/4馬身</td><td>池添謙一</td></tr>
+                    <tr><td>2010</td><td>京王杯2歳S</td><td>10着</td><td>1.0</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>スプリングS</td><td>1着</td><td>3/4馬身</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>皐月賞</td><td>1着</td><td>3馬身</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>日本ダービー</td><td>1着</td><td>1 3/4馬身</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>神戸新聞杯</td><td>1着</td><td>2 1/2馬身</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>菊花賞</td><td>1着</td><td>2 1/2馬身</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2011</td><td>有馬記念</td><td>1着</td><td>3/4馬身</td><td>池添謙一</td></tr>
+                    <tr><td>2012</td><td>阪神大賞典</td><td>2着</td><td>ハナ</td><td>池添謙一</td></tr>
+                    <tr><td>2012</td><td>天皇賞・春</td><td>11着</td><td>2.0</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2012</td><td>宝塚記念</td><td>1着</td><td>2馬身</td><td>池添謙一</td></tr>
+                    <tr><td>2012</td><td>フォワ賞</td><td>1着</td><td>ハナ</td><td>C.スミヨン</td></tr>
+                    <tr><td>2012</td><td>凱旋門賞</td><td>2着</td><td>クビ</td><td>C.スミヨン</td></tr>
+                    <tr><td>2012</td><td>ジャパンC</td><td>2着</td><td>ハナ</td><td>池添謙一</td></tr>
+                    <tr class="rank-1"><td>2013</td><td>大阪杯</td><td>1着</td><td>1/2馬身</td><td>池添謙一</td></tr>
+                    <tr><td>2013</td><td>凱旋門賞</td><td>2着</td><td>5馬身</td><td>C.スミヨン</td></tr>
+                    <tr class="rank-1"><td>2013</td><td>有馬記念</td><td>1着</td><td>8馬身</td><td>池添謙一</td></tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;"></p>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">ラッキーライラック（エリザベス女王杯など）</li>
+                <li class="progeny-item">エポカドーロ（皐月賞）</li>
+                <li class="progeny-item">マルシュロレーヌ（BCディスタフ）</li>
+                <li class="progeny-item">ウシュバテソーロ（ドバイWC）</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※リンクがある馬は詳細ページへ移動できます</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：阪神大賞典の「大逸走」</h3>
+            <p>2012年阪神大賞典。圧倒的1番人気ながら、レース途中で外側に逸走し競走を中止するかのように失速。しかし、そこから再び加速して前の馬を抜き去り2着に突っ込んできた姿は、まさに規格外の怪物そのものでした。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
