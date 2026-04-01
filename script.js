@@ -147,21 +147,53 @@ if (clearBtn) {
 }
 
     const performSearch = () => {
-    const val = searchInput ? searchInput.value.trim() : '';
-    const resultSection = document.getElementById('searchResultsSection');
-    const resultGrid = document.getElementById('searchResultGrid');
-    if (!val || !resultSection || !resultGrid) return;
+        const val = searchInput ? searchInput.value.trim() : '';
+        const resultSection = document.getElementById('searchResultsSection');
+        const resultGrid = document.getElementById('searchResultGrid');
+        if (!val || !resultSection || !resultGrid) return;
 
-    const staticCards = document.querySelectorAll('.horse-card:not(.result-card)');
-    const targetCards = Array.from(staticCards).filter(card => card.getAttribute('data-name') === val);
+        // 全カードから名前が完全一致するものを探す
+        const staticCards = document.querySelectorAll('.horse-card:not(.result-card)');
+        const targetCards = Array.from(staticCards).filter(card => card.getAttribute('data-name') === val);
 
-    const seen = new Set();
-    const uniqueCards = targetCards.filter(card => {
-        const name = card.getAttribute('data-name');
-        if (seen.has(name)) return false;
-        seen.add(name);
-        return true;
-    });
+        if (targetCards.length > 0) {
+            // ✅ 修正: 既存のセクションを隠すのではなく、検索結果を「上」に表示させるだけにする
+            // (もし全部隠したいなら、今のままでも良いですが、リンク移動を邪魔しないようにします)
+            
+            resultGrid.innerHTML = '';
+            const seen = new Set();
+            
+            targetCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (seen.has(name)) return;
+                seen.add(name);
+
+                const img = card.querySelector('img')?.src || '';
+                const href = card.getAttribute('href') || '#';
+                const infoHTML = card.querySelector('.card-info')?.innerHTML || `<h4>${name}</h4>`;
+                
+                const resultLink = document.createElement('a');
+                resultLink.href = href; // ← ここで正しいリンク(arima-kinen.html等)が入る
+                resultLink.className = 'horse-card result-card';
+                
+                // ✅ 重要: Chromeで強制的に飛ばすための処理を追加
+                resultLink.onclick = function(e) {
+                    if (this.href !== '#' && !this.href.includes('javascript:')) {
+                        window.location.href = this.href;
+                    }
+                };
+
+                resultLink.innerHTML = `<img src="${img}" alt="${name}"><div class="card-info">${infoHTML}</div>`;
+                resultGrid.appendChild(resultLink);
+            });
+
+            resultSection.style.display = "block";
+            // 検索結果までスムーズにスクロール
+            setTimeout(() => resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        } else {
+            alert("「" + val + "」は見次かりませんでした。");
+        }
+    };
 
     // ✅ 追加: 全セクションを隠す
     document.querySelectorAll('.horse-section').forEach(section => {
