@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凱旋門賞 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho+B1:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --crimson: #8b0000;
+            --crimson-light: #c0392b;
+            --gold: #d4af37;
+            --gold-light: #f0d060;
+            --dark: #0f0505;
+            --dark2: #1c0a0a;
+            --cream: #fdf8f0;
+            --text: #2a1a1a;
+        }
+
+        /* ============ フェード ============ */
+        .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============ ヒーロー ============ */
+        .race-hero {
+            background: linear-gradient(160deg, #0f0505 0%, #2a0808 45%, #1a0404 100%);
+            color: white;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+        }
+        .race-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(139,0,0,0.5) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(212,175,55,0.12) 0%, transparent 50%);
+        }
+        .hero-track-lines {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0.07;
+        }
+        .hero-track-lines::before,
+        .hero-track-lines::after {
+            content: '';
+            position: absolute;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+        }
+        .hero-track-lines::before {
+            width: 900px; height: 400px;
+            bottom: -200px; left: 50%;
+            transform: translateX(-50%);
+        }
+        .hero-track-lines::after {
+            width: 700px; height: 310px;
+            bottom: -155px; left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-inner {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 40px 70px;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .hero-eyebrow-line {
+            width: 40px; height: 2px;
+            background: var(--gold);
+        }
+        .hero-eyebrow span {
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        .hero-title {
+            font-family: 'Shippori Mincho B1', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .hero-title span {
+            display: block;
+            background: linear-gradient(135deg, #fff 0%, var(--gold-light) 60%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 36px;
+            letter-spacing: 0.1em;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .hero-stat-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.15em;
+            font-weight: bold;
+        }
+        .hero-stat-value {
+            font-size: 1.05rem;
+            color: white;
+            font-weight: bold;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(139,0,0,0.6);
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            color: var(--gold);
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            margin-bottom: 28px;
+        }
+
+        /* ============ 本文エリア ============ */
+        .page-body {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 30px 100px;
+        }
+
+        /* セクションヘッダー */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .section-num {
+            font-family: 'Shippori Mincho B1', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #e8d8d8;
+            line-height: 1;
+            min-width: 48px;
+        }
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--crimson), transparent);
+        }
+
+        .race-section { margin-bottom: 72px; }
+
+        /* ============ 概要カード ============ */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .overview-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px 22px;
+            border: 1px solid #ede0e0;
+            box-shadow: 0 3px 16px rgba(139,0,0,0.06);
+        }
+        .overview-card-label {
+            font-size: 0.72rem;
+            color: #aaa;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .overview-card-value {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .overview-card-value.highlight {
+            color: var(--crimson);
+        }
+
+        .history-box {
+            background: linear-gradient(135deg, #fff8f8 0%, white 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            border-left: 4px solid var(--crimson);
+            border: 1px solid #ede0e0;
+            box-shadow: 0 3px 16px rgba(139,0,0,0.05);
+        }
+        .history-box p {
+            font-size: 0.96rem;
+            color: #444;
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+        .history-box p:last-child { margin-bottom: 0; }
+
+        /* ============ 歴代優勝馬 ============ */
+        .winners-table-wrap {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #ede0e0;
+            box-shadow: 0 4px 20px rgba(139,0,0,0.07);
+        }
+        .winners-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+        .winners-table thead tr {
+            background: linear-gradient(135deg, var(--crimson) 0%, #a01010 100%);
+            color: white;
+        }
+        .winners-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+        .winners-table tbody tr {
+            border-bottom: 1px solid #f5eded;
+            transition: background 0.2s;
+        }
+        .winners-table tbody tr:hover { background: #fdf5f5; }
+        .winners-table tbody tr:last-child { border-bottom: none; }
+        .winners-table td {
+            padding: 12px 16px;
+            color: #333;
+        }
+        .winners-table td:first-child {
+            font-weight: bold;
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .winner-horse {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+            color: var(--crimson);
+        }
+        .winner-horse a {
+            color: var(--crimson);
+            text-decoration: none;
+        }
+        .winner-horse a:hover { text-decoration: underline; }
+        .legend-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            background: #fff0f0;
+            color: var(--crimson);
+            border: 1px solid #fcc;
+            border-radius: 6px;
+            padding: 1px 7px;
+            margin-left: 6px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        /* ============ 着順表 ============ */
+        .result-year-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .year-tab {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 2px solid #ddd;
+            background: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+        }
+        .year-tab:hover { border-color: var(--crimson); color: var(--crimson); }
+        .year-tab.active { background: var(--crimson); border-color: var(--crimson); color: white; }
+
+        .result-panel { display: none; }
+        .result-panel.active { display: block; }
+
+        .result-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            background: #fff8f8;
+            border-radius: 12px;
+            border: 1px solid #ede0e0;
+        }
+        .result-meta-item { font-size: 0.82rem; color: #666; }
+        .result-meta-item strong { color: var(--crimson); font-weight: bold; }
+
+        .result-table-wrap {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #ede0e0;
+            box-shadow: 0 4px 20px rgba(139,0,0,0.07);
+            margin-bottom: 20px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.87rem;
+        }
+        .result-table thead tr {
+            background: linear-gradient(135deg, #2a1a1a 0%, #3d2020 100%);
+            color: white;
+        }
+        .result-table th {
+            padding: 12px 14px;
+            text-align: left;
+            font-size: 0.78rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+        .result-table tbody tr { border-bottom: 1px solid #f5eded; transition: background 0.15s; }
+        .result-table tbody tr:hover { background: #fdf5f5; }
+        .result-table tbody tr:last-child { border-bottom: none; }
+        .result-table td { padding: 11px 14px; color: #333; }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .rank-1 { background: linear-gradient(135deg, #d4af37, #f0d060); color: #5a3e00; }
+        .rank-2 { background: linear-gradient(135deg, #bbb, #ddd); color: #333; }
+        .rank-3 { background: linear-gradient(135deg, #cd7f32, #e8a060); color: white; }
+        .rank-other { background: #f0f0f0; color: #888; }
+
+        .horse-td {
+            font-family: 'Noto Serif JP', serif;
+            font-weight: 700;
+        }
+        .horse-td a { color: var(--crimson); text-decoration: none; }
+        .horse-td a:hover { text-decoration: underline; }
+
+        .result-comment {
+            background: #fff8f8;
+            border-left: 3px solid var(--crimson);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        .result-comment strong { color: var(--crimson); }
+
+        /* ============ 解説 ============ */
+        .commentary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .commentary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px 26px;
+            border: 1px solid #ede0e0;
+            box-shadow: 0 3px 16px rgba(139,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .commentary-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(to right, var(--crimson), var(--gold));
+        }
+        .commentary-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        .commentary-card-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .commentary-card-body {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.85;
+        }
+
+        /* ============ 戻るボタン ============ */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--crimson);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            padding: 8px 0;
+            transition: gap 0.2s;
+        }
+        .back-link:hover { gap: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link active">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <!-- ヒーロー -->
+    <div class="race-hero">
+        <div class="hero-track-lines"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <div class="hero-eyebrow-line"></div>
+                <span>G1 / 世界最高峰のレース</span>
+            </div>
+            <div class="hero-title"><span>凱旋門賞</span></div>
+            <p class="hero-subtitle">PRIX DE L'ARC DE TRIOMPHE</p>
+            <div class="hero-badge">🏆 G1 海外</div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-label">開催地</span>
+                    <span class="hero-stat-value">パリロンシャン競馬場（仏）</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-label">距離</span>
+                    <span class="hero-stat-value">芝 2,400m</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-label">開催時期</span>
+                    <span class="hero-stat-value">10月上旬</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-label">出走条件</span>
+                    <span class="hero-stat-value">3歳以上</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-label">創設</span>
+                    <span class="hero-stat-value">1920年</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <a href="race-list.html" class="back-link">← レース一覧に戻る</a>
+
+        <!-- 1. レース概要 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">01</div>
+                <div class="section-title">レース概要</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-card-label">グレード</div>
+                    <div class="overview-card-value highlight">G1</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-label">コース</div>
+                    <div class="overview-card-value">中山 芝2500m 右・内回り</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-label">出走頭数</div>
+                    <div class="overview-card-value">最大16頭</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-label">賞金（1着）</div>
+                    <div class="overview-card-value highlight">3億円</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-label">出走選定</div>
+                    <div class="overview-card-value">ファン投票＋選定</div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-card-label">コース特性</div>
+                    <div class="overview-card-value">急坂・小回り</div>
+                </div>
+            </div>
+            <div class="history-box"><p>フランス・パリロンシャンで開催される世界最高峰のレース。世界レーティング1位を決める一戦として国際的な注目を集める。日本馬は長年挑戦を続けているが未勝利で、ディープインパクトの失格やオルフェーヴルの2年連続2着など惜しい場面も多かった。</p><p>詳細な歴史・記録は随時追加予定です。</p></div>
+        </section>
+        <!-- 2. 歴代優勝馬 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">02</div>
+                <div class="section-title">歴代優勝馬</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="winners-table-wrap" style="padding:32px;text-align:center;color:#aaa;font-size:1rem;">
+                📋 歴代優勝馬一覧は随時追加していきます
+            </div>
+        </section>
+
+        <!-- 3. 着順表 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">03</div>
+                <div class="section-title">着順表</div>
+                <div class="section-line"></div>
+            </div>
+
+            <div style="padding:40px;text-align:center;color:#aaa;font-size:1rem;background:white;border-radius:16px;border:1px solid #ede0e0;">
+                📋 着順表は随時追加していきます
+            </div>
+        </section>
+
+        <!-- 4. レース解説・見どころ -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">04</div>
+                <div class="section-title">レース解説・見どころ</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="commentary-grid">
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🏟</div>
+                    <div class="commentary-card-title">中山芝2500mの特性</div>
+                    <div class="commentary-card-body">スタートから最初のコーナーまでが短く、位置取り争いが激しい。2度の急坂越えとタイトなコーナーが馬の総合力を問う。直線距離は310mと短く、差し・追い込み馬は早めに動かないと届かないケースも多い。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🏇</div>
+                    <div class="commentary-card-title">有利な脚質・条件</div>
+                    <div class="commentary-card-body">先行〜差しが有利とされるが、過去の優勝馬を見ると脚質は様々。スタミナと底力が必須で、G1実績のある一線級の馬が順当に強い。ただし小回りコースゆえ、コーナーワークの巧い馬が台頭することも。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">⭐</div>
+                    <div class="commentary-card-title">ファン投票の意義</div>
+                    <div class="commentary-card-body">ファン投票によって選出されることで、その年の「最も愛された馬」が集結する。引退レースとなることも多く、名馬の有終の美を飾る舞台として特別な感情を持って観戦されるレース。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">📖</div>
+                    <div class="commentary-card-title">名勝負の系譜</div>
+                    <div class="commentary-card-body">1990年オグリキャップの奇跡の復活、2006年ディープインパクトの引退飾り、2017年キタサンブラックの有終の美など、有馬記念は常に名場面を生み出してきた。競馬ファンなら誰もが語れる「あの有馬記念」が必ずある。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🌟</div>
+                    <div class="commentary-card-title">3歳馬の挑戦</div>
+                    <div class="commentary-card-body">秋の三冠路線を歩んだ3歳馬が古馬の一線級と激突する構図も見どころのひとつ。コントレイル・エフフォーリア・イクイノックスなど、後の名馬がここで古馬に挑み世代交代を印象付けた例も多い。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🎄</div>
+                    <div class="commentary-card-title">年末の競馬の祭典</div>
+                    <div class="commentary-card-body">有馬記念の売上はジャパンカップと並び日本最高水準。クリスマス前後の開催ということもあり、競馬ファン以外の層も多く参加する特別なレース。年末の話題として日本中で注目を集める。</div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /page-body -->
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 年タブ切り替え
+        document.querySelectorAll('.year-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.result-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.year).classList.add('active');
+            });
+        });
+
+        // フェードイン
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06 });
+        fadeEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

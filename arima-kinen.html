@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>有馬記念 - 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho+B1:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --crimson: #8b0000;
+            --crimson-light: #c0392b;
+            --gold: #d4af37;
+            --gold-light: #f0d060;
+            --dark: #0f0505;
+            --dark2: #1c0a0a;
+            --cream: #fdf8f0;
+            --text: #2a1a1a;
+        }
+
+        .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .race-hero {
+            background: linear-gradient(160deg, #0f0505 0%, #2a0808 45%, #1a0404 100%);
+            color: white; padding: 0; position: relative; overflow: hidden;
+            min-height: 420px; display: flex; align-items: center;
+        }
+        .race-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(139,0,0,0.5) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(212,175,55,0.12) 0%, transparent 50%);
+        }
+        .hero-track-lines { position: absolute; inset: 0; overflow: hidden; opacity: 0.07; }
+        .hero-track-lines::before, .hero-track-lines::after {
+            content: ''; position: absolute; border: 2px solid var(--gold); border-radius: 50%;
+        }
+        .hero-track-lines::before { width: 900px; height: 400px; bottom: -200px; left: 50%; transform: translateX(-50%); }
+        .hero-track-lines::after { width: 700px; height: 310px; bottom: -155px; left: 50%; transform: translateX(-50%); }
+
+        .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; padding: 80px 40px 70px; width: 100%; }
+        .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .hero-eyebrow-line { width: 40px; height: 2px; background: var(--gold); }
+        .hero-eyebrow span { font-size: 0.8rem; letter-spacing: 0.25em; color: var(--gold); font-weight: bold; }
+        .hero-title { font-family: 'Shippori Mincho B1', serif; font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .hero-title span { display: block; background: linear-gradient(135deg, #fff 0%, var(--gold-light) 60%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.55); margin-bottom: 36px; letter-spacing: 0.1em; }
+        .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+        .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+        .hero-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; font-weight: bold; }
+        .hero-stat-value { font-size: 1.05rem; color: white; font-weight: bold; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(139,0,0,0.6); border: 1px solid rgba(212,175,55,0.4); border-radius: 6px; padding: 6px 14px; font-size: 0.78rem; color: var(--gold); font-weight: bold; letter-spacing: 0.1em; margin-bottom: 28px; }
+
+        .page-body { max-width: 1100px; margin: 0 auto; padding: 60px 30px 100px; }
+
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+        .section-num { font-family: 'Shippori Mincho B1', serif; font-size: 2.5rem; font-weight: 800; color: #e8d8d8; line-height: 1; min-width: 48px; }
+        .section-title { font-family: 'Noto Serif JP', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); }
+        .section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--crimson), transparent); }
+        .race-section { margin-bottom: 72px; }
+
+        .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .overview-card { background: white; border-radius: 14px; padding: 20px 22px; border: 1px solid #ede0e0; box-shadow: 0 3px 16px rgba(139,0,0,0.06); }
+        .overview-card-label { font-size: 0.72rem; color: #aaa; font-weight: bold; letter-spacing: 0.1em; margin-bottom: 8px; }
+        .overview-card-value { font-family: 'Noto Serif JP', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); }
+        .overview-card-value.highlight { color: var(--crimson); }
+
+        .history-box { background: linear-gradient(135deg, #fff8f8 0%, white 100%); border-radius: 16px; padding: 28px 32px; border: 1px solid #ede0e0; box-shadow: 0 3px 16px rgba(139,0,0,0.05); }
+        .history-box p { font-size: 0.96rem; color: #444; line-height: 1.9; margin-bottom: 12px; }
+        .history-box p:last-child { margin-bottom: 0; }
+
+        /* 歴代優勝馬 */
+        .winners-table-wrap { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #ede0e0; box-shadow: 0 4px 20px rgba(139,0,0,0.07); }
+        .winners-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        .winners-table thead tr { background: linear-gradient(135deg, var(--crimson) 0%, #a01010 100%); color: white; }
+        .winners-table th { padding: 14px 16px; text-align: left; font-weight: bold; letter-spacing: 0.05em; font-size: 0.8rem; }
+        .winners-table tbody tr { border-bottom: 1px solid #f5eded; transition: background 0.2s; }
+        .winners-table tbody tr:hover { background: #fdf5f5; }
+        .winners-table tbody tr:last-child { border-bottom: none; }
+        .winners-table td { padding: 12px 16px; color: #333; }
+        .winners-table td:first-child { font-weight: bold; color: #888; font-size: 0.8rem; }
+        .winner-horse { font-family: 'Noto Serif JP', serif; font-weight: 700; color: var(--crimson); }
+        .winner-horse a { color: var(--crimson); text-decoration: none; }
+        .winner-horse a:hover { text-decoration: underline; }
+        .legend-tag { display: inline-block; font-size: 0.65rem; background: #fff0f0; color: var(--crimson); border: 1px solid #fcc; border-radius: 6px; padding: 1px 7px; margin-left: 6px; font-weight: bold; vertical-align: middle; }
+
+        /* 着順表 */
+        .result-year-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+        .year-tab { padding: 6px 18px; border-radius: 20px; border: 2px solid #ddd; background: white; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; color: #666; }
+        .year-tab:hover { border-color: var(--crimson); color: var(--crimson); }
+        .year-tab.active { background: var(--crimson); border-color: var(--crimson); color: white; }
+        .result-panel { display: none; }
+        .result-panel.active { display: block; }
+
+        .result-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; padding: 16px 20px; background: #fff8f8; border-radius: 12px; border: 1px solid #ede0e0; }
+        .result-meta-item { font-size: 0.82rem; color: #666; }
+        .result-meta-item strong { color: var(--crimson); font-weight: bold; }
+
+        .result-table-wrap { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #ede0e0; box-shadow: 0 4px 20px rgba(139,0,0,0.07); margin-bottom: 20px; }
+        .result-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        .result-table thead tr { background: linear-gradient(135deg, #2a1a1a 0%, #3d2020 100%); color: white; }
+        .result-table th { padding: 12px 14px; text-align: left; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.05em; }
+        .result-table tbody tr { border-bottom: 1px solid #f5eded; transition: background 0.15s; }
+        .result-table tbody tr:hover { background: #fdf5f5; }
+        .result-table tbody tr:last-child { border-bottom: none; }
+        .result-table td { padding: 11px 14px; color: #333; }
+
+        .rank-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-weight: bold; font-size: 0.85rem; }
+        .rank-1 { background: linear-gradient(135deg, #d4af37, #f0d060); color: #5a3e00; }
+        .rank-2 { background: linear-gradient(135deg, #bbb, #ddd); color: #333; }
+        .rank-3 { background: linear-gradient(135deg, #cd7f32, #e8a060); color: white; }
+        .rank-other { background: #f0f0f0; color: #888; }
+
+        .horse-td { font-family: 'Noto Serif JP', serif; font-weight: 700; }
+        .horse-td a { color: var(--crimson); text-decoration: none; }
+        .horse-td a:hover { text-decoration: underline; }
+
+        .result-comment { background: #fff8f8; border-left: 3px solid var(--crimson); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 0.88rem; color: #555; line-height: 1.8; }
+        .result-comment strong { color: var(--crimson); }
+
+        /* 解説 */
+        .commentary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .commentary-card { background: white; border-radius: 16px; padding: 24px 26px; border: 1px solid #ede0e0; box-shadow: 0 3px 16px rgba(139,0,0,0.05); position: relative; overflow: hidden; }
+        .commentary-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, var(--crimson), var(--gold)); }
+        .commentary-card-icon { font-size: 1.8rem; margin-bottom: 12px; }
+        .commentary-card-title { font-family: 'Noto Serif JP', serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+        .commentary-card-body { font-size: 0.88rem; color: #555; line-height: 1.85; }
+
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--crimson); text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-bottom: 40px; padding: 8px 0; transition: gap 0.2s; }
+        .back-link:hover { gap: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link active">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <div class="race-hero">
+        <div class="hero-track-lines"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <div class="hero-eyebrow-line"></div>
+                <span>GRAND PRIX / G1</span>
+            </div>
+            <div class="hero-title"><span>有馬記念</span></div>
+            <p class="hero-subtitle">ARIMA KINEN — THE GRAND PRIX</p>
+            <div class="hero-badge">🏆 ファン投票選出・グランプリ</div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="hero-stat-label">開催地</span><span class="hero-stat-value">中山競馬場</span></div>
+                <div class="hero-stat"><span class="hero-stat-label">距離</span><span class="hero-stat-value">芝 2,500m</span></div>
+                <div class="hero-stat"><span class="hero-stat-label">開催時期</span><span class="hero-stat-value">12月下旬</span></div>
+                <div class="hero-stat"><span class="hero-stat-label">出走条件</span><span class="hero-stat-value">3歳以上 / ファン投票</span></div>
+                <div class="hero-stat"><span class="hero-stat-label">創設</span><span class="hero-stat-value">1956年</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <a href="race-list.html" class="back-link">← レース一覧に戻る</a>
+
+        <!-- 1. レース概要 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">01</div>
+                <div class="section-title">レース概要</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-card"><div class="overview-card-label">グレード</div><div class="overview-card-value highlight">G1</div></div>
+                <div class="overview-card"><div class="overview-card-label">コース</div><div class="overview-card-value">中山 芝2500m 右・内回り</div></div>
+                <div class="overview-card"><div class="overview-card-label">出走頭数</div><div class="overview-card-value">最大16頭</div></div>
+                <div class="overview-card"><div class="overview-card-label">賞金（1着）</div><div class="overview-card-value highlight">5億円</div></div>
+                <div class="overview-card"><div class="overview-card-label">出走選定</div><div class="overview-card-value">ファン投票＋選定</div></div>
+                <div class="overview-card"><div class="overview-card-label">コース特性</div><div class="overview-card-value">急坂・小回り</div></div>
+            </div>
+            <div class="history-box">
+                <p>有馬記念は1956年に創設された中央競馬のグランプリレース。初代JRA理事長・有馬頼寧氏の提案により「ファン投票で出走馬を決める」という画期的な形式で誕生した。以来、年末の競馬の祭典として毎年12月下旬に中山競馬場で開催されている。</p>
+                <p>中山競馬場の芝2500mというコースは、正面スタンド前からスタートし、急坂を2度越えるタフな設定。スタミナと底力が問われる「最も強い馬が勝つレース」とも言われ、スピード型よりも総合力の高い馬が有利とされる。小回りコースのため器用さや立ち回りの巧さも求められる。</p>
+                <p>ファン投票によって出走馬が決まるため、その年の主役たちが一堂に会し、「現役最強馬決定戦」としての性格を持つ。オグリキャップの引退レース（1990年）をはじめ、数々の伝説的な名勝負が生まれており、年間の競馬シーズンの締めくくりとして特別な位置づけを誇る。</p>
+            </div>
+        </section>
+
+        <!-- 2. 歴代優勝馬 2010-2025 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">02</div>
+                <div class="section-title">歴代優勝馬（2010〜2025年）</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="winners-table-wrap">
+                <table class="winners-table">
+                    <thead>
+                        <tr><th>年度</th><th>優勝馬</th><th>騎手</th><th>タイム</th><th>馬齢</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2025年</td><td class="winner-horse">ミュージアムマイル<span class="legend-tag">現役</span></td><td>C.デムーロ</td><td>2:31.5</td><td>3歳牡</td></tr>
+                        <tr><td>2024年</td><td class="winner-horse">レガレイラ<span class="legend-tag">現役</span></td><td>戸崎圭太</td><td>2:31.8</td><td>3歳牝</td></tr>
+                        <tr><td>2023年</td><td class="winner-horse"><a href="do-deuce.html">ドウデュース</a></td><td>武豊</td><td>2:30.9</td><td>4歳牡</td></tr>
+                        <tr><td>2022年</td><td class="winner-horse"><a href="equinox.html">イクイノックス</a><span class="legend-tag">世界1位</span></td><td>C.ルメール</td><td>2:32.4</td><td>3歳牡</td></tr>
+                        <tr><td>2021年</td><td class="winner-horse">エフフォーリア</td><td>横山武史</td><td>2:31.8</td><td>3歳牡</td></tr>
+                        <tr><td>2020年</td><td class="winner-horse">クロノジェネシス</td><td>北村友一</td><td>2:30.5</td><td>4歳牝</td></tr>
+                        <tr><td>2019年</td><td class="winner-horse">リスグラシュー</td><td>D.レーン</td><td>2:30.5</td><td>5歳牝</td></tr>
+                        <tr><td>2018年</td><td class="winner-horse">ブラストワンピース</td><td>池添謙一</td><td>2:31.4</td><td>3歳牡</td></tr>
+                        <tr><td>2017年</td><td class="winner-horse"><a href="kitasan.html">キタサンブラック</a><span class="legend-tag">顕彰</span></td><td>武豊</td><td>2:33.6</td><td>5歳牡</td></tr>
+                        <tr><td>2016年</td><td class="winner-horse">サトノダイヤモンド</td><td>C.ルメール</td><td>2:33.3</td><td>3歳牡</td></tr>
+                        <tr><td>2015年</td><td class="winner-horse">ゴールドアクター</td><td>吉田隼人</td><td>2:32.8</td><td>4歳牡</td></tr>
+                        <tr><td>2014年</td><td class="winner-horse"><a href="gentil.html">ジェンティルドンナ</a><span class="legend-tag">三冠牝</span></td><td>戸崎圭太</td><td>2:33.4</td><td>5歳牝</td></tr>
+                        <tr><td>2013年</td><td class="winner-horse"><a href="orphe.html">オルフェーヴル</a><span class="legend-tag">三冠</span></td><td>池添謙一</td><td>2:33.0</td><td>4歳牡</td></tr>
+                        <tr><td>2012年</td><td class="winner-horse">ゴールドシップ</td><td>内田博幸</td><td>2:33.8</td><td>3歳牡</td></tr>
+                        <tr><td>2011年</td><td class="winner-horse"><a href="orphe.html">オルフェーヴル</a><span class="legend-tag">三冠</span></td><td>池添謙一</td><td>2:31.6</td><td>3歳牡</td></tr>
+                        <tr><td>2010年</td><td class="winner-horse">ヴィクトワールピサ</td><td>M.デムーロ</td><td>2:33.1</td><td>3歳牡</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. 着順表 -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">03</div>
+                <div class="section-title">着順表</div>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="result-year-tabs">
+                <button class="year-tab active" data-year="2025">2025年</button>
+                <button class="year-tab" data-year="2024">2024年</button>
+                <button class="year-tab" data-year="2023">2023年</button>
+                <button class="year-tab" data-year="2022">2022年</button>
+                <button class="year-tab" data-year="2021">2021年</button>
+                <button class="year-tab" data-year="2020">2020年</button>
+                <button class="year-tab" data-year="2017">2017年</button>
+                <button class="year-tab" data-year="2011">2011年</button>
+            </div>
+
+            <!-- 2025年 -->
+            <div class="result-panel active" id="panel-2025">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2025年12月28日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td">ミュージアムマイル</td><td>C.デムーロ</td><td>3牡</td><td>2:31.5</td><td>—</td><td>3人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">コスモキュランダ</td><td>横山武史</td><td>4牡</td><td>2:31.6</td><td>½</td><td>12人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">ダノンデサイル</td><td>戸崎圭太</td><td>4牡</td><td>2:31.6</td><td>クビ</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">レガレイラ</td><td>C.ルメール</td><td>4牝</td><td>2:31.8</td><td>1¼</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">5</span></td><td class="horse-td">ジャスティンパレス</td><td>鮫島克駿</td><td>6牡</td><td>2:31.9</td><td>¾</td><td>5人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>3歳馬ミュージアムマイルが大外から強烈な末脚を発揮して差し切り、皐月賞に続くG1・2勝目。前半はダノンデサイルをマークしながら後方に待機し、4コーナーで進出すると直線で豪快に突き抜けた。12番人気コスモキュランダが粘り2着に激走する波乱も演出。前年覇者レガレイラの連覇は4着に終わった。C.デムーロ騎手は兄ミルコに続く兄弟での有馬制覇という史上初の快挙も達成した。
+                </div>
+            </div>
+
+            <!-- 2024年 -->
+            <div class="result-panel" id="panel-2024">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2024年12月22日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td">レガレイラ</td><td>戸崎圭太</td><td>3牝</td><td>2:31.8</td><td>—</td><td>5人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">シャフリヤール</td><td>C.デムーロ</td><td>6牡</td><td>2:31.8</td><td>ハナ</td><td>8人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">ダノンデサイル</td><td>横山典弘</td><td>3牡</td><td>2:31.9</td><td>クビ</td><td>4人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">ジャスティンパレス</td><td>鮫島克駿</td><td>5牡</td><td>2:32.0</td><td>¾</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">5</span></td><td class="horse-td">アーバンシック</td><td>横山武史</td><td>3牡</td><td>2:32.1</td><td>¾</td><td>3人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>ファン投票1位のドウデュースが直前に右前肢跛行で出走取消となる波乱の幕開け。ダノンデサイルが最内から逃げる展開の中、レガレイラが直線で外から鋭く伸び、シャフリヤールとの叩き合いをハナ差制した。1960年スターロッチ以来64年ぶりとなる3歳牝馬の有馬記念制覇という歴史的な勝利となった。
+                </div>
+            </div>
+
+            <!-- 2023年 -->
+            <div class="result-panel" id="panel-2023">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2023年12月24日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td"><a href="do-deuce.html">ドウデュース</a></td><td>武豊</td><td>4牡</td><td>2:30.9</td><td>—</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">スターズオンアース</td><td>C.ルメール</td><td>4牝</td><td>2:31.0</td><td>½</td><td>4人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">タイトルホルダー</td><td>横山和生</td><td>5牡</td><td>2:31.4</td><td>2½</td><td>3人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">ジャスティンパレス</td><td>C.ルメール</td><td>4牡</td><td>2:31.5</td><td>½</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">5</span></td><td class="horse-td">ソールオリエンス</td><td>横山武史</td><td>3牡</td><td>2:31.7</td><td>1¼</td><td>7人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>絶対王者イクイノックスが引退し、混戦ムードのなか武豊×ドウデュースのコンビが復活V。後方から3〜4コーナーで大外を捲るように進出し、粘るタイトルホルダーとスターズオンアースをねじ伏せた。ここ2戦で騎手不在だったドウデュースが武豊騎手との再タッグで真の実力を発揮した。
+                </div>
+            </div>
+
+            <!-- 2022年 -->
+            <div class="result-panel" id="panel-2022">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2022年12月25日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td"><a href="equinox.html">イクイノックス</a></td><td>C.ルメール</td><td>3牡</td><td>2:32.4</td><td>—</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">ボルドグフーシュ</td><td>福永祐一</td><td>3牡</td><td>2:32.6</td><td>2½</td><td>7人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">ジェラルディーナ</td><td>C.デムーロ</td><td>4牝</td><td>2:32.7</td><td>クビ</td><td>4人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">ディープボンド</td><td>和田竜二</td><td>5牡</td><td>2:32.8</td><td>クビ</td><td>8人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">5</span></td><td class="horse-td">エフフォーリア</td><td>横山武史</td><td>4牡</td><td>2:32.9</td><td>¾</td><td>3人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>3歳馬イクイノックスが古馬一線級を相手に横綱相撲で完勝。直線で抜け出すや後続を引き離し、危なげない内容で世代最強を証明した。この勝利が後の世界1位への序章となる、圧巻のパフォーマンスだった。
+                </div>
+            </div>
+
+            <!-- 2021年 -->
+            <div class="result-panel" id="panel-2021">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2021年12月26日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td">エフフォーリア</td><td>横山武史</td><td>3牡</td><td>2:31.8</td><td>—</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">ディープボンド</td><td>和田竜二</td><td>4牡</td><td>2:32.0</td><td>1¼</td><td>5人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">クロノジェネシス</td><td>北村友一</td><td>5牝</td><td>2:32.1</td><td>½</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">シャフリヤール</td><td>福永祐一</td><td>3牡</td><td>2:32.4</td><td>2</td><td>4人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>3歳馬エフフォーリアが天皇賞（秋）に続いてグランプリも制し、その年の三冠馬に匹敵する活躍を見せた。3〜4コーナーで動いてディープボンドを捉えると、後続の追撃を振り切り堂々の勝利。横山武史騎手との若きコンビが競馬界を席巻した年を締め括った。
+                </div>
+            </div>
+
+            <!-- 2020年 -->
+            <div class="result-panel" id="panel-2020">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2020年12月27日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td">クロノジェネシス</td><td>北村友一</td><td>4牝</td><td>2:30.5</td><td>—</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">サラキア</td><td>松山弘平</td><td>5牝</td><td>2:30.8</td><td>2</td><td>9人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">フィエールマン</td><td>C.ルメール</td><td>5牡</td><td>2:31.1</td><td>2</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td"><a href="contrail.html">コントレイル</a></td><td>福永祐一</td><td>3牡</td><td>2:31.6</td><td>3</td><td>3人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>クロノジェネシスが宝塚記念に続いて秋のグランプリも制し、上半期・下半期のグランプリ連覇を達成。無観客開催（COVID-19）という特殊な状況の中でも、2着のサラキアとの叩き合いを制した。無敗三冠のコントレイルは4着に終わり、古馬の壁を実感することとなった。
+                </div>
+            </div>
+
+            <!-- 2017年 -->
+            <div class="result-panel" id="panel-2017">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2017年12月24日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：曇 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td"><a href="kitasan.html">キタサンブラック</a></td><td>武豊</td><td>5牡</td><td>2:33.6</td><td>—</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">クイーンズリング</td><td>M.デムーロ</td><td>5牝</td><td>2:33.8</td><td>1¼</td><td>9人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td"><a href="cheval-grand.html">シュヴァルグラン</a></td><td>H.ボウマン</td><td>5牡</td><td>2:34.1</td><td>1½</td><td>5人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">スワーヴリチャード</td><td>M.デムーロ</td><td>3牡</td><td>2:34.5</td><td>2½</td><td>4人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>引退レースとなったキタサンブラックが有終の美を飾った一戦。武豊騎手とのコンビで逃げ切り圧勝。ゴール後に武豊騎手がガッツポーズを見せた名場面は多くのファンの記憶に刻まれた。王道を歩み続けた名馬の、最高の締めくくりとなった。
+                </div>
+            </div>
+
+            <!-- 2011年 -->
+            <div class="result-panel" id="panel-2011">
+                <div class="result-meta">
+                    <div class="result-meta-item">📅 <strong>2011年12月25日（日）</strong></div>
+                    <div class="result-meta-item">🏟 中山競馬場 / 芝2500m</div>
+                    <div class="result-meta-item">☁ 天候：晴 / 馬場：良</div>
+                    <div class="result-meta-item">👥 出走：16頭</div>
+                </div>
+                <div class="result-table-wrap">
+                    <table class="result-table">
+                        <thead><tr><th>着順</th><th>馬名</th><th>騎手</th><th>馬齢</th><th>タイム</th><th>着差</th><th>人気</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="rank-badge rank-1">1</span></td><td class="horse-td"><a href="orphe.html">オルフェーヴル</a></td><td>池添謙一</td><td>3牡</td><td>2:31.6</td><td>—</td><td>1人気</td></tr>
+                            <tr><td><span class="rank-badge rank-2">2</span></td><td class="horse-td">エイシンフラッシュ</td><td>D.ホワイト</td><td>4牡</td><td>2:31.8</td><td>1¼</td><td>2人気</td></tr>
+                            <tr><td><span class="rank-badge rank-3">3</span></td><td class="horse-td">トゥザグローリー</td><td>福永祐一</td><td>4牡</td><td>2:32.1</td><td>1¾</td><td>5人気</td></tr>
+                            <tr><td><span class="rank-badge rank-other">4</span></td><td class="horse-td">ブエナビスタ</td><td>岩田康誠</td><td>5牝</td><td>2:32.1</td><td>ハナ</td><td>3人気</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="result-comment">
+                    <strong>レース解説：</strong>無敗の三冠馬オルフェーヴルが、三冠達成後の初戦となる有馬記念を快勝。直線でロングスパートを決め、後続を突き放した。三冠から有馬記念まで4連勝を飾り、黄金の怪物ぶりを存分に発揮した一年を締め括った。
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. レース解説・見どころ -->
+        <section class="race-section fade-in">
+            <div class="section-header">
+                <div class="section-num">04</div>
+                <div class="section-title">レース解説・見どころ</div>
+                <div class="section-line"></div>
+            </div>
+            <div class="commentary-grid">
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🏟</div>
+                    <div class="commentary-card-title">中山芝2500mの特性</div>
+                    <div class="commentary-card-body">スタートから最初のコーナーまでが短く、位置取り争いが激しい。2度の急坂越えとタイトなコーナーが馬の総合力を問う。直線距離は310mと短く、差し・追い込み馬は早めに動かないと届かないケースも多い。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🏇</div>
+                    <div class="commentary-card-title">有利な脚質・条件</div>
+                    <div class="commentary-card-body">先行〜差しが有利とされるが、過去の優勝馬を見ると脚質は様々。スタミナと底力が必須で、G1実績のある一線級の馬が順当に強い。ただし小回りコースゆえ、コーナーワークの巧い馬が台頭することも。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">⭐</div>
+                    <div class="commentary-card-title">ファン投票の意義</div>
+                    <div class="commentary-card-body">ファン投票によって選出されることで、その年の「最も愛された馬」が集結する。引退レースとなることも多く、名馬の有終の美を飾る舞台として特別な感情を持って観戦されるレース。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">📖</div>
+                    <div class="commentary-card-title">名勝負の系譜</div>
+                    <div class="commentary-card-body">1990年オグリキャップの奇跡の復活、2017年キタサンブラックの有終の美、2023年ドウデュースの復活劇など、有馬記念は常に名場面を生み出してきた。競馬ファンなら誰もが語れる「あの有馬記念」が必ずある。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🌟</div>
+                    <div class="commentary-card-title">3歳馬の挑戦</div>
+                    <div class="commentary-card-body">秋の三冠路線を歩んだ3歳馬が古馬の一線級と激突する構図も見どころのひとつ。2024年レガレイラ・2025年ミュージアムマイルと2年連続で3歳馬が制覇。世代交代のドラマが毎年繰り広げられる。</div>
+                </div>
+                <div class="commentary-card">
+                    <div class="commentary-card-icon">🎄</div>
+                    <div class="commentary-card-title">年末の競馬の祭典</div>
+                    <div class="commentary-card-body">有馬記念の売上はジャパンカップと並び日本最高水準。クリスマス〜年末の開催ということもあり、競馬ファン以外の層も多く参加する特別なレース。年末の話題として日本中で注目を集める。</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.year-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.result-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.year).classList.add('active');
+            });
+        });
+
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06 });
+        fadeEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+/* ============================================================
+   responsive.css — スマホ対応パッチ
+   全ページの <head> に <link rel="stylesheet" href="responsive.css"> で読み込む
+   ============================================================ */
+
+/* ============================================================
+   ヘッダー共通レスポンシブ
+   ============================================================ */
+
+/* タブレット以下：ナビとサーチを縦積みに */
+@media (max-width: 900px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 16px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        gap: 4px 8px;
+    }
+
+    .list-link {
+        font-size: 0.82rem;
+        padding: 4px 8px;
+    }
+
+    .search-box {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .input-wrapper {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .input-wrapper input {
+        width: 100%;
+    }
+
+    #searchBtn {
+        white-space: nowrap;
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+    }
+}
+
+/* スマホ：ハンバーガーメニュー化 */
+@media (max-width: 600px) {
+    .header-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        flex-wrap: nowrap;
+    }
+
+    .header-logo img {
+        height: 36px;
+        width: auto;
+    }
+
+    /* ハンバーガーボタン */
+    .hamburger-btn {
+        display: flex !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 6px;
+        background: none;
+        border: none;
+        z-index: 200;
+    }
+
+    .hamburger-btn span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s;
+    }
+
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* header-right をドロワーに */
+    .header-right {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a0a00;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 100;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .header-right.open {
+        display: flex;
+    }
+
+    .header-nav {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .list-link {
+        display: block;
+        padding: 10px 12px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .list-link:last-child {
+        border-bottom: none;
+    }
+
+    .search-box {
+        flex-direction: row;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .input-wrapper {
+        flex: 1;
+    }
+
+    header h1 {
+        font-size: 1rem;
+        padding: 6px 16px 10px;
+        letter-spacing: 0.05em;
+    }
+}
+
+/* ============================================================
+   index.html — スライダー・コンテンツ
+   ============================================================ */
+@media (max-width: 600px) {
+    .main-visual-slider {
+        min-height: 200px;
+    }
+
+    .slider-overlay p {
+        font-size: 1rem;
+        padding: 0 16px;
+    }
+
+    .horse-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .horse-card .card-info h4 {
+        font-size: 0.82rem;
+    }
+
+    .horse-card .tagline {
+        font-size: 0.7rem;
+    }
+
+    .category-header {
+        font-size: 0.9rem;
+    }
+
+    .content-wrapper {
+        padding: 20px 12px;
+    }
+}
+
+/* ============================================================
+   all-horses.html — フィルター・グリッド
+   ============================================================ */
+@media (max-width: 600px) {
+    .filter-section {
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .filter-section select,
+    .filter-section .reset-button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    #matchCount {
+        text-align: center;
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================================
+   race-list.html — フィルター・カレンダー
+   ============================================================ */
+@media (max-width: 600px) {
+    .race-hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .filter-area {
+        padding: 0 12px;
+    }
+
+    .filter-row {
+        gap: 6px;
+    }
+
+    .filter-btn {
+        font-size: 0.78rem;
+        padding: 5px 12px;
+    }
+
+    .race-calendar {
+        padding: 0 12px;
+        margin-top: 24px;
+    }
+
+    .month-num {
+        font-size: 2rem;
+        min-width: 44px;
+    }
+
+    .month-label {
+        font-size: 0.75rem;
+    }
+
+    .race-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .race-card {
+        padding: 14px 16px;
+    }
+
+    .race-name {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================================
+   レース個別ページ（arima-kinen等）
+   ============================================================ */
+@media (max-width: 600px) {
+    .hero-inner {
+        padding: 48px 20px 40px;
+    }
+
+    .hero-title {
+        font-size: 2.6rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .hero-stats {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .hero-stat-value {
+        font-size: 0.92rem;
+    }
+
+    .page-body {
+        padding: 32px 16px 60px;
+    }
+
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .overview-card {
+        padding: 14px 16px;
+    }
+
+    .overview-card-value {
+        font-size: 1rem;
+    }
+
+    .history-box {
+        padding: 20px 18px;
+    }
+
+    .winners-table th,
+    .winners-table td {
+        padding: 10px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* タブ */
+    .result-year-tabs {
+        gap: 6px;
+    }
+
+    .year-tab {
+        font-size: 0.78rem;
+        padding: 5px 12px;
+    }
+
+    /* 着順表スクロール */
+    .result-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .result-table {
+        min-width: 480px;
+    }
+
+    .result-meta {
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 14px;
+    }
+
+    .commentary-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .section-num {
+        font-size: 1.8rem;
+        min-width: 36px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================================
+   jockey-list.html — 騎手一覧
+   ============================================================ */
+@media (max-width: 600px) {
+    .jockey-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    .jockey-card-name {
+        font-size: 1rem;
+    }
+
+    .jockey-filter {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+}
+
+/* ============================================================
+   騎手個別ページ
+   ============================================================ */
+@media (max-width: 600px) {
+    .jockey-hero-inner {
+        padding: 40px 20px 32px;
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .jockey-hero-img {
+        width: 120px !important;
+        height: 120px !important;
+        margin: 0 auto 16px;
+    }
+
+    .jockey-profile-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+    }
+
+    .jockey-career-table th,
+    .jockey-career-table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .jockey-career-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ============================================================
+   history.html — 歴史タイムライン
+   ============================================================ */
+@media (max-width: 700px) {
+    .timeline-line {
+        left: 20px !important;
+    }
+
+    .timeline-card {
+        margin-left: 44px !important;
+        margin-right: 0 !important;
+        width: auto !important;
+    }
+
+    .timeline-card.right {
+        margin-left: 44px !important;
+    }
+
+    .timeline-dot {
+        left: 14px !important;
+        right: auto !important;
+    }
+
+    .timeline-year {
+        font-size: 1.4rem;
+    }
+}
+
+/* ============================================================
+   glossary.html — 用語集
+   ============================================================ */
+@media (max-width: 600px) {
+    .glossary-filter {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .category-tabs {
+        gap: 6px;
+    }
+
+    .cat-btn {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+    }
+
+    .glossary-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+
+    .glossary-wrapper {
+        padding: 0 12px;
+        margin-top: 24px;
+    }
+}
+
+/* ============================================================
+   馬個別ページ（horse-details.css 補完）
+   ============================================================ */
+@media (max-width: 600px) {
+    .horse-hero {
+        flex-direction: column !important;
+        padding: 24px 16px !important;
+        text-align: center;
+    }
+
+    .horse-hero-img {
+        width: 140px !important;
+        margin: 0 auto 16px !important;
+    }
+
+    .horse-stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .radar-section {
+        overflow-x: auto;
+    }
+
+    .race-record-table th,
+    .race-record-table td {
+        padding: 8px 8px;
+        font-size: 0.78rem;
+    }
+
+    .race-record-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ============================================================
+   共通：テーブル横スクロール
+   ============================================================ */
+@media (max-width: 600px) {
+    table {
+        font-size: 0.82rem;
+    }
+}
+
+/* ============================================================
+   共通：フッター
+   ============================================================ */
+@media (max-width: 600px) {
+    footer {
+        padding: 16px;
+        font-size: 0.82rem;
+    }
+}
