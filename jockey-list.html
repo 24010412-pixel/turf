@@ -7,168 +7,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .jockey-hero {
-            background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #5c2d00 100%);
-            color: white;
-            text-align: center;
-            padding: 60px 20px 50px;
-            position: relative;
-            overflow: hidden;
-        }
-        .jockey-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.15) 0%, transparent 70%);
-        }
-        .jockey-hero h2 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-            letter-spacing: 0.1em;
-            position: relative;
-        }
-        .jockey-hero p {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.7);
-            position: relative;
-        }
-
-        /* フィルター */
-        .jockey-filter {
-            max-width: 900px;
-            margin: 40px auto 0;
-            padding: 0 20px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .filter-btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: 2px solid #ccc;
-            background: white;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: bold;
-            color: #555;
-        }
+        .jockey-hero { background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 50%, #5c2d00 100%); color: white; text-align: center; padding: 60px 20px 50px; position: relative; overflow: hidden; }
+        .jockey-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.15) 0%, transparent 70%); }
+        .jockey-hero h2 { font-family: 'Noto Serif JP', serif; font-size: 2.8rem; margin-bottom: 12px; letter-spacing: 0.1em; position: relative; }
+        .jockey-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.7); position: relative; }
+        .jockey-filter { max-width: 900px; margin: 40px auto 0; padding: 0 20px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        .filter-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid #ccc; background: white; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; font-weight: bold; color: #555; }
         .filter-btn:hover { border-color: #8b4513; color: #8b4513; }
         .filter-btn.active { background: #8b4513; border-color: #8b4513; color: white; }
-
-        /* グリッド */
-        .jockey-grid {
-            max-width: 1100px;
-            margin: 40px auto 80px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 28px;
-        }
-
-        .jockey-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #f0e8e0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .jockey-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(139,69,19,0.15);
-        }
-
-        .jockey-card-img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            object-position: center top;
-            background: linear-gradient(135deg, #f5e6d3, #e8d0b0);
-            display: block;
-        }
-        .jockey-card-img-placeholder {
-            width: 100%;
-            aspect-ratio: 3/4;
-            background: linear-gradient(135deg, #3d1a00, #8b4513);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: rgba(255,255,255,0.3);
-        }
-
-        .jockey-card-body {
-            padding: 18px 20px 20px;
-        }
-        .jockey-status {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
+        .jockey-grid { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px; }
+        .jockey-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #f0e8e0; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .jockey-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(139,69,19,0.15); }
+        .jockey-card-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; background: linear-gradient(135deg, #f5e6d3, #e8d0b0); display: block; }
+        .jockey-card-img-placeholder { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #3d1a00, #8b4513); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: rgba(255,255,255,0.3); }
+        .jockey-card-body { padding: 18px 20px 20px; }
+        .jockey-status { display: inline-block; font-size: 0.72rem; font-weight: bold; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; }
         .status-active { background: #e8f5e9; color: #2e7d32; }
         .status-retired { background: #f3f3f3; color: #888; }
+        .jockey-name { font-family: 'Noto Serif JP', serif; font-size: 1.4rem; font-weight: 700; color: #1a0a00; margin-bottom: 4px; }
+        .jockey-name-en { font-size: 0.8rem; color: #aaa; margin-bottom: 10px; letter-spacing: 0.05em; }
+        .jockey-g1 { font-size: 0.85rem; color: #8b4513; font-weight: bold; margin-bottom: 6px; }
+        .jockey-style { font-size: 0.82rem; color: #666; line-height: 1.6; }
+        .jockey-rep-horses { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .horse-tag { font-size: 0.72rem; background: #fdf3e7; color: #8b4513; border: 1px solid #e8c99a; border-radius: 10px; padding: 2px 8px; }
 
-        .jockey-name {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1a0a00;
-            margin-bottom: 4px;
+        /* スマホ対応 */
+        @media (max-width: 700px) {
+            .jockey-hero h2 { font-size: 1.8rem; }
+            .jockey-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 0 12px; }
+            .jockey-card-body { padding: 12px 14px 14px; }
+            .jockey-name { font-size: 1.1rem; }
+            .jockey-card:hover { transform: none; }
         }
-        .jockey-name-en {
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-bottom: 10px;
-            letter-spacing: 0.05em;
-        }
-        .jockey-g1 {
-            font-size: 0.85rem;
-            color: #8b4513;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-        .jockey-style {
-            font-size: 0.82rem;
-            color: #666;
-            line-height: 1.6;
-        }
-        .jockey-rep-horses {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .horse-tag {
-            font-size: 0.72rem;
-            background: #fdf3e7;
-            color: #8b4513;
-            border: 1px solid #e8c99a;
-            border-radius: 10px;
-            padding: 2px 8px;
+        @media (max-width: 400px) {
+            .jockey-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header>
         <div class="header-container">
             <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
-            <div class="header-right">
+            <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="header-right" id="headerRight">
                 <nav class="header-nav">
                     <a href="index.html" class="list-link">ホーム</a>
                     <a href="all-horses.html" class="list-link">競走馬一覧</a>
                     <a href="race-list.html" class="list-link">レース</a>
                     <a href="history.html" class="list-link">歴史</a>
-                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="jockey-list.html" class="list-link active">騎手</a>
                     <a href="glossary.html" class="list-link">用語集</a>
                 </nav>
                 <div class="search-box">
@@ -196,255 +87,36 @@
     </div>
 
     <div class="jockey-grid" id="jockeyGrid">
-
-        <!-- 武豊 -->
-        <a href="jockey-takeyutaka.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_takeyutaka.png" alt="武豊" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">武 豊</div>
-                <div class="jockey-name-en">TAKE Yutaka</div>
-                <div class="jockey-g1">JRA G1通算 100勝超</div>
-                <div class="jockey-style">天才的センスと柔らかな手綱さばき。日本競馬の顔。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">ディープインパクト</span>
-                    <span class="horse-tag">オグリキャップ</span>
-                    <span class="horse-tag">キズナ</span>
-                    <span class="horse-tag">ドウデュース</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 岡部幸雄 -->
-        <a href="jockey-okabeyukio.html" class="jockey-card" data-status="retired">
-            <img src="images/jockey_okabeyukio.png" alt="岡部幸雄" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-retired">引退</span>
-                <div class="jockey-name">岡部 幸雄</div>
-                <div class="jockey-name-en">OKABE Yukio</div>
-                <div class="jockey-g1">JRA G1通算 28勝</div>
-                <div class="jockey-style">「ミスター競馬」。冷静沈着な騎乗と卓越した戦略眼。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">シンボリルドルフ</span>
-                    <span class="horse-tag">オグリキャップ</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- ルメール -->
-        <a href="jockey-lemaire.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_lemaire.png" alt="C.ルメール" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">C. ルメール</div>
-                <div class="jockey-name-en">Christophe LEMAIRE</div>
-                <div class="jockey-g1">JRA G1通算 100勝超</div>
-                <div class="jockey-style">世界最高峰の技術と抜群のコース取り。近年最強の外国人騎手。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">アーモンドアイ</span>
-                    <span class="horse-tag">イクイノックス</span>
-                    <span class="horse-tag">ジャスティンパレス</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 池添謙一 -->
-        <a href="jockey-ikezoe.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_ikezoe.png" alt="池添謙一" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">池添 謙一</div>
-                <div class="jockey-name-en">IKEZOE Kenichi</div>
-                <div class="jockey-g1">JRA G1通算 30勝超</div>
-                <div class="jockey-style">豪快な追い込みが持ち味。オルフェーヴルとの名コンビ。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">オルフェーヴル</span>
-                    <span class="horse-tag">ゴールドシップ</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 和田竜二 -->
-        <a href="jockey-wadaryu.html" class="jockey-card" data-status="retired">
-            <img src="images/jockey_wadaryu.png" alt="和田竜二" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-retired">引退・調教師</span>
-                <div class="jockey-name">和田 竜二</div>
-                <div class="jockey-name-en">WADA Ryuji</div>
-                <div class="jockey-g1">JRA G1通算 10勝超</div>
-                <div class="jockey-style">先行押し切りの安定感。テイエムオペラオーとの黄金コンビ。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">テイエムオペラオー</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 横山典弘 -->
-        <a href="jockey-yokoyamanori.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_yokoyamanori.png" alt="横山典弘" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">横山 典弘</div>
-                <div class="jockey-name-en">YOKOYAMA Norihiro</div>
-                <div class="jockey-g1">JRA G1通算 40勝超</div>
-                <div class="jockey-style">「ノリ」の愛称で親しまれる個性派。大逃げから差しまで自在。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">ナリタブライアン</span>
-                    <span class="horse-tag">ホーリックス</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 安藤勝巳 -->
-        <a href="jockey-andokatsumi.html" class="jockey-card" data-status="retired">
-            <img src="images/jockey_andokatsumi.png" alt="安藤勝巳" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-retired">引退</span>
-                <div class="jockey-name">安藤 勝巳</div>
-                <div class="jockey-name-en">ANDO Katsumi</div>
-                <div class="jockey-g1">JRA G1通算 20勝超</div>
-                <div class="jockey-style">地方から中央へ。「アンカツ」の愛称で絶大な人気を誇った。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">スクリーンヒーロー</span>
-                    <span class="horse-tag">ブエナビスタ</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 岩田康誠 -->
-        <a href="jockey-iwatayasusei.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_iwatayasusei.png" alt="岩田康誠" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">岩田 康誠</div>
-                <div class="jockey-name-en">IWATA Yasusei</div>
-                <div class="jockey-g1">JRA G1通算 30勝超</div>
-                <div class="jockey-style">力強い騎乗スタイルと勝負根性。先行・追い込みどちらもこなす。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">ダイワスカーレット</span>
-                    <span class="horse-tag">カレンブラックヒル</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 坂井瑠星 -->
-        <a href="jockey-sakairyu.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_sakairyu.png" alt="坂井瑠星" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">坂井 瑠星</div>
-                <div class="jockey-name-en">SAKAI Ryusei</div>
-                <div class="jockey-g1">JRA G1通算 10勝超</div>
-                <div class="jockey-style">若手のホープ。海外遠征経験も豊富な令和を代表する騎手。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">フォーエバーヤング</span>
-                    <span class="horse-tag">ナミュール</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 福永祐一 -->
-        <a href="jockey-fukunagayuichi.html" class="jockey-card" data-status="retired">
-            <img src="images/jockey_fukunagayuichi.png" alt="福永祐一" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-retired">引退→調教師</span>
-                <div class="jockey-name">福永 祐一</div>
-                <div class="jockey-name-en">FUKUNAGA Yuichi</div>
-                <div class="jockey-g1">JRA G1通算 30勝超</div>
-                <div class="jockey-style">父・洋一の背中を追いかけた2代目騎手。コントレイルとの三冠。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">コントレイル</span>
-                    <span class="horse-tag">ブロードアピール</span>
-                    <span class="horse-tag">ウオッカ</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 松山弘平 -->
-        <a href="jockey-matsuyama.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_matsuyama.png" alt="松山弘平" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">松山 弘平</div>
-                <div class="jockey-name-en">MATSUYAMA Kohei</div>
-                <div class="jockey-g1">JRA G1通算 10勝超</div>
-                <div class="jockey-style">デアリングタクトとの無敗三冠達成。西の実力派。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">デアリングタクト</span>
-                    <span class="horse-tag">エフフォーリア</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 幸英明 -->
-        <a href="jockey-miyukihideaki.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_miyukihideaki.png" alt="幸英明" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">幸 英明</div>
-                <div class="jockey-name-en">MIYUKI Hideaki</div>
-                <div class="jockey-g1">JRA G1通算 10勝超</div>
-                <div class="jockey-style">関西を拠点とする安定した技巧派。地道な積み重ねで実績を築く。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">スティルインラブ</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- M.デムーロ -->
-        <a href="jockey-demuro.html" class="jockey-card" data-status="active">
-            <img src="images/jockey_demuro.png" alt="M.デムーロ" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-active">現役</span>
-                <div class="jockey-name">M. デムーロ</div>
-                <div class="jockey-name-en">Mirco DEMURO</div>
-                <div class="jockey-g1">JRA G1通算 50勝超</div>
-                <div class="jockey-style">イタリア出身の大物。フィエールマン・リスグラシューなど多くの名馬で実績。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">リスグラシュー</span>
-                    <span class="horse-tag">フィエールマン</span>
-                    <span class="horse-tag">サリオス</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- 藤田菜七子 -->
-        <a href="jockey-fujitananako.html" class="jockey-card" data-status="retired">
-            <img src="images/jockey_fujitananako.png" alt="藤田菜七子" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="jockey-card-img-placeholder" style="display:none">🏇</div>
-            <div class="jockey-card-body">
-                <span class="jockey-status status-retired">引退</span>
-                <div class="jockey-name">藤田 菜七子</div>
-                <div class="jockey-name-en">FUJITA Nanako</div>
-                <div class="jockey-g1">JRA G1勝利</div>
-                <div class="jockey-style">女性騎手として新たな歴史を切り拓く。果敢な騎乗で注目を集める。</div>
-                <div class="jockey-rep-horses">
-                    <span class="horse-tag">コスタボニータ</span>
-                </div>
-            </div>
-        </a>
-
+        <a href="jockey-takeyutaka.html" class="jockey-card" data-status="active"><img src="images/jockey_takeyutaka.png" alt="武豊" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">武 豊</div><div class="jockey-name-en">TAKE Yutaka</div><div class="jockey-g1">JRA G1通算 100勝超</div><div class="jockey-style">天才的センスと柔らかな手綱さばき。日本競馬の顔。</div><div class="jockey-rep-horses"><span class="horse-tag">ディープインパクト</span><span class="horse-tag">オグリキャップ</span><span class="horse-tag">キズナ</span><span class="horse-tag">ドウデュース</span></div></div></a>
+        <a href="jockey-okabeyukio.html" class="jockey-card" data-status="retired"><img src="images/jockey_okabeyukio.png" alt="岡部幸雄" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-retired">引退</span><div class="jockey-name">岡部 幸雄</div><div class="jockey-name-en">OKABE Yukio</div><div class="jockey-g1">JRA G1通算 28勝</div><div class="jockey-style">「ミスター競馬」。冷静沈着な騎乗と卓越した戦略眼。</div><div class="jockey-rep-horses"><span class="horse-tag">シンボリルドルフ</span><span class="horse-tag">オグリキャップ</span></div></div></a>
+        <a href="jockey-lemaire.html" class="jockey-card" data-status="active"><img src="images/jockey_lemaire.png" alt="C.ルメール" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">C. ルメール</div><div class="jockey-name-en">Christophe LEMAIRE</div><div class="jockey-g1">JRA G1通算 100勝超</div><div class="jockey-style">世界最高峰の技術と抜群のコース取り。近年最強の外国人騎手。</div><div class="jockey-rep-horses"><span class="horse-tag">アーモンドアイ</span><span class="horse-tag">イクイノックス</span><span class="horse-tag">ジャスティンパレス</span></div></div></a>
+        <a href="jockey-ikezoe.html" class="jockey-card" data-status="active"><img src="images/jockey_ikezoe.png" alt="池添謙一" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">池添 謙一</div><div class="jockey-name-en">IKEZOE Kenichi</div><div class="jockey-g1">JRA G1通算 30勝超</div><div class="jockey-style">豪快な追い込みが持ち味。オルフェーヴルとの名コンビ。</div><div class="jockey-rep-horses"><span class="horse-tag">オルフェーヴル</span><span class="horse-tag">ゴールドシップ</span></div></div></a>
+        <a href="jockey-wadaryu.html" class="jockey-card" data-status="retired"><img src="images/jockey_wadaryu.png" alt="和田竜二" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-retired">引退・調教師</span><div class="jockey-name">和田 竜二</div><div class="jockey-name-en">WADA Ryuji</div><div class="jockey-g1">JRA G1通算 10勝超</div><div class="jockey-style">先行押し切りの安定感。テイエムオペラオーとの黄金コンビ。</div><div class="jockey-rep-horses"><span class="horse-tag">テイエムオペラオー</span></div></div></a>
+        <a href="jockey-yokoyamanori.html" class="jockey-card" data-status="active"><img src="images/jockey_yokoyamanori.png" alt="横山典弘" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">横山 典弘</div><div class="jockey-name-en">YOKOYAMA Norihiro</div><div class="jockey-g1">JRA G1通算 40勝超</div><div class="jockey-style">「ノリ」の愛称で親しまれる個性派。大逃げから差しまで自在。</div><div class="jockey-rep-horses"><span class="horse-tag">ナリタブライアン</span><span class="horse-tag">ホーリックス</span></div></div></a>
+        <a href="jockey-andokatsumi.html" class="jockey-card" data-status="retired"><img src="images/jockey_andokatsumi.png" alt="安藤勝巳" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-retired">引退</span><div class="jockey-name">安藤 勝巳</div><div class="jockey-name-en">ANDO Katsumi</div><div class="jockey-g1">JRA G1通算 20勝超</div><div class="jockey-style">地方から中央へ。「アンカツ」の愛称で絶大な人気を誇った。</div><div class="jockey-rep-horses"><span class="horse-tag">スクリーンヒーロー</span><span class="horse-tag">ブエナビスタ</span></div></div></a>
+        <a href="jockey-iwatayasusei.html" class="jockey-card" data-status="active"><img src="images/jockey_iwatayasusei.png" alt="岩田康誠" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">岩田 康誠</div><div class="jockey-name-en">IWATA Yasusei</div><div class="jockey-g1">JRA G1通算 30勝超</div><div class="jockey-style">力強い騎乗スタイルと勝負根性。先行・追い込みどちらもこなす。</div><div class="jockey-rep-horses"><span class="horse-tag">ダイワスカーレット</span><span class="horse-tag">カレンブラックヒル</span></div></div></a>
+        <a href="jockey-sakairyu.html" class="jockey-card" data-status="active"><img src="images/jockey_sakairyu.png" alt="坂井瑠星" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">坂井 瑠星</div><div class="jockey-name-en">SAKAI Ryusei</div><div class="jockey-g1">JRA G1通算 10勝超</div><div class="jockey-style">若手のホープ。海外遠征経験も豊富な令和を代表する騎手。</div><div class="jockey-rep-horses"><span class="horse-tag">フォーエバーヤング</span><span class="horse-tag">ナミュール</span></div></div></a>
+        <a href="jockey-fukunagayuichi.html" class="jockey-card" data-status="retired"><img src="images/jockey_fukunagayuichi.png" alt="福永祐一" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-retired">引退→調教師</span><div class="jockey-name">福永 祐一</div><div class="jockey-name-en">FUKUNAGA Yuichi</div><div class="jockey-g1">JRA G1通算 30勝超</div><div class="jockey-style">父・洋一の背中を追いかけた2代目騎手。コントレイルとの三冠。</div><div class="jockey-rep-horses"><span class="horse-tag">コントレイル</span><span class="horse-tag">ブロードアピール</span><span class="horse-tag">ウオッカ</span></div></div></a>
+        <a href="jockey-matsuyama.html" class="jockey-card" data-status="active"><img src="images/jockey_matsuyama.png" alt="松山弘平" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">松山 弘平</div><div class="jockey-name-en">MATSUYAMA Kohei</div><div class="jockey-g1">JRA G1通算 10勝超</div><div class="jockey-style">デアリングタクトとの無敗三冠達成。西の実力派。</div><div class="jockey-rep-horses"><span class="horse-tag">デアリングタクト</span><span class="horse-tag">エフフォーリア</span></div></div></a>
+        <a href="jockey-miyukihideaki.html" class="jockey-card" data-status="active"><img src="images/jockey_miyukihideaki.png" alt="幸英明" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">幸 英明</div><div class="jockey-name-en">MIYUKI Hideaki</div><div class="jockey-g1">JRA G1通算 10勝超</div><div class="jockey-style">関西を拠点とする安定した技巧派。地道な積み重ねで実績を築く。</div><div class="jockey-rep-horses"><span class="horse-tag">スティルインラブ</span></div></div></a>
+        <a href="jockey-demuro.html" class="jockey-card" data-status="active"><img src="images/jockey_demuro.png" alt="M.デムーロ" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-active">現役</span><div class="jockey-name">M. デムーロ</div><div class="jockey-name-en">Mirco DEMURO</div><div class="jockey-g1">JRA G1通算 50勝超</div><div class="jockey-style">イタリア出身の大物。フィエールマン・リスグラシューなど多くの名馬で実績。</div><div class="jockey-rep-horses"><span class="horse-tag">リスグラシュー</span><span class="horse-tag">フィエールマン</span><span class="horse-tag">サリオス</span></div></div></a>
+        <a href="jockey-fujitananako.html" class="jockey-card" data-status="retired"><img src="images/jockey_fujitananako.png" alt="藤田菜七子" class="jockey-card-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="jockey-card-img-placeholder" style="display:none">🏇</div><div class="jockey-card-body"><span class="jockey-status status-retired">引退</span><div class="jockey-name">藤田 菜七子</div><div class="jockey-name-en">FUJITA Nanako</div><div class="jockey-g1">JRA G1勝利</div><div class="jockey-style">女性騎手として新たな歴史を切り拓く。果敢な騎乗で注目を集める。</div><div class="jockey-rep-horses"><span class="horse-tag">コスタボニータ</span></div></div></a>
     </div>
 
-    <footer>
-        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
-    </footer>
+    <footer><p>&copy; 2026 伝説の競走馬アーカイブ</p></footer>
 
     <script src="script.js"></script>
     <script>
+        // ハンバーガーメニュー
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const headerRight = document.getElementById('headerRight');
+        const navOverlay = document.getElementById('navOverlay');
+        function openMenu() { hamburgerBtn.classList.add('open'); headerRight.classList.add('open'); navOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function closeMenu() { hamburgerBtn.classList.remove('open'); headerRight.classList.remove('open'); navOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+        hamburgerBtn.addEventListener('click', () => headerRight.classList.contains('open') ? closeMenu() : openMenu());
+        navOverlay.addEventListener('click', closeMenu);
+        headerRight.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
         // フィルター
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -452,11 +124,7 @@
                 btn.classList.add('active');
                 const filter = btn.dataset.filter;
                 document.querySelectorAll('.jockey-card').forEach(card => {
-                    if (filter === 'all' || card.dataset.status === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (filter === 'all' || card.dataset.status === filter) ? 'block' : 'none';
                 });
             });
         });
@@ -465,21 +133,10 @@
         const cards = document.querySelectorAll('.jockey-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, i * 60);
-                }
+                if (entry.isIntersecting) { setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, i * 60); }
             });
         }, { threshold: 0.1 });
-
-        cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(card);
-        });
+        cards.forEach(card => { card.style.opacity = '0'; card.style.transform = 'translateY(20px)'; card.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; observer.observe(card); });
     </script>
 </body>
 </html>

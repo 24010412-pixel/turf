@@ -99,13 +99,27 @@
 
         .race-card.hidden { display: none; }
         .month-block.all-hidden { display: none; }
+
+        /* スマホ対応 */
+        @media (max-width: 700px) {
+            .race-hero h2 { font-size: 1.8rem; }
+            .month-num { font-size: 2rem; min-width: 40px; }
+            .race-grid { grid-template-columns: 1fr; }
+            .filter-row { gap: 6px; }
+            .filter-btn { font-size: 0.78rem; padding: 5px 12px; }
+        }
     </style>
 </head>
 <body>
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header>
         <div class="header-container">
             <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
-            <div class="header-right">
+            <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="header-right" id="headerRight">
                 <nav class="header-nav">
                     <a href="index.html" class="list-link">ホーム</a>
                     <a href="all-horses.html" class="list-link">競走馬一覧</a>
@@ -167,408 +181,136 @@
     </div>
 
     <div class="race-calendar">
-
-        <!-- 1月 -->
         <div class="month-block fade-in" data-month="1">
             <div class="month-header"><div class="month-num">01</div><div class="month-label">JANUARY</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="fairy-stakes.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">1月12日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">フェアリーステークス</div>
-                    <div class="race-meta"><span>📍 中山 / 芝1600m</span><span>🏇 3歳牝馬</span></div>
-                </a>
-                <a href="nikkeishunki.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">1月19日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">日経新春杯</div>
-                    <div class="race-meta"><span>📍 中京 / 芝2200m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="tokai-stakes.html" class="race-card g2 dirt" data-tags="g2 dirt">
-                    <div class="race-date">1月26日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">東海ステークス</div>
-                    <div class="race-meta"><span>📍 中京 / ダ1800m</span><span>🏇 4歳以上</span></div>
-                </a>
+                <a href="fairy-stakes.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">1月12日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">フェアリーステークス</div><div class="race-meta"><span>📍 中山 / 芝1600m</span><span>🏇 3歳牝馬</span></div></a>
+                <a href="nikkeishunki.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">1月19日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">日経新春杯</div><div class="race-meta"><span>📍 中京 / 芝2200m</span><span>🏇 4歳以上</span></div></a>
+                <a href="tokai-stakes.html" class="race-card g2 dirt" data-tags="g2 dirt"><div class="race-date">1月26日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge dirt">ダート</span></div><div class="race-name">東海ステークス</div><div class="race-meta"><span>📍 中京 / ダ1800m</span><span>🏇 4歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 2月 -->
         <div class="month-block fade-in" data-month="2">
             <div class="month-header"><div class="month-num">02</div><div class="month-label">FEBRUARY</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="kyoto-kinen.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">2月8日（土）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">京都記念</div>
-                    <div class="race-meta"><span>📍 京都 / 芝2200m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="kyodo-tsushin.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">2月9日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">共同通信杯</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="negishi-stakes.html" class="race-card g2 dirt" data-tags="g2 dirt">
-                    <div class="race-date">2月16日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">根岸ステークス</div>
-                    <div class="race-meta"><span>📍 東京 / ダ1400m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="february-stakes.html" class="race-card g1 dirt" data-tags="g1 dirt">
-                    <div class="race-date">2月23日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">フェブラリーステークス</div>
-                    <div class="race-meta"><span>📍 東京 / ダ1600m</span><span>🏇 4歳以上</span></div>
-                </a>
+                <a href="kyoto-kinen.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">2月8日（土）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">京都記念</div><div class="race-meta"><span>📍 京都 / 芝2200m</span><span>🏇 4歳以上</span></div></a>
+                <a href="kyodo-tsushin.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">2月9日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">共同通信杯</div><div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳</span></div></a>
+                <a href="negishi-stakes.html" class="race-card g2 dirt" data-tags="g2 dirt"><div class="race-date">2月16日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge dirt">ダート</span></div><div class="race-name">根岸ステークス</div><div class="race-meta"><span>📍 東京 / ダ1400m</span><span>🏇 4歳以上</span></div></a>
+                <a href="february-stakes.html" class="race-card g1 dirt" data-tags="g1 dirt"><div class="race-date">2月23日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div><div class="race-name">フェブラリーステークス</div><div class="race-meta"><span>📍 東京 / ダ1600m</span><span>🏇 4歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 3月 -->
         <div class="month-block fade-in" data-month="3">
             <div class="month-header"><div class="month-num">03</div><div class="month-label">MARCH</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="nakayama-kinen.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">3月1日（土）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">中山記念</div>
-                    <div class="race-meta"><span>📍 中山 / 芝1800m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="yayoi-sho.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">3月2日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">弥生賞ディープインパクト記念</div>
-                    <div class="race-meta"><span>📍 中山 / 芝2000m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="kinko-sho.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">3月8日（土）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">金鯱賞</div>
-                    <div class="race-meta"><span>📍 中京 / 芝2000m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="fillies-review.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">3月8日（土）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">フィリーズレビュー</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝1400m</span><span>🏇 3歳牝馬</span></div>
-                </a>
-                <a href="hanshin-daishoten.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">3月15日（土）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">阪神大賞典</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝3000m</span><span>🏇 4歳以上</span></div>
-                </a>
+                <a href="nakayama-kinen.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">3月1日（土）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">中山記念</div><div class="race-meta"><span>📍 中山 / 芝1800m</span><span>🏇 4歳以上</span></div></a>
+                <a href="yayoi-sho.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">3月2日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">弥生賞ディープインパクト記念</div><div class="race-meta"><span>📍 中山 / 芝2000m</span><span>🏇 3歳</span></div></a>
+                <a href="kinko-sho.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">3月8日（土）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">金鯱賞</div><div class="race-meta"><span>📍 中京 / 芝2000m</span><span>🏇 4歳以上</span></div></a>
+                <a href="fillies-review.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">3月8日（土）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">フィリーズレビュー</div><div class="race-meta"><span>📍 阪神 / 芝1400m</span><span>🏇 3歳牝馬</span></div></a>
+                <a href="hanshin-daishoten.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">3月15日（土）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">阪神大賞典</div><div class="race-meta"><span>📍 阪神 / 芝3000m</span><span>🏇 4歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 4月 -->
         <div class="month-block fade-in" data-month="4">
             <div class="month-header"><div class="month-num">04</div><div class="month-label">APRIL</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="osaka-hai.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">4月6日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">大阪杯</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝2000m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="oka-sho.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">4月13日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">桜花賞</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 3歳牝馬</span></div>
-                </a>
-                <a href="satsuki-sho.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">4月20日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">皐月賞</div>
-                    <div class="race-meta"><span>📍 中山 / 芝2000m</span><span>🏇 3歳牡馬</span></div>
-                </a>
-                <a href="flora-stakes.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">4月20日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">フローラステークス</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2000m</span><span>🏇 3歳牝馬</span></div>
-                </a>
+                <a href="osaka-hai.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">4月6日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">大阪杯</div><div class="race-meta"><span>📍 阪神 / 芝2000m</span><span>🏇 4歳以上</span></div></a>
+                <a href="oka-sho.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">4月13日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">桜花賞</div><div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 3歳牝馬</span></div></a>
+                <a href="satsuki-sho.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">4月20日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">皐月賞</div><div class="race-meta"><span>📍 中山 / 芝2000m</span><span>🏇 3歳牡馬</span></div></a>
+                <a href="flora-stakes.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">4月20日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">フローラステークス</div><div class="race-meta"><span>📍 東京 / 芝2000m</span><span>🏇 3歳牝馬</span></div></a>
             </div>
         </div>
-
-        <!-- 5月 -->
         <div class="month-block fade-in" data-month="5">
             <div class="month-header"><div class="month-num">05</div><div class="month-label">MAY</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="tenno-sho-spring.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">5月4日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">天皇賞（春）</div>
-                    <div class="race-meta"><span>📍 京都 / 芝3200m</span><span>🏇 4歳以上</span></div>
-                </a>
-                <a href="nhk-mile.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">5月11日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">NHKマイルカップ</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="victoria-mile.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">5月18日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">ヴィクトリアマイル</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 4歳以上牝馬</span></div>
-                </a>
-                <a href="kyoto-shimbun-hai.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">5月18日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">京都新聞杯</div>
-                    <div class="race-meta"><span>📍 京都 / 芝2200m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="derby.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">5月25日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">日本ダービー（東京優駿）</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳</span></div>
-                </a>
+                <a href="tenno-sho-spring.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">5月4日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">天皇賞（春）</div><div class="race-meta"><span>📍 京都 / 芝3200m</span><span>🏇 4歳以上</span></div></a>
+                <a href="nhk-mile.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">5月11日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">NHKマイルカップ</div><div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳</span></div></a>
+                <a href="victoria-mile.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">5月18日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">ヴィクトリアマイル</div><div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 4歳以上牝馬</span></div></a>
+                <a href="kyoto-shimbun-hai.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">5月18日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">京都新聞杯</div><div class="race-meta"><span>📍 京都 / 芝2200m</span><span>🏇 3歳</span></div></a>
+                <a href="derby.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">5月25日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">日本ダービー（東京優駿）</div><div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳</span></div></a>
             </div>
         </div>
-
-        <!-- 6月 -->
         <div class="month-block fade-in" data-month="6">
             <div class="month-header"><div class="month-num">06</div><div class="month-label">JUNE</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="oaks.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">6月1日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">オークス（優駿牝馬）</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳牝馬</span></div>
-                </a>
-                <a href="yasuda-kinen.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">6月8日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">安田記念</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="epsom-cup.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">6月8日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">エプソムカップ</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="oaks.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">6月1日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">オークス（優駿牝馬）</div><div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳牝馬</span></div></a>
+                <a href="yasuda-kinen.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">6月8日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">安田記念</div><div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳以上</span></div></a>
+                <a href="epsom-cup.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">6月8日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">エプソムカップ</div><div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 7月 -->
         <div class="month-block fade-in" data-month="7">
             <div class="month-header"><div class="month-num">07</div><div class="month-label">JULY</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="takarazuka-kinen.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">7月6日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">宝塚記念</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝2200m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="radio-nikkei.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">7月6日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">ラジオNIKKEI賞</div>
-                    <div class="race-meta"><span>📍 福島 / 芝1800m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="king-george.html" class="race-card overseas g1" data-tags="g1 overseas turf">
-                    <div class="race-date">7月下旬</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">キングジョージ6世＆クイーンエリザベスS</div>
-                    <div class="race-meta"><span>📍 アスコット（英）/ 芝2400m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="takarazuka-kinen.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">7月6日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">宝塚記念</div><div class="race-meta"><span>📍 阪神 / 芝2200m</span><span>🏇 3歳以上</span></div></a>
+                <a href="radio-nikkei.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">7月6日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">ラジオNIKKEI賞</div><div class="race-meta"><span>📍 福島 / 芝1800m</span><span>🏇 3歳</span></div></a>
+                <a href="king-george.html" class="race-card overseas g1" data-tags="g1 overseas turf"><div class="race-date">7月下旬</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div><div class="race-name">キングジョージ6世＆クイーンエリザベスS</div><div class="race-meta"><span>📍 アスコット（英）/ 芝2400m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 8月 -->
         <div class="month-block fade-in" data-month="8">
             <div class="month-header"><div class="month-num">08</div><div class="month-label">AUGUST</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="queen-stakes.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">8月17日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">クイーンステークス</div>
-                    <div class="race-meta"><span>📍 札幌 / 芝1800m</span><span>🏇 3歳以上牝馬</span></div>
-                </a>
-                <a href="sapporo-kinen.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">8月24日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">札幌記念</div>
-                    <div class="race-meta"><span>📍 札幌 / 芝2000m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="queen-stakes.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">8月17日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">クイーンステークス</div><div class="race-meta"><span>📍 札幌 / 芝1800m</span><span>🏇 3歳以上牝馬</span></div></a>
+                <a href="sapporo-kinen.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">8月24日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">札幌記念</div><div class="race-meta"><span>📍 札幌 / 芝2000m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 9月 -->
         <div class="month-block fade-in" data-month="9">
             <div class="month-header"><div class="month-num">09</div><div class="month-label">SEPTEMBER</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="sprinters-stakes.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">9月7日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">スプリンターズステークス</div>
-                    <div class="race-meta"><span>📍 中山 / 芝1200m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="st-lite-kinen.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">9月14日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">セントライト記念</div>
-                    <div class="race-meta"><span>📍 中山 / 芝2200m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="kobe-shimbun.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">9月21日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">神戸新聞杯</div>
-                    <div class="race-meta"><span>📍 中京 / 芝2200m</span><span>🏇 3歳</span></div>
-                </a>
-                <a href="shuuka-sho.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">9月28日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">秋華賞</div>
-                    <div class="race-meta"><span>📍 京都 / 芝2000m</span><span>🏇 3歳牝馬</span></div>
-                </a>
+                <a href="sprinters-stakes.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">9月7日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">スプリンターズステークス</div><div class="race-meta"><span>📍 中山 / 芝1200m</span><span>🏇 3歳以上</span></div></a>
+                <a href="st-lite-kinen.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">9月14日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">セントライト記念</div><div class="race-meta"><span>📍 中山 / 芝2200m</span><span>🏇 3歳</span></div></a>
+                <a href="kobe-shimbun.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">9月21日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">神戸新聞杯</div><div class="race-meta"><span>📍 中京 / 芝2200m</span><span>🏇 3歳</span></div></a>
+                <a href="shuuka-sho.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">9月28日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">秋華賞</div><div class="race-meta"><span>📍 京都 / 芝2000m</span><span>🏇 3歳牝馬</span></div></a>
             </div>
         </div>
-
-        <!-- 10月 -->
         <div class="month-block fade-in" data-month="10">
             <div class="month-header"><div class="month-num">10</div><div class="month-label">OCTOBER</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="arc.html" class="race-card overseas g1" data-tags="g1 overseas turf">
-                    <div class="race-date">10月5日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">凱旋門賞</div>
-                    <div class="race-meta"><span>📍 パリロンシャン（仏）/ 芝2400m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="mainichi-okan.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">10月5日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">毎日王冠</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="kikka-sho.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">10月19日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">菊花賞</div>
-                    <div class="race-meta"><span>📍 京都 / 芝3000m</span><span>🏇 3歳牡馬</span></div>
-                </a>
-                <a href="tenno-sho-autumn.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">10月26日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">天皇賞（秋）</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2000m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="breeders-cup.html" class="race-card overseas g1 dirt" data-tags="g1 overseas dirt">
-                    <div class="race-date">10月下旬〜11月上旬</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">BCクラシック</div>
-                    <div class="race-meta"><span>📍 アメリカ（各地）/ ダ2000m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="fuji-stakes.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">10月26日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">富士ステークス</div>
-                    <div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="arc.html" class="race-card overseas g1" data-tags="g1 overseas turf"><div class="race-date">10月5日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div><div class="race-name">凱旋門賞</div><div class="race-meta"><span>📍 パリロンシャン（仏）/ 芝2400m</span><span>🏇 3歳以上</span></div></a>
+                <a href="mainichi-okan.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">10月5日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">毎日王冠</div><div class="race-meta"><span>📍 東京 / 芝1800m</span><span>🏇 3歳以上</span></div></a>
+                <a href="kikka-sho.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">10月19日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">菊花賞</div><div class="race-meta"><span>📍 京都 / 芝3000m</span><span>🏇 3歳牡馬</span></div></a>
+                <a href="tenno-sho-autumn.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">10月26日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">天皇賞（秋）</div><div class="race-meta"><span>📍 東京 / 芝2000m</span><span>🏇 3歳以上</span></div></a>
+                <a href="breeders-cup.html" class="race-card overseas g1 dirt" data-tags="g1 overseas dirt"><div class="race-date">10月下旬〜11月上旬</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge dirt">ダート</span></div><div class="race-name">BCクラシック</div><div class="race-meta"><span>📍 アメリカ（各地）/ ダ2000m</span><span>🏇 3歳以上</span></div></a>
+                <a href="fuji-stakes.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">10月26日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">富士ステークス</div><div class="race-meta"><span>📍 東京 / 芝1600m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 11月 -->
         <div class="month-block fade-in" data-month="11">
             <div class="month-header"><div class="month-num">11</div><div class="month-label">NOVEMBER</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="elizabeth-jo-hai.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">11月9日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">エリザベス女王杯</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝2200m</span><span>🏇 3歳以上牝馬</span></div>
-                </a>
-                <a href="argentina-kyowakoku.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">11月9日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">アルゼンチン共和国杯</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2500m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="mile-championship.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">11月16日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">マイルチャンピオンシップ</div>
-                    <div class="race-meta"><span>📍 京都 / 芝1600m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="japan-cup.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">11月23日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">ジャパンカップ</div>
-                    <div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="champions-cup.html" class="race-card g1 dirt" data-tags="g1 dirt">
-                    <div class="race-date">11月30日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">チャンピオンズカップ</div>
-                    <div class="race-meta"><span>📍 中京 / ダ1800m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="hong-kong-cup.html" class="race-card overseas g1" data-tags="g1 overseas turf">
-                    <div class="race-date">11月下旬</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">香港カップ</div>
-                    <div class="race-meta"><span>📍 沙田（香港）/ 芝2000m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="elizabeth-jo-hai.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">11月9日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">エリザベス女王杯</div><div class="race-meta"><span>📍 阪神 / 芝2200m</span><span>🏇 3歳以上牝馬</span></div></a>
+                <a href="argentina-kyowakoku.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">11月9日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">アルゼンチン共和国杯</div><div class="race-meta"><span>📍 東京 / 芝2500m</span><span>🏇 3歳以上</span></div></a>
+                <a href="mile-championship.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">11月16日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">マイルチャンピオンシップ</div><div class="race-meta"><span>📍 京都 / 芝1600m</span><span>🏇 3歳以上</span></div></a>
+                <a href="japan-cup.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">11月23日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">ジャパンカップ</div><div class="race-meta"><span>📍 東京 / 芝2400m</span><span>🏇 3歳以上</span></div></a>
+                <a href="champions-cup.html" class="race-card g1 dirt" data-tags="g1 dirt"><div class="race-date">11月30日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div><div class="race-name">チャンピオンズカップ</div><div class="race-meta"><span>📍 中京 / ダ1800m</span><span>🏇 3歳以上</span></div></a>
+                <a href="hong-kong-cup.html" class="race-card overseas g1" data-tags="g1 overseas turf"><div class="race-date">11月下旬</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div><div class="race-name">香港カップ</div><div class="race-meta"><span>📍 沙田（香港）/ 芝2000m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
-        <!-- 12月 -->
         <div class="month-block fade-in" data-month="12">
             <div class="month-header"><div class="month-num">12</div><div class="month-label">DECEMBER</div><div class="month-line"></div></div>
             <div class="race-grid">
-                <a href="hanshin-juvenile-fillies.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">12月14日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">阪神ジュベナイルフィリーズ</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 2歳牝馬</span></div>
-                </a>
-                <a href="asahi-futurity.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">12月21日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">朝日杯フューチュリティS</div>
-                    <div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 2歳牡馬</span></div>
-                </a>
-                <a href="stayers-stakes.html" class="race-card g2" data-tags="g2 turf">
-                    <div class="race-date">12月21日（日）</div>
-                    <div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">ステイヤーズステークス</div>
-                    <div class="race-meta"><span>📍 中山 / 芝3600m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="tokyo-daishoten.html" class="race-card g1 dirt" data-tags="g1 dirt">
-                    <div class="race-date">12月28日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div>
-                    <div class="race-name">東京大賞典</div>
-                    <div class="race-meta"><span>📍 大井（地方）/ ダ2000m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="arima-kinen.html" class="race-card g1" data-tags="g1 turf">
-                    <div class="race-date">12月28日（日）</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">有馬記念</div>
-                    <div class="race-meta"><span>📍 中山 / 芝2500m</span><span>🏇 3歳以上</span></div>
-                </a>
-                <a href="hong-kong-vase.html" class="race-card overseas g1" data-tags="g1 overseas turf">
-                    <div class="race-date">12月下旬</div>
-                    <div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div>
-                    <div class="race-name">香港ヴァーズ</div>
-                    <div class="race-meta"><span>📍 沙田（香港）/ 芝2400m</span><span>🏇 3歳以上</span></div>
-                </a>
+                <a href="hanshin-juvenile-fillies.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">12月14日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">阪神ジュベナイルフィリーズ</div><div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 2歳牝馬</span></div></a>
+                <a href="asahi-futurity.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">12月21日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">朝日杯フューチュリティS</div><div class="race-meta"><span>📍 阪神 / 芝1600m</span><span>🏇 2歳牡馬</span></div></a>
+                <a href="stayers-stakes.html" class="race-card g2" data-tags="g2 turf"><div class="race-date">12月21日（日）</div><div class="race-badges"><span class="badge g2">G2</span><span class="badge turf">芝</span></div><div class="race-name">ステイヤーズステークス</div><div class="race-meta"><span>📍 中山 / 芝3600m</span><span>🏇 3歳以上</span></div></a>
+                <a href="tokyo-daishoten.html" class="race-card g1 dirt" data-tags="g1 dirt"><div class="race-date">12月28日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge dirt">ダート</span></div><div class="race-name">東京大賞典</div><div class="race-meta"><span>📍 大井（地方）/ ダ2000m</span><span>🏇 3歳以上</span></div></a>
+                <a href="arima-kinen.html" class="race-card g1" data-tags="g1 turf"><div class="race-date">12月28日（日）</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge turf">芝</span></div><div class="race-name">有馬記念</div><div class="race-meta"><span>📍 中山 / 芝2500m</span><span>🏇 3歳以上</span></div></a>
+                <a href="hong-kong-vase.html" class="race-card overseas g1" data-tags="g1 overseas turf"><div class="race-date">12月下旬</div><div class="race-badges"><span class="badge g1">G1</span><span class="badge overseas">海外</span><span class="badge turf">芝</span></div><div class="race-name">香港ヴァーズ</div><div class="race-meta"><span>📍 沙田（香港）/ 芝2400m</span><span>🏇 3歳以上</span></div></a>
             </div>
         </div>
-
     </div>
 
-    <footer>
-        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
-    </footer>
+    <footer><p>&copy; 2026 伝説の競走馬アーカイブ</p></footer>
 
     <script src="script.js"></script>
     <script>
+        // ハンバーガーメニュー
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const headerRight = document.getElementById('headerRight');
+        const navOverlay = document.getElementById('navOverlay');
+        function openMenu() { hamburgerBtn.classList.add('open'); headerRight.classList.add('open'); navOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function closeMenu() { hamburgerBtn.classList.remove('open'); headerRight.classList.remove('open'); navOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+        hamburgerBtn.addEventListener('click', () => headerRight.classList.contains('open') ? closeMenu() : openMenu());
+        navOverlay.addEventListener('click', closeMenu);
+        headerRight.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+        // フィルター
         let currentGrade = 'all';
         let currentMonth = 'all';
-
         function applyFilters() {
             document.querySelectorAll('.race-card').forEach(card => {
                 const tags = card.dataset.tags || '';
@@ -581,7 +323,6 @@
                 block.classList.toggle('all-hidden', !monthOk || !hasVisible);
             });
         }
-
         document.querySelectorAll('#gradeFilter .filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('#gradeFilter .filter-btn').forEach(b => b.classList.remove('active'));
@@ -590,7 +331,6 @@
                 applyFilters();
             });
         });
-
         document.querySelectorAll('#monthFilter .filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('#monthFilter .filter-btn').forEach(b => b.classList.remove('active'));
@@ -604,10 +344,7 @@
         const fadeEls = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
-                    observer.unobserve(entry.target);
-                }
+                if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 80); observer.unobserve(entry.target); }
             });
         }, { threshold: 0.06 });
         fadeEls.forEach(el => observer.observe(el));
