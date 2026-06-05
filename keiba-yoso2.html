@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI競馬予想 | 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== AI予想ページ専用スタイル ===== */
+        .ai-page-title {
+            background: linear-gradient(135deg, var(--green-dark, #1a4a2e) 0%, var(--green-main, #2d6e47) 100%);
+            padding: 28px 32px;
+            text-align: center;
+            border-bottom: 3px solid #c8a84b;
+        }
+        .ai-page-title h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: #fff;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+        .ai-page-title p { color: rgba(255,255,255,0.75); font-size: 0.82rem; }
+
+        .ai-tab-wrap {
+            background: #fff;
+            border-bottom: 2px solid #ddd;
+        }
+        .ai-tab-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+        }
+        .ai-tab-btn {
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 14px 28px;
+            font-family: 'Noto Sans JP', 'Noto Serif JP', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: -2px;
+        }
+        .ai-tab-btn.active { border-bottom-color: #2d6e47; color: #2d6e47; font-weight: 700; }
+        .ai-tab-btn:hover:not(.active) { color: #333; }
+
+        .ai-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 24px;
+        }
+
+        /* ===== 共通カード ===== */
+        .ai-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .ai-card-head {
+            background: #1a4a2e;
+            padding: 13px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .ai-card-head h2, .ai-card-head h3 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+        .ai-card-head span { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+        .ai-card-body { padding: 20px; }
+
+        /* ===== フォーム ===== */
+        .ai-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .ai-form-grid.three { grid-template-columns: repeat(3, 1fr); }
+        .ai-fg-full { grid-column: 1 / -1; }
+        @media(max-width:600px){
+            .ai-form-grid, .ai-form-grid.three { grid-template-columns: 1fr 1fr; }
+        }
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .fg label {
+            font-size: 0.72rem;
+            color: #555;
+            font-weight: 600;
+        }
+        .fg input, .fg select {
+            background: #f7f5f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            color: #222;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+        .fg input:focus, .fg select:focus { outline: none; border-color: #2d6e47; }
+
+        .url-hint {
+            background: #f0f7f3;
+            border: 1px dashed #4caf76;
+            border-radius: 6px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+        }
+        .url-hint p { font-size: 0.75rem; color: #3a7a50; margin-bottom: 8px; }
+        .url-row { display: flex; gap: 8px; }
+        .url-row input { flex: 1; }
+
+        /* ===== ボタン ===== */
+        .btn-ai {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-ai.green { background: #2d6e47; color: #fff; }
+        .btn-ai.green:hover { background: #3a8a58; }
+        .btn-ai.gold { background: #c8a84b; color: #fff; }
+        .btn-ai.gold:hover { background: #e0c060; }
+        .btn-ai.red { background: #c0392b; color: #fff; font-size: 0.78rem; padding: 7px 14px; }
+        .btn-ai.red:hover { opacity: 0.85; }
+        .btn-ai.outline { background: transparent; border: 1px solid #2d6e47; color: #2d6e47; }
+        .btn-ai.outline:hover { background: #2d6e47; color: #fff; }
+        .btn-ai.sm { padding: 5px 10px; font-size: 0.75rem; }
+        .btn-ai:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* ===== 管理画面レイアウト ===== */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 20px;
+        }
+        @media(max-width:900px){ .admin-layout { grid-template-columns: 1fr; } }
+
+        /* ===== 登録馬リスト ===== */
+        .horse-reg-list { display: flex; flex-direction: column; gap: 8px; }
+        .horse-reg-item {
+            background: #f7f5f0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hri-num {
+            width: 26px; height: 26px;
+            background: #1a4a2e;
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700;
+            flex-shrink: 0;
+        }
+        .hri-info { flex: 1; }
+        .hri-name { font-weight: 700; font-size: 0.88rem; color: #1a1a1a; }
+        .hri-sub { font-size: 0.68rem; color: #888; }
+        .hri-odds { font-size: 0.88rem; font-weight: 700; color: #c0392b; min-width: 44px; text-align: right; }
+
+        .empty-hint {
+            text-align: center;
+            padding: 36px 16px;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        .empty-hint .ico { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+
+        /* 枠番色バッジ */
+        .waku-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 20px; height: 20px;
+            border-radius: 3px;
+            font-size: 0.65rem; font-weight: 700;
+            flex-shrink: 0;
+        }
+        .w1 { background:#fff; color:#000; border:1px solid #bbb; }
+        .w2 { background:#222; color:#fff; }
+        .w3 { background:#b22020; color:#fff; }
+        .w4 { background:#2255bb; color:#fff; }
+        .w5 { background:#ccb800; color:#000; }
+        .w6 { background:#1a8a1a; color:#fff; }
+        .w7 { background:#dd6030; color:#fff; }
+        .w8 { background:#cc3090; color:#fff; }
+
+        /* ===== ユーザー画面 ===== */
+        .user-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 20px;
+        }
+        @media(max-width:900px){ .user-layout { grid-template-columns: 1fr; } }
+
+        .race-side-card {
+            background: #1a4a2e;
+            border-radius: 8px;
+            padding: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .race-side-name {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.25rem;
+            color: #e8cc6a;
+            margin-bottom: 4px;
+        }
+        .grade-pill {
+            display: inline-block;
+            background: #c0392b;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-bottom: 14px;
+        }
+        .race-meta-list { display: flex; flex-direction: column; gap: 7px; }
+        .rml-row { display: flex; gap: 8px; font-size: 0.8rem; }
+        .rml-lbl { color: rgba(255,255,255,0.55); min-width: 56px; }
+        .rml-val { color: #fff; font-weight: 500; }
+        .netkeiba-btn {
+            display: block;
+            margin-top: 14px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.75rem;
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 4px;
+            padding: 8px;
+            transition: background 0.2s;
+        }
+        .netkeiba-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* AI実行バナー */
+        .ai-run-banner {
+            background: #fff;
+            border: 2px solid #2d6e47;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .ai-ico {
+            width: 44px; height: 44px;
+            background: #1a4a2e;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .ai-run-text { flex: 1; }
+        .ai-run-text strong { display: block; font-size: 0.88rem; color: #1a4a2e; margin-bottom: 3px; }
+        .ai-run-text span { font-size: 0.74rem; color: #888; }
+        .ai-run-btn {
+            background: #2d6e47;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 11px 20px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .ai-run-btn:hover { background: #3a8a58; }
+        .ai-run-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* AI予想結果 */
+        .ai-result-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .ai-result-head {
+            background: linear-gradient(135deg, #1a4a2e, #2d6e47);
+            padding: 13px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ai-result-head h3 { font-family: 'Noto Serif JP', serif; font-size: 0.95rem; color: #fff; }
+        .ai-badge-pill {
+            background: #c8a84b;
+            color: #000;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .ai-result-body { padding: 18px 20px; }
+
+        .picks-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        @media(max-width:600px){ .picks-grid { grid-template-columns: repeat(2,1fr); } }
+        .pick-item {
+            background: #f7f5f0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        .pick-item.top { border-color: #c8a84b; background: #fdf8ec; }
+        .pick-mark-ico { font-size: 1.1rem; margin-bottom: 4px; }
+        .pick-mark-lbl { font-size: 0.64rem; color: #888; margin-bottom: 6px; }
+        .pick-horse-name { font-family: 'Noto Serif JP', serif; font-size: 0.88rem; font-weight: 700; color: #1a4a2e; margin-bottom: 2px; }
+        .pick-item.top .pick-horse-name { color: #8a6a00; }
+        .pick-odds-lbl { font-size: 0.72rem; color: #c0392b; font-weight: 700; }
+
+        .ai-comment-box {
+            background: #f0f7f3;
+            border-left: 4px solid #2d6e47;
+            border-radius: 0 6px 6px 0;
+            padding: 13px 16px;
+            font-size: 0.82rem;
+            line-height: 1.85;
+            color: #444;
+        }
+        .ai-comment-box strong { color: #1a4a2e; }
+
+        /* 出走馬テーブル */
+        .horses-tbl-wrap {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .tbl-head-bar {
+            background: #1a4a2e;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .tbl-head-bar h3 { color: #fff; font-family: 'Noto Serif JP', serif; font-size: 0.9rem; }
+        .tbl-head-bar span { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+
+        .horses-tbl { width: 100%; border-collapse: collapse; }
+        .horses-tbl th {
+            background: #f0ece4;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            color: #666;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .horses-tbl th.left { text-align: left; }
+        .horses-tbl td {
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            border-bottom: 1px solid #f0ece4;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .horses-tbl td.left { text-align: left; }
+        .horses-tbl tr:last-child td { border-bottom: none; }
+        .horses-tbl tr:hover td { background: #faf8f4; }
+        .horses-tbl tr.tr-1st td { background: #fdf8ec; }
+        .horses-tbl tr.tr-2nd td { background: #f0f4f8; }
+        .horses-tbl tr.tr-3rd td { background: #f0f8f4; }
+
+        .hn { font-weight: 700; font-size: 0.9rem; color: #1a4a2e; }
+        .hs { font-size: 0.68rem; color: #999; }
+        .odds-red { font-weight: 700; color: #c0392b; }
+
+        .score-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .score-bar-bg { width: 52px; height: 5px; background: #e0dbd0; border-radius: 3px; overflow: hidden; }
+        .score-bar-fill { height: 100%; border-radius: 3px; }
+        .bar-g { background: linear-gradient(90deg, #a88000, #c8a84b); }
+        .bar-b { background: linear-gradient(90deg, #1a5580, #2471a3); }
+        .bar-gr { background: linear-gradient(90deg, #1a6030, #2d6e47); }
+        .bar-x { background: #ccc; }
+        .score-pt { font-size: 0.7rem; font-weight: 700; }
+        .pt-g { color: #8a6a00; } .pt-b { color: #2471a3; } .pt-gr { color: #1a6030; } .pt-x { color: #aaa; }
+
+        .ai-mark {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; border-radius: 50%;
+            font-size: 0.75rem; font-weight: 700;
+        }
+        .mk1 { background: #c8a84b; color: #000; }
+        .mk2 { background: #aaa; color: #000; }
+        .mk3 { background: #cd7f32; color: #fff; }
+        .mkx { background: #eee; color: #aaa; }
+
+        /* no data */
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+        }
+        .no-data .ico { font-size: 2.8rem; display: block; margin-bottom: 12px; }
+        .no-data p { font-size: 0.9rem; margin-bottom: 6px; color: #888; }
+        .no-data small { font-size: 0.78rem; }
+
+        /* disclaimer */
+        .disclaimer {
+            background: #fdf8ec;
+            border: 1px solid #e8d090;
+            border-radius: 4px;
+            padding: 10px 14px;
+            font-size: 0.72rem;
+            color: #7a6a40;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* toast */
+        .ai-toast {
+            position: fixed;
+            bottom: 24px; right: 24px;
+            background: #1a4a2e;
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .ai-toast.show { transform: translateY(0); opacity: 1; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ドロワーオーバーレイ -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="header-right" id="headerRight">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                    <a href="keiba-yoso2.html" class="list-link">AI予想</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <!-- ページタイトル -->
+    <div class="ai-page-title">
+        <h1>AI競馬予想</h1>
+        <p>出走馬を登録してAIによる本命・穴馬予想を生成します</p>
+    </div>
+
+    <!-- タブ -->
+    <div class="ai-tab-wrap">
+        <div class="ai-tab-inner">
+            <button class="ai-tab-btn active" onclick="switchTab('user')">📊 AI予想を見る</button>
+            <button class="ai-tab-btn" onclick="switchTab('admin')">⚙️ 出走馬を登録する</button>
+        </div>
+    </div>
+
+    <!-- コンテンツ -->
+    <div class="ai-content">
+
+        <!-- ===== ユーザー画面 ===== -->
+        <div id="view-user">
+            <div id="no-data-msg" class="no-data">
+                <span class="ico">🐎</span>
+                <p>まだレース情報が登録されていません</p>
+                <small>「出走馬を登録する」タブから情報を入力してください</small>
+            </div>
+
+            <div id="race-display" style="display:none;">
+                <div class="user-layout">
+                    <!-- サイドバー -->
+                    <div>
+                        <div class="race-side-card">
+                            <div class="race-side-name" id="d-name">—</div>
+                            <div id="d-grade" style="display:none;"></div>
+                            <div class="race-meta-list">
+                                <div class="rml-row"><span class="rml-lbl">📍 競馬場</span><span class="rml-val" id="d-venue">—</span></div>
+                                <div class="rml-row"><span class="rml-lbl">🏁 コース</span><span class="rml-val" id="d-course">—</span></div>
+                                <div class="rml-row"><span class="rml-lbl">📅 日程</span><span class="rml-val" id="d-date">—</span></div>
+                                <div class="rml-row"><span class="rml-lbl">⏰ 発走</span><span class="rml-val" id="d-time">—</span></div>
+                                <div class="rml-row"><span class="rml-lbl">🐎 頭数</span><span class="rml-val" id="d-count">—</span></div>
+                            </div>
+                            <a id="d-netkeiba" href="https://race.netkeiba.com/" target="_blank" class="netkeiba-btn">📎 netkeibaでレース詳細を確認 →</a>
+                        </div>
+                        <div class="disclaimer">
+                            ※ AI予想はモックデータです。実際の結果を保証するものではありません。馬券の購入は自己責任でお願いします。
+                        </div>
+                    </div>
+
+                    <!-- メイン -->
+                    <div>
+                        <div class="ai-run-banner">
+                            <div class="ai-run-text">
+                                <strong>AI予想を生成する</strong>
+                                <span>登録された出走馬データをもとに本命・対抗・穴馬を分析します</span>
+                            </div>
+                            <button class="ai-run-btn" id="runBtn" onclick="generateAI()">▶ 予想を生成</button>
+                        </div>
+
+                        <div class="ai-result-card" id="ai-result" style="display:none;">
+                            <div class="ai-result-head">
+                                <h3>AI総合予想</h3>
+                                <span class="ai-badge-pill">AI PREDICTION</span>
+                            </div>
+                            <div class="ai-result-body">
+                                <div class="picks-grid" id="picks-grid"></div>
+                                <div class="ai-comment-box" id="ai-comment"></div>
+                            </div>
+                        </div>
+
+                        <div class="horses-tbl-wrap">
+                            <div class="tbl-head-bar">
+                                <h3>📋 出走馬一覧 &amp; AI評価</h3>
+                                <span>出走データ: 手動登録</span>
+                            </div>
+                            <div style="overflow-x:auto;">
+                                <table class="horses-tbl">
+                                    <thead>
+                                        <tr>
+                                            <th>枠</th>
+                                            <th>馬番</th>
+                                            <th class="left">馬名</th>
+                                            <th>騎手</th>
+                                            <th>性齢</th>
+                                            <th>オッズ</th>
+                                            <th>AI評価</th>
+                                            <th>AI印</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="horses-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 管理画面 ===== -->
+        <div id="view-admin" style="display:none;">
+            <div class="admin-layout">
+                <!-- 左：フォーム -->
+                <div>
+                    <!-- レース情報 -->
+                    <div class="ai-card" style="margin-bottom:20px;">
+                        <div class="ai-card-head">
+                            <h2>📅 レース情報</h2>
+                            <span>開催レースの基本情報</span>
+                        </div>
+                        <div class="ai-card-body">
+                            <div class="url-hint">
+                                <p>📎 netkeibaのレースページURLを参照してデータを入力してください</p>
+                                <div class="url-row">
+                                    <input class="fg" id="f-url" type="url" style="flex:1;background:#f7f5f0;border:1px solid #ccc;border-radius:4px;padding:7px 10px;font-size:0.82rem;" placeholder="https://race.netkeiba.com/race/shutuba.html?race_id=...">
+                                    <button class="btn-ai outline sm" onclick="setUrl()">設定</button>
+                                </div>
+                            </div>
+                            <div class="ai-form-grid three">
+                                <div class="fg">
+                                    <label>レース名 *</label>
+                                    <input id="f-rname" type="text" placeholder="安田記念">
+                                </div>
+                                <div class="fg">
+                                    <label>グレード</label>
+                                    <select id="f-grade">
+                                        <option value="">なし</option>
+                                        <option>G1</option><option>G2</option><option>G3</option>
+                                        <option>OP</option><option>L</option>
+                                        <option>3勝</option><option>2勝</option><option>1勝</option>
+                                        <option>新馬</option><option>未勝利</option>
+                                    </select>
+                                </div>
+                                <div class="fg">
+                                    <label>競馬場 *</label>
+                                    <select id="f-venue">
+                                        <option value="">選択</option>
+                                        <option>東京</option><option>中山</option><option>阪神</option>
+                                        <option>京都</option><option>中京</option><option>新潟</option>
+                                        <option>小倉</option><option>福島</option><option>札幌</option><option>函館</option>
+                                    </select>
+                                </div>
+                                <div class="fg">
+                                    <label>コース・距離 *</label>
+                                    <input id="f-course" type="text" placeholder="芝1600m">
+                                </div>
+                                <div class="fg">
+                                    <label>開催日</label>
+                                    <input id="f-date" type="date">
+                                </div>
+                                <div class="fg">
+                                    <label>発走時刻</label>
+                                    <input id="f-time" type="time">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 出走馬追加 -->
+                    <div class="ai-card">
+                        <div class="ai-card-head">
+                            <h2>🐎 出走馬を追加</h2>
+                            <span>1頭ずつ入力</span>
+                        </div>
+                        <div class="ai-card-body">
+                            <div class="ai-form-grid">
+                                <div class="fg">
+                                    <label>馬名 *</label>
+                                    <input id="f-hname" type="text" placeholder="ソウルラッシュ">
+                                </div>
+                                <div class="fg">
+                                    <label>騎手 *</label>
+                                    <input id="f-jockey" type="text" placeholder="川田将雅">
+                                </div>
+                                <div class="fg">
+                                    <label>性別</label>
+                                    <select id="f-sex"><option>牡</option><option>牝</option><option>騸</option></select>
+                                </div>
+                                <div class="fg">
+                                    <label>年齢</label>
+                                    <select id="f-age"><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+                                </div>
+                                <div class="fg">
+                                    <label>枠番</label>
+                                    <select id="f-waku"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+                                </div>
+                                <div class="fg">
+                                    <label>単勝オッズ</label>
+                                    <input id="f-odds" type="number" step="0.1" placeholder="3.5">
+                                </div>
+                                <div class="fg ai-fg-full">
+                                    <label>前走・メモ（任意）</label>
+                                    <input id="f-memo" type="text" placeholder="前走マイラーズC1着、東京実績◎">
+                                </div>
+                            </div>
+                            <button class="btn-ai green" style="width:100%;" onclick="addHorse()">＋ 出走馬を追加</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右：登録済みリスト -->
+                <div>
+                    <div class="ai-card">
+                        <div class="ai-card-head">
+                            <h2>📋 登録済み出走馬</h2>
+                            <span id="horse-count">0頭登録</span>
+                        </div>
+                        <div class="ai-card-body">
+                            <div id="reg-list-wrap">
+                                <div class="empty-hint"><span class="ico">🐎</span>まだ登録されていません</div>
+                            </div>
+                            <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+                                <button class="btn-ai gold" style="flex:1;" onclick="saveAndView()">✔ 保存してAI予想を見る</button>
+                                <button class="btn-ai red" onclick="clearAll()">全削除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ai-toast" id="toast"></div>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- ハンバーガーメニュー制御 -->
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const headerRight = document.getElementById('headerRight');
+        const navOverlay = document.getElementById('navOverlay');
+        function openMenu() {
+            hamburgerBtn.classList.add('open');
+            headerRight.classList.add('open');
+            navOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            hamburgerBtn.classList.remove('open');
+            headerRight.classList.remove('open');
+            navOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        hamburgerBtn.addEventListener('click', () => {
+            headerRight.classList.contains('open') ? closeMenu() : openMenu();
+        });
+        navOverlay.addEventListener('click', closeMenu);
+        headerRight.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMenu));
+    </script>
+
+    <!-- AI予想ロジック -->
+    <script>
+        let horses = [], raceInfo = {}, idCounter = 0;
+
+        function switchTab(tab) {
+            document.querySelectorAll('.ai-tab-btn').forEach((b,i) => {
+                b.classList.toggle('active', (tab==='user'&&i===0)||(tab==='admin'&&i===1));
+            });
+            document.getElementById('view-user').style.display = tab==='user' ? 'block' : 'none';
+            document.getElementById('view-admin').style.display = tab==='admin' ? 'block' : 'none';
+            if(tab==='user') renderUserView();
+        }
+
+        function addHorse() {
+            const name = document.getElementById('f-hname').value.trim();
+            const jockey = document.getElementById('f-jockey').value.trim();
+            if(!name||!jockey){ toast('⚠ 馬名と騎手は必須です'); return; }
+            idCounter++;
+            horses.push({
+                id: idCounter,
+                num: horses.length + 1,
+                waku: parseInt(document.getElementById('f-waku').value),
+                name, jockey,
+                sex: document.getElementById('f-sex').value,
+                age: document.getElementById('f-age').value,
+                odds: parseFloat(document.getElementById('f-odds').value)||0,
+                memo: document.getElementById('f-memo').value.trim(),
+            });
+            assignScores();
+            renderAdminList();
+            ['f-hname','f-jockey','f-odds','f-memo'].forEach(id => document.getElementById(id).value='');
+            toast('✔ ' + name + ' を追加しました');
+        }
+
+        function removeHorse(id) {
+            horses = horses.filter(h => h.id !== id);
+            horses.forEach((h,i) => h.num = i+1);
+            assignScores();
+            renderAdminList();
+        }
+
+        function assignScores() {
+            const kw = ['1着','前走1着','重賞','G1','実績','適性','良好','連勝'];
+            horses.forEach(h => {
+                let s = Math.floor(Math.random()*25)+45;
+                if(h.odds>0&&h.odds<5) s+=20;
+                else if(h.odds<10) s+=12;
+                else if(h.odds<20) s+=5;
+                kw.forEach(k => { if(h.memo.includes(k)) s+=7; });
+                h.score = Math.min(97, s);
+            });
+            const sorted = [...horses].sort((a,b)=>b.score-a.score);
+            horses.forEach(h => { h.rank = sorted.findIndex(s=>s.id===h.id)+1; });
+        }
+
+        function renderAdminList() {
+            document.getElementById('horse-count').textContent = horses.length + '頭登録';
+            const wrap = document.getElementById('reg-list-wrap');
+            if(!horses.length){
+                wrap.innerHTML = '<div class="empty-hint"><span class="ico">🐎</span>まだ登録されていません</div>';
+                return;
+            }
+            wrap.innerHTML = '<div class="horse-reg-list">' + horses.map(h=>`
+                <div class="horse-reg-item">
+                    <div class="hri-num">${h.num}</div>
+                    <span class="waku-badge w${h.waku}">${h.waku}</span>
+                    <div class="hri-info">
+                        <div class="hri-name">${h.name}</div>
+                        <div class="hri-sub">${h.sex}${h.age} / ${h.jockey}${h.memo?' / '+h.memo:''}</div>
+                    </div>
+                    <div class="hri-odds">${h.odds?h.odds+'倍':'—'}</div>
+                    <button class="btn-ai red sm" onclick="removeHorse(${h.id})">削除</button>
+                </div>
+            `).join('') + '</div>';
+        }
+
+        function setUrl() {
+            const u = document.getElementById('f-url').value.trim();
+            if(u) toast('✔ URLを設定しました');
+        }
+
+        function saveAndView() {
+            raceInfo = {
+                name: document.getElementById('f-rname').value.trim(),
+                grade: document.getElementById('f-grade').value,
+                venue: document.getElementById('f-venue').value,
+                course: document.getElementById('f-course').value.trim(),
+                date: document.getElementById('f-date').value,
+                time: document.getElementById('f-time').value,
+                url: document.getElementById('f-url').value.trim(),
+            };
+            if(!raceInfo.name){ toast('⚠ レース名を入力してください'); return; }
+            if(!horses.length){ toast('⚠ 出走馬を1頭以上登録してください'); return; }
+            switchTab('user');
+            toast('✔ 保存しました');
+        }
+
+        function clearAll() {
+            if(!confirm('登録済みの出走馬をすべて削除しますか？')) return;
+            horses=[]; raceInfo={};
+            renderAdminList();
+            toast('🗑 削除しました');
+        }
+
+        function renderUserView() {
+            const ok = raceInfo.name && horses.length > 0;
+            document.getElementById('no-data-msg').style.display = ok ? 'none' : 'block';
+            document.getElementById('race-display').style.display = ok ? 'block' : 'none';
+            if(!ok) return;
+
+            document.getElementById('d-name').textContent = raceInfo.name;
+            const gb = document.getElementById('d-grade');
+            if(raceInfo.grade){ gb.style.display='block'; gb.innerHTML=`<span class="grade-pill">${raceInfo.grade}</span>`; }
+            else gb.style.display='none';
+            document.getElementById('d-venue').textContent = raceInfo.venue||'—';
+            document.getElementById('d-course').textContent = raceInfo.course||'—';
+            document.getElementById('d-date').textContent = raceInfo.date ? fmtDate(raceInfo.date) : '—';
+            document.getElementById('d-time').textContent = raceInfo.time ? raceInfo.time+' 発走' : '—';
+            document.getElementById('d-count').textContent = horses.length+'頭';
+            if(raceInfo.url) document.getElementById('d-netkeiba').href = raceInfo.url;
+
+            const byNum = [...horses].sort((a,b)=>a.num-b.num);
+            document.getElementById('horses-tbody').innerHTML = byNum.map(h => {
+                const bc = h.rank===1?'bar-g':h.rank===2?'bar-b':h.rank<=4?'bar-gr':'bar-x';
+                const pc = h.rank===1?'pt-g':h.rank===2?'pt-b':h.rank<=4?'pt-gr':'pt-x';
+                const mc = h.rank===1?'mk1':h.rank===2?'mk2':h.rank===3?'mk3':'mkx';
+                const ms = h.rank===1?'◎':h.rank===2?'○':h.rank===3?'▲':h.rank<=5?'△':'—';
+                const rc = h.rank===1?'tr-1st':h.rank===2?'tr-2nd':h.rank===3?'tr-3rd':'';
+                return `<tr class="${rc}">
+                    <td><span class="waku-badge w${h.waku}">${h.waku}</span></td>
+                    <td><strong>${h.num}</strong></td>
+                    <td class="left">
+                        <div class="hn">${h.name}</div>
+                        ${h.memo?`<div class="hs">${h.memo}</div>`:''}
+                    </td>
+                    <td>${h.jockey}</td>
+                    <td>${h.sex}${h.age}</td>
+                    <td class="odds-red">${h.odds?h.odds+'倍':'—'}</td>
+                    <td>
+                        <div class="score-wrap">
+                            <div class="score-bar-bg"><div class="score-bar-fill ${bc}" style="width:${h.score}%"></div></div>
+                            <span class="score-pt ${pc}">${h.score}pt</span>
+                        </div>
+                    </td>
+                    <td><span class="ai-mark ${mc}">${ms}</span></td>
+                </tr>`;
+            }).join('');
+        }
+
+        function generateAI() {
+            if(horses.length < 2){ toast('⚠ 出走馬を2頭以上登録してください'); return; }
+            const btn = document.getElementById('runBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>分析中…';
+            setTimeout(()=>{
+                btn.disabled = false;
+                btn.textContent = '✔ 予想完了（再生成）';
+                const byRank = [...horses].sort((a,b)=>a.rank-b.rank);
+                const top = byRank.slice(0,4);
+                const icons = ['🥇','🥈','🥉','🏅'];
+                const marks = ['◎ 本命','○ 対抗','▲ 単穴','△ 穴馬'];
+                document.getElementById('picks-grid').innerHTML = top.map((h,i)=>`
+                    <div class="pick-item ${i===0?'top':''}">
+                        <div class="pick-mark-ico">${icons[i]}</div>
+                        <div class="pick-mark-lbl">${marks[i]}</div>
+                        <div class="pick-horse-name">${h.name}</div>
+                        <div class="pick-odds-lbl">${h.num}番 ${h.odds?h.odds+'倍':'オッズ未登録'}</div>
+                    </div>
+                `).join('');
+                document.getElementById('ai-comment').innerHTML = buildComment(byRank);
+                document.getElementById('ai-result').style.display = 'block';
+                toast('✔ AI予想を生成しました');
+            }, 1800);
+        }
+
+        function buildComment(r) {
+            const h1=r[0], h2=r[1], h3=r[2];
+            let t = `<strong>AIコメント：</strong>今回の${raceInfo.name||'レース'}は<strong>【${h1.name}】</strong>を本命に推します。`;
+            if(h1.memo) t += `${h1.memo}の点が評価ポイントです。`;
+            t += `${h1.jockey}騎手とのコンビで安定したパフォーマンスが期待できます。`;
+            if(h2) t += ` 対抗は<strong>【${h2.name}】</strong>。${h2.memo?h2.memo+'が好材料で、':''}本命に迫る可能性があります。`;
+            if(h3) t += ` 単穴として<strong>【${h3.name}】</strong>も要注意。展開次第では一発激走が狙えます。`;
+            const ana = r.find(h=>h.odds>=10);
+            if(ana&&ana!==h3) t += ` 穴馬候補は<strong>【${ana.name}】</strong>（${ana.odds}倍）——AIスコアが高く、高配当を狙う価値があります。`;
+            return t;
+        }
+
+        function fmtDate(d) {
+            const dt = new Date(d);
+            return `${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日`;
+        }
+
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(()=>t.classList.remove('show'), 2500);
+        }
+
+        document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+    </script>
+</body>
+</html>

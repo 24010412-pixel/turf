@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パンサラッサ - 伝説の競走馬アーカイブ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="horse-details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+            <div class="header-right">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                    <a href="keiba-yoso2.html" class="list-link ai-link">AI予想</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="horse-profile">
+        <p class="subtitle">「世界の逃亡者」芝ダート両方の海外G1制覇</p>
+        <h2>パンサラッサ</h2>
+
+        <div class="horse-visual"><img src="images/pansarassa.png" alt="パンサラッサ"></div>
+
+        <div class="horse-intro">
+            ロードカナロア産駒として2017年生まれ。下級条件で鳴かず飛ばずだった時期を経て、吉田豊騎手との大逃げスタイルを確立。2022年ドバイターフで日本馬として初のGI制覇を果たし、2023年には世界最高賞金レース「サウジカップ」を日本調教馬として初制覇。芝・ダート双方の海外G1を制した唯一無二の逃亡者として、世界の競馬ファンにその名を刻みました。
+        </div>
+
+        <div class="data-box">
+            <h3>基本データ</h3>
+            <ul class="info-list">
+                <li><b>主な鞍上：</b> 吉田 豊</li>
+                <li><b>獲得賞金：</b> 約3億1365万円（中央）＋海外賞金</li>
+                <li><b>通算成績：</b> 21戦6勝</li>
+                <li><b>脚質：</b> 逃げ（大逃げ）</li>
+                <li><b>調教師：</b> 矢作芳人（栗東）</li>
+                <li>
+                    <b>血統（父母）：</b>
+                    <ul class="progeny-list" style="display: inline-flex; vertical-align: middle; margin-left: 10px;">
+                        <li class="progeny-item">ロードカナロア</li>
+                        <li class="progeny-item">ミヤビランベリ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-box">
+            <h3>能力パラメータ</h3>
+            <div id="radarChart" class="capability-container"
+                 data-stats='{"スピード": 96, "スタミナ": 88, "パワー": 82, "根性": 98, "賢さ": 70}'>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: -10px;">
+                ※独自解析による競走能力アーカイブ
+            </p>
+        </div>
+
+        <div class="data-box">
+            <h3>全戦績</h3>
+            <table class="career-table">
+                <thead>
+                    <tr><th>年</th><th>レース名</th><th>着順</th><th>着差</th><th>鞍上</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2020</td><td>新馬戦（阪神・芝1600m）</td><td>6着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr><td>2020</td><td>未勝利（阪神・芝2000m）</td><td>2着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2020</td><td>未勝利（京都・芝2000m）</td><td>1着</td><td>大差</td><td>坂井瑠星</td></tr>
+                    <tr><td>2020</td><td>エリカ賞</td><td>6着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr><td>2020</td><td>ホープフルS（G1）</td><td>6着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr><td>2021</td><td>若駒S</td><td>4着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr><td>2021</td><td>弥生賞ディープインパクト記念（G2）</td><td>9着</td><td>—</td><td>坂井瑠星</td></tr>
+                    <tr class="rank-1"><td>2021</td><td>3歳上1勝クラス（阪神・芝2000m）</td><td>1着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2021</td><td>ラジオNIKKEI賞（G3）</td><td>2着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2021</td><td>神戸新聞杯（G2）</td><td>12着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr class="rank-1"><td>2021</td><td>オクトーバーS（L）</td><td>1着</td><td>アタマ</td><td>吉田豊</td></tr>
+                    <tr class="rank-1"><td>2021</td><td>福島記念（G3）</td><td>1着</td><td>4馬身</td><td>菱田裕二</td></tr>
+                    <tr class="rank-1"><td>2022</td><td>中山記念（G2）</td><td>1着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr class="rank-1"><td>2022</td><td>ドバイターフ（G1）</td><td>1着</td><td>同着</td><td>吉田豊</td></tr>
+                    <tr><td>2022</td><td>宝塚記念（G1）</td><td>8着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2022</td><td>札幌記念（G2）</td><td>2着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2022</td><td>香港カップ（G1）</td><td>10着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2022</td><td>天皇賞・秋（G1）</td><td>2着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr class="rank-1"><td>2023</td><td>サウジカップ（G1）</td><td>1着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2023</td><td>ドバイワールドC（G1）</td><td>10着</td><td>—</td><td>吉田豊</td></tr>
+                    <tr><td>2023</td><td>ジャパンC（G1）</td><td>12着</td><td>—</td><td>吉田豊</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="data-box">
+            <h3>主な産駒（子供たち）</h3>
+            <ul class="progeny-list">
+                <li class="progeny-item">2025年初年度産駒誕生予定</li>
+                <li class="progeny-item">種付け料：300万円（2024年）</li>
+                <li class="progeny-item">シャトル種牡馬としてオーストラリア・ユーロンスタッドでも供用</li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">※2024年よりアロースタッドで種牡馬として供用開始</p>
+        </div>
+
+        <div class="data-box episode-box">
+            <h3>伝説の瞬間：2023年サウジカップ「世界最高賞金、逃げ切り」</h3>
+            <p>世界最高賞金レースのサウジカップ（賞金総額約20億円）で、日本調教馬として初制覇。スタートから先手を取り、持ち前の大逃げで後続を引き離す鮮やかな逃げ切りは世界を驚かせました。芝のドバイターフに続きダートの頂点も制し、芝・ダート双方の海外G1を制覇した唯一の日本馬として歴史に名を刻みました。</p>
+        </div>
+
+        <a href="index.html" class="back-link">← アーカイブ一覧に戻る</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
