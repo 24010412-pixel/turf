@@ -9,8 +9,16 @@
 
     <style>
     /* ===== 起動画面 ===== */
-    #aSplash{position:fixed;inset:0;z-index:99999;overflow:hidden;touch-action:none;background:#000;
-        font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;color:#e8c872;}
+    #aSplash{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    overflow:hidden;
+    touch-action:none;
+    background:transparent;
+    font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+    color:#e8c872;
+    }
     .as-panel{position:absolute;top:0;bottom:0;width:50.5%;z-index:1;background-color:#05070c;
         background-image:radial-gradient(ellipse at 50% 50%,#0d1320 0%,#05070c 75%);
         transition:transform 1.1s cubic-bezier(.75,0,.2,1);}
@@ -109,7 +117,7 @@
         try { sessionStorage.setItem('archiveSplashSeen', '1'); } catch (e) {}
 
         // 縦書きのコピーを1文字ずつ組み立てる
-        var lines = ['歴史と伝説は', '今も尚走り続ける。'];
+        var lines = ['歴史と伝説は', '今も尚走り続ける'];
         var copy = document.getElementById('asCopy');
         var idx = 0;
         lines.forEach(function (line) {
