@@ -518,4 +518,122 @@ footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; b
     footer {
         padding: 40px 16px;
     }
+
+
+    /* =========================
+   オープニングアニメーション
+========================= */
+
+#opening {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #050505;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: openingFadeOut 0.8s ease 2.5s forwards;
+}
+
+.opening-content {
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+
+    animation: openingText 1s ease 0.3s forwards;
+}
+
+.opening-sub {
+    font-size: 18px;
+    letter-spacing: 6px;
+    margin-bottom: 15px;
+}
+
+.opening-content h2 {
+    font-family: "Noto Serif JP", serif;
+    font-size: 48px;
+    letter-spacing: 5px;
+    margin: 0;
+}
+
+.opening-line {
+    width: 0;
+    height: 2px;
+    background: #d4af37;
+    margin: 25px auto 0;
+
+    animation: lineExtend 1s ease 1s forwards;
+}
+
+
+/* 文字表示 */
+@keyframes openingText {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* 金色ライン */
+@keyframes lineExtend {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 300px;
+    }
+
+}
+
+
+/* オープニング終了 */
+@keyframes openingFadeOut {
+
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
+
+
+/* スマホ */
+@media (max-width: 600px) {
+
+    .opening-content h2 {
+        font-size: 30px;
+    }
+
+    .opening-sub {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+
+    .opening-line {
+        max-width: 70%;
+    }
+
+}
+
+
 }
