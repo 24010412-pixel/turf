@@ -50,9 +50,11 @@
     .as-border i:nth-child(4){bottom:-2px;right:-2px;border-left:0;border-top:0}
 
     /* 縦書きのコピー */
-    .as-copy{position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);display:flex;
+    .as-copy{position:absolute;left:0;right:0;top:calc(50% - 60px);transform:translateY(-50%);display:flex;
         flex-direction:row-reverse;justify-content:center;align-items:flex-start;gap:clamp(22px,7vw,40px);}
     .as-col{display:flex;flex-direction:column;align-items:center;font-size:clamp(26px,7.4vw,42px);
+        font-size:clamp(18px,min(7.4vw,calc((84vh - 168px) / 13.8)),42px);
+        font-size:clamp(18px,min(7.4vw,calc((84dvh - 168px) / 13.8)),42px);
         font-weight:700;text-shadow:0 0 14px rgba(212,175,55,.35),0 2px 0 rgba(0,0,0,.7);}
     .as-col:nth-child(2){margin-top:2.6em;}
     .as-ch{display:block;width:1em;height:1.4em;line-height:1.4em;text-align:center;opacity:0;filter:blur(12px);transform:translateY(-16px);
@@ -83,6 +85,48 @@
     .as-vig{position:absolute;inset:0;z-index:3;pointer-events:none;
         background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.75) 100%);}
     #aSplash.open .as-grain,#aSplash.open .as-vig{opacity:0;transition:opacity .45s ease;}
+
+    /* 画面の高さが低い時(横向きスマホ等):キャプションを隠して縦書きを大きく */
+    @media (max-height:500px){
+        .as-cap{display:none;}
+        .as-copy{top:50%;}
+        .as-col{font-size:clamp(14px,min(7.4vw,calc((84vh - 48px) / 13.8)),42px);
+            font-size:clamp(14px,min(7.4vw,calc((84dvh - 48px) / 13.8)),42px);}
+    }
+
+    /* ===== 注意書きカード(起動画面のあとに表示) ===== */
+    #aNotice{position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;padding:20px;
+        background:rgba(3,5,10,.84);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+        opacity:0;transition:opacity .5s ease;
+        font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;}
+    #aNotice.show{opacity:1;}
+    .an-card{position:relative;display:flex;flex-direction:column;width:100%;max-width:400px;
+        max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);
+        background-color:#05070c;background-image:radial-gradient(ellipse at 50% 0%,#0d1320 0%,#05070c 75%);
+        border:1px solid rgba(212,175,55,.45);box-shadow:0 0 40px rgba(212,175,55,.12),inset 0 0 30px rgba(212,175,55,.05);
+        opacity:0;transform:translateY(14px) scale(.97);transition:opacity .5s ease .15s,transform .5s ease .15s;}
+    #aNotice.show .an-card{opacity:1;transform:none;}
+    .an-card::before{content:"";position:absolute;inset:5px;border:1px solid rgba(212,175,55,.16);pointer-events:none;}
+    .an-card i{position:absolute;width:14px;height:14px;border:2px solid #d4af37;pointer-events:none;}
+    .an-card i:nth-of-type(1){top:-2px;left:-2px;border-right:0;border-bottom:0}
+    .an-card i:nth-of-type(2){top:-2px;right:-2px;border-left:0;border-bottom:0}
+    .an-card i:nth-of-type(3){bottom:-2px;left:-2px;border-right:0;border-top:0}
+    .an-card i:nth-of-type(4){bottom:-2px;right:-2px;border-left:0;border-top:0}
+    .an-body{overflow-y:auto;padding:30px 26px 24px;text-align:center;}
+    .an-en{font-family:Georgia,serif;font-size:10px;letter-spacing:.5em;padding-left:.5em;color:#8a7a45;}
+    .an-title{margin:8px 0 0;font-size:20px;font-weight:700;letter-spacing:.3em;padding-left:.3em;color:#e8c872;
+        text-shadow:0 0 14px rgba(212,175,55,.35);}
+    .an-rule{display:block;width:1px;height:26px;margin:14px auto 16px;background:linear-gradient(#d4af37,transparent);}
+    .an-text{margin:0 0 24px;font-size:14px;font-weight:700;line-height:2;letter-spacing:.04em;color:#e9e0c6;text-align:left;}
+    .an-text strong{color:#e8c872;font-weight:700;}
+    .an-btn{display:block;width:100%;padding:13px 0;border:1px solid #d4af37;cursor:pointer;
+        background:linear-gradient(#ecd081,#d4af37);color:#1a1405;
+        font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.3em;text-indent:.3em;
+        -webkit-tap-highlight-color:transparent;}
+    .an-btn:active{filter:brightness(.9);}
+    @media (prefers-reduced-motion: reduce){
+        #aNotice,.an-card{transition:none;}
+    }
     </style>
 </head>
 <body>
@@ -106,6 +150,56 @@
         <div class="as-bar b"></div>
         <div class="as-hint">TAP TO SKIP</div>
     </div>
+    <!-- 注意書きカード:「わかりました」を押すまで閲覧できない -->
+    <div id="aNotice" role="dialog" aria-modal="true" aria-labelledby="anTitle">
+        <div class="an-card">
+            <i></i><i></i><i></i><i></i>
+            <div class="an-body">
+                <div class="an-en">NOTICE</div>
+                <h2 class="an-title" id="anTitle">ご注意</h2>
+                <span class="an-rule"></span>
+                <p class="an-text">本サイトはAIを使用し情報収集と制作を行いましたが、後に制作者が確認した際間違ってる情報が多数見つかりました。<br><strong>本サイトの情報が全て正しいとは思わないでください。</strong></p>
+                <button type="button" class="an-btn" id="anOk">わかりました</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    // 注意書き:このタブで「わかりました」を押すまで表示。起動画面のあとに出す
+    (function () {
+        var KEY = 'archiveNoticeAck';
+        var box = document.getElementById('aNotice');
+        var btn = document.getElementById('anOk');
+        var shown = false;
+
+        window.showArchiveNotice = function (delay) {
+            if (shown || !box) return;
+            var acked = false;
+            try { acked = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+            if (acked) return;
+            shown = true;
+            setTimeout(function () {
+                box.style.display = 'flex';
+                void box.offsetWidth;
+                box.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                btn.focus({ preventScroll: true });
+            }, delay || 0);
+        };
+
+        btn.addEventListener('click', function () {
+            try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+            box.classList.remove('show');
+            document.body.style.overflow = '';
+            setTimeout(function () { box.style.display = 'none'; }, 500);
+        });
+
+        // カードの外にフォーカスが逃げないようにする
+        box.addEventListener('keydown', function (e) {
+            if (e.key === 'Tab') { e.preventDefault(); btn.focus(); }
+        });
+    })();
+    </script>
+
     <script>
     // 起動画面:このタブで初めて開いた時だけ表示。タップでスキップ
     (function () {
@@ -113,7 +207,7 @@
         var seen = false;
         try { seen = sessionStorage.getItem('archiveSplashSeen') === '1'; } catch (e) {}
         var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (seen || reduce) { sp.remove(); return; }
+        if (seen || reduce) { sp.remove(); showArchiveNotice(0); return; }
         try { sessionStorage.setItem('archiveSplashSeen', '1'); } catch (e) {}
 
         // 縦書きのコピーを1文字ずつ組み立てる
@@ -139,6 +233,7 @@
             if (closed) return;
             closed = true;
             sp.classList.add('open');
+            showArchiveNotice(1100);
             setTimeout(function () { sp.remove(); }, 1700);
         }
         sp.addEventListener('click', close);
