@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人的年度代表馬 | 伝説の競走馬アーカイブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    /* ===== 個人的年度代表馬(style.cssの緑基調・白カードに合わせたデザイン) ===== */
+    .horse-section.hoy-section{width:100%;max-width:860px;align-items:stretch;margin-bottom:60px;}
+    .hoy-section .category-header{align-self:flex-start;margin-bottom:24px;}
+    .hoy-lead{margin:0 0 20px;font-size:1rem;line-height:1.8;color:#666;}
+
+    .hoy-controls{display:flex;gap:10px;margin-bottom:24px;}
+    .hoy-controls button{padding:8px 24px;border-radius:25px;cursor:pointer;font-size:.95rem;font-weight:bold;
+        border:1px solid #ccc;background:#f5f5f5;color:#666;transition:all .2s ease;}
+    .hoy-controls button.primary{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+    .hoy-controls button:hover{filter:brightness(.95);}
+
+    .hoy-card{margin-bottom:16px;background:#fff;border-radius:20px;overflow:hidden;
+        box-shadow:0 8px 20px rgba(0,0,0,.08);transition:box-shadow .3s ease;}
+    .hoy-card:hover{box-shadow:0 12px 28px rgba(0,0,0,.14);}
+
+    /* 細いバナー(写真を背景にする。写真がない年は緑の背景) */
+    .hoy-card summary{display:flex;align-items:center;gap:20px;min-height:96px;padding:14px 26px;
+        cursor:pointer;list-style:none;color:#fff;
+        background-color:#004d40;background-image:linear-gradient(120deg,#004d40 0%,#00695c 100%);
+        background-size:cover;background-position:center 30%;-webkit-tap-highlight-color:transparent;}
+    .hoy-card summary::-webkit-details-marker{display:none;}
+    .hoy-year{flex:none;min-width:3.4em;font-family:'Noto Serif JP',serif;font-size:1.6rem;font-weight:700;
+        text-shadow:0 2px 8px rgba(0,0,0,.6);}
+    .hoy-year small{font-size:.85rem;margin-left:1px;}
+    .hoy-main{flex:1;min-width:0;}
+    .hoy-name{display:block;font-family:'Noto Serif JP',serif;font-size:1.3rem;font-weight:700;
+        text-shadow:0 2px 8px rgba(0,0,0,.7);}
+    .hoy-race{display:block;margin-top:3px;font-size:.9rem;color:#f0e2b0;text-shadow:0 1px 6px rgba(0,0,0,.8);}
+    .hoy-race::before{content:"◆ ";color:#f0c75e;font-size:.7rem;}
+    .hoy-arrow{flex:none;font-size:.9rem;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:transform .25s ease;}
+    .hoy-card[open] .hoy-arrow{transform:rotate(180deg);}
+
+    /* 開いたとき:写真全体 + 理由 */
+    .hoy-body{padding:20px 26px 26px;}
+    .hoy-fullpic{display:block;width:100%;height:auto;border-radius:12px;margin-bottom:18px;}
+    .hoy-body p{margin:0;font-size:1rem;line-height:1.9;color:#333;}
+    .hoy-official{display:inline-block;margin-top:14px;font-size:.85rem;color:#2e7d32;background:#e8f5e9;
+        padding:4px 12px;border-radius:6px;font-weight:bold;}
+
+    @media (max-width:700px){
+        .horse-section.hoy-section{margin-bottom:40px;}
+        .hoy-lead{font-size:.9rem;}
+        .hoy-card{border-radius:16px;}
+        .hoy-card summary{gap:12px;padding:12px 16px;min-height:88px;}
+        .hoy-year{font-size:1.25rem;}
+        .hoy-name{font-size:1.05rem;}
+        .hoy-race{font-size:.8rem;}
+        .hoy-body{padding:16px;}
+        .hoy-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.08);}
+    }
+    </style>
+</head>
+<body>
+    <!-- ドロワーオーバーレイ -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="header-logo"><img src="images/title.png" alt="サイトロゴ"></a>
+
+            <!-- ハンバーガーボタン -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="header-right" id="headerRight">
+                <nav class="header-nav">
+                    <a href="index.html" class="list-link">ホーム</a>
+                    <a href="all-horses.html" class="list-link">競走馬一覧</a>
+                    <a href="race-list.html" class="list-link">レース</a>
+                    <a href="history.html" class="list-link">歴史</a>
+                    <a href="jockey-list.html" class="list-link">騎手</a>
+                    <a href="glossary.html" class="list-link">用語集</a>
+                    <a href="personal-hoy.html" class="list-link active">年度代表馬</a>
+                    <a href="keiba-yoso2.html" class="list-link ai-link">AI予想</a>
+                </nav>
+                <div class="search-box">
+                    <div class="input-wrapper">
+                        <input type="text" id="horseSearch" list="horseList" placeholder="馬名を入力">
+                        <span id="clearBtn">&times;</span>
+                    </div>
+                    <datalist id="horseList"></datalist>
+                    <button type="button" id="searchBtn">検索</button>
+                </div>
+            </div>
+        </div>
+        <h1>伝説の競走馬アーカイブ</h1>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="horse-section hoy-section fade-in">
+            <h3 class="category-header hall-of-fame">個人的年度代表馬</h3>
+            <p class="hoy-lead">公式の年度代表馬ではなく、制作者が選ぶ2000〜2025年の各年のNo.1。タップすると選んだ理由と写真が開きます。</p>
+            <div class="hoy-controls">
+                <button type="button" class="primary" id="hoyOpenAll">すべて開く</button>
+                <button type="button" id="hoyCloseAll">すべて閉じる</button>
+            </div>
+            <div id="hoyList"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 伝説の競走馬アーカイブ</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- 個人的年度代表馬 -->
+    <script>
+    // ▼ ここを書き換えるだけで内容を変えられます
+    // horse: 馬名 / race: 決め手のレース / reason: 選んだ理由 / official: 公式の年度代表馬(違う年だけ書く)
+    // pos: 閉じた時の写真の見せる位置(例: "center 20%" で上寄り、"center 60%" で下寄り) / image: 写真のパス
+  const entries = {
+    2000: { horse: "テイエムオペラオー", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2000.png", pos: "center 30%" },
+    2001: { horse: "ジャングルポケット", race: "ジャパンカップ", reason: "ここに選んだ理由を書く", official: "", image: "images/2001.png", pos: "center 30%" },
+    2002: { horse: "ファインモーション", race: "秋華賞", reason: "ここに選んだ理由を書く", official: "", image: "images/2002.png", pos: "center 30%" },
+    2003: { horse: "シンボリクリスエス", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2003.png", pos: "center 30%" },
+    2004: { horse: "ゼンノロブロイ", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2004.png", pos: "center 30%" },
+    2005: { horse: "ハーツクライ", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2005.png", pos: "center 30%" },
+    2006: { horse: "ディープインパクト", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2006.png", pos: "center 30%" },
+    2007: { horse: "ウオッカ", race: "日本ダービー", reason: "ここに選んだ理由を書く", official: "", image: "images/2007.png", pos: "center 30%" },
+    2008: { horse: "ダイワスカーレット", race: "天皇賞秋", reason: "ここに選んだ理由を書く", official: "", image: "images/2008.png", pos: "center 30%" },
+    2009: { horse: "ドリームジャーニー", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2009.png", pos: "center 30%" },
+    2010: { horse: "ブエナビスタ", race: "天皇賞秋", reason: "ここに選んだ理由を書く", official: "", image: "images/2010.png", pos: "center 30%" },
+    2011: { horse: "オルフェーヴル", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2011.png", pos: "center 30%" },
+    2012: { horse: "ジェンティルドンナ", race: "ジャパンカップ", reason: "ここに選んだ理由を書く", official: "", image: "images/2012.png", pos: "center 30%" },
+    2013: { horse: "ロードカナロア", race: "スプリンターズステークス", reason: "ここに選んだ理由を書く", official: "", image: "images/2013.png", pos: "center 30%" },
+    2014: { horse: "ジャスタウェイ", race: "安田記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2014.png", pos: "center 30%" },
+    2015: { horse: "ドゥラメンテ", race: "日本ダービー", reason: "ここに選んだ理由を書く", official: "", image: "images/2015.png", pos: "center 30%" },
+    2016: { horse: "モーリス", race: "天皇賞秋", reason: "ここに選んだ理由を書く", official: "", image: "images/2016.png", pos: "center 30%" },
+    2017: { horse: "キタサンブラック", race: "天皇賞秋", reason: "ここに選んだ理由を書く", official: "", image: "images/2017.png", pos: "center 30%" },
+    2018: { horse: "オジュウチョウサン", race: "中山GJ", reason: "ここに選んだ理由を書く", official: "", image: "images/2018.png", pos: "center 30%" },
+    2019: { horse: "クロノジェネシス", race: "秋華賞", reason: "ここに選んだ理由を書く", official: "", image: "images/2019.png", pos: "center 30%" },
+    2020: { horse: "アーモンドアイ", race: "ジャパンカップ", reason: "ここに選んだ理由を書く", official: "", image: "images/2020.png", pos: "center 30%" },
+    2021: { horse: "コントレイル", race: "ジャパンカップ", reason: "ここに選んだ理由を書く", official: "", image: "images/2021.png", pos: "center 30%" },
+    2022: { horse: "タイトルホルダー", race: "宝塚記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2022.png", pos: "center 30%" },
+    2023: { horse: "イクイノックス", race: "宝塚記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2023.png", pos: "center 30%" },
+    2024: { horse: "ドウデュース", race: "有馬記念", reason: "ここに選んだ理由を書く", official: "", image: "images/2024.png", pos: "center 30%" },
+    2025: { horse: "フォーエバーヤング", race: "BCクラシック", reason: "ここに選んだ理由を書く", official: "", image: "images/2025.png", pos: "center 30%" }
+  };
+
+    (function () {
+        var list = document.getElementById('hoyList');
+
+        Object.keys(entries).forEach(function (year) {
+            var e = entries[year];
+            var d = document.createElement('details');
+            d.className = 'hoy-card';
+
+            var s = document.createElement('summary');
+            s.innerHTML =
+                '<span class="hoy-year">' + year + '<small>年</small></span>' +
+                '<span class="hoy-main"><span class="hoy-name"></span><span class="hoy-race"></span></span>' +
+                '<span class="hoy-arrow">▼</span>';
+            s.querySelector('.hoy-name').textContent = e.horse;
+            s.querySelector('.hoy-race').textContent = e.race;
+
+            var b = document.createElement('div');
+            b.className = 'hoy-body';
+
+            // 写真があれば:閉じた時は背景、開いた時は全体を表示(なければ緑の背景のまま)
+            if (e.image) {
+                var probe = new Image();
+                probe.onload = function () {
+                    s.style.backgroundImage =
+                        "linear-gradient(90deg, rgba(0,40,32,.85) 0%, rgba(0,40,32,.45) 55%, rgba(0,40,32,.1) 100%), url('" + e.image + "')";
+                    s.style.backgroundPosition = e.pos || 'center 30%';
+
+                    var full = document.createElement('img');
+                    full.className = 'hoy-fullpic';
+                    full.src = e.image;
+                    full.alt = e.horse;
+                    full.loading = 'lazy';
+                    b.insertBefore(full, b.firstChild);
+                };
+                probe.src = e.image;
+            }
+
+            var p = document.createElement('p');
+            p.textContent = e.reason;
+            b.appendChild(p);
+            if (e.official) {
+                var o = document.createElement('div');
+                o.className = 'hoy-official';
+                o.textContent = '公式:' + e.official;
+                b.appendChild(o);
+            }
+
+            d.appendChild(s);
+            d.appendChild(b);
+            list.appendChild(d);
+        });
+
+        document.getElementById('hoyOpenAll').onclick = function () {
+            list.querySelectorAll('details').forEach(function (d) { d.open = true; });
+        };
+        document.getElementById('hoyCloseAll').onclick = function () {
+            list.querySelectorAll('details').forEach(function (d) { d.open = false; });
+        };
+    })();
+    </script>
+
+    <!-- ハンバーガーメニュー制御 -->
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const headerRight = document.getElementById('headerRight');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function openMenu() {
+            hamburgerBtn.classList.add('open');
+            headerRight.classList.add('open');
+            navOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburgerBtn.classList.remove('open');
+            headerRight.classList.remove('open');
+            navOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', () => {
+            if (headerRight.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        navOverlay.addEventListener('click', closeMenu);
+
+        // ドロワー内のリンクをタップしたら閉じる
+        headerRight.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+
+    <!-- フェードイン -->
+    <script>
+        const fadeEls = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 100);
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+    </script>
+</body>
+</html>
