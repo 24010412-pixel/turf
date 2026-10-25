@@ -518,30 +518,31 @@ footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; b
     footer {
         padding: 40px 16px;
     }
-   /* --- note(予想まとめ)カード --- */
-.note-section { align-self: flex-start; margin-bottom: 60px; }
-.note-card {
-    display: block;
-    width: 360px;
-    max-width: 100%;
-    padding: 24px 28px;
+  /* --- 左下に固定のnote予想カード --- */
+.note-float {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 900;
+    width: 230px;
+    padding: 16px 18px;
     background: white;
-    border-radius: 20px;
-    border-left: 8px solid #2e7d32;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-left: 6px solid #2e7d32;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     text-decoration: none;
     color: #333;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.note-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-.note-label { font-size: 0.75rem; letter-spacing: 0.2em; color: #2e7d32; font-weight: bold; margin-bottom: 6px; }
-.note-card h4 { font-size: 1.4rem; font-family: 'Noto Serif JP', serif; margin-bottom: 8px; }
-.note-card p { font-size: 0.95rem; color: #666; line-height: 1.7; margin-bottom: 16px; }
-.note-btn { display: inline-block; background: #2e7d32; color: white; font-weight: bold; padding: 8px 22px; border-radius: 25px; }
+.note-float:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+.note-float .note-label { display: block; font-size: 0.7rem; letter-spacing: 0.2em; color: #2e7d32; font-weight: bold; }
+.note-float strong { display: block; margin: 4px 0 10px; font-size: 1.1rem; font-family: 'Noto Serif JP', serif; }
+.note-float .note-btn { display: inline-block; background: #2e7d32; color: white; font-size: 0.85rem; font-weight: bold; padding: 6px 16px; border-radius: 25px; }
 
 @media (max-width: 700px) {
-    .note-section { width: 100%; }
-    .note-card { width: 100%; padding: 18px 20px; }
-    .note-card:hover { transform: none; }
+    .note-float { left: 10px; bottom: 10px; width: 170px; padding: 10px 12px; }
+    .note-float strong { font-size: 0.95rem; margin-bottom: 6px; }
+    .note-float .note-btn { font-size: 0.75rem; padding: 4px 12px; }
+    .note-float:hover { transform: none; }
 }
 }
