@@ -518,7 +518,12 @@ footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; b
     footer {
         padding: 40px 16px;
     }
-  /* --- 左下に固定のnoteボタン(ヘッダーのボタンと同じ見た目) --- */
+     footer {
+        padding: 40px 16px;
+    }
+}
+
+/* --- 左下に固定のnoteボタン(ヘッダーのボタンと同じ見た目) --- */
 .note-fab {
     position: fixed;
     left: 20px;
@@ -539,5 +544,4 @@ footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; b
 
 @media (max-width: 700px) {
     .note-fab { left: 12px; bottom: 12px; font-size: 0.95rem; padding: 8px 14px; }
-}
 }
