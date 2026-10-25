@@ -518,31 +518,26 @@ footer { text-align: center; padding: 80px 30px; color: #888; font-size: 1rem; b
     footer {
         padding: 40px 16px;
     }
-  /* --- 左下に固定のnote予想カード --- */
-.note-float {
+  /* --- 左下に固定のnoteボタン(ヘッダーのボタンと同じ見た目) --- */
+.note-fab {
     position: fixed;
     left: 20px;
     bottom: 20px;
     z-index: 900;
-    width: 230px;
-    padding: 16px 18px;
-    background: white;
-    border-left: 6px solid #2e7d32;
-    border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    color: white;
     text-decoration: none;
-    color: #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    background: #004d40;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
 }
-.note-float:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
-.note-float .note-label { display: block; font-size: 0.7rem; letter-spacing: 0.2em; color: #2e7d32; font-weight: bold; }
-.note-float strong { display: block; margin: 4px 0 10px; font-size: 1.1rem; font-family: 'Noto Serif JP', serif; }
-.note-float .note-btn { display: inline-block; background: #2e7d32; color: white; font-size: 0.85rem; font-weight: bold; padding: 6px 16px; border-radius: 25px; }
+.note-fab:hover { background: #00695c; border-color: white; }
 
 @media (max-width: 700px) {
-    .note-float { left: 10px; bottom: 10px; width: 170px; padding: 10px 12px; }
-    .note-float strong { font-size: 0.95rem; margin-bottom: 6px; }
-    .note-float .note-btn { font-size: 0.75rem; padding: 4px 12px; }
-    .note-float:hover { transform: none; }
+    .note-fab { left: 12px; bottom: 12px; font-size: 0.95rem; padding: 8px 14px; }
 }
 }
